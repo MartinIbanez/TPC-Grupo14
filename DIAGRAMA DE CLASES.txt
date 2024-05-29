@@ -1,0 +1,104 @@
++----------------+          +----------------+          +----------------+
+|     Usuario    |<>--------|     Perfil     |<>--------|  CorreoElectronico  |
++----------------+          +----------------+          +----------------+
+| - id           |          | - id           |          | - direccion     |
+| - nombre       |          | - nombre       |          | - usuarioId     |
+| - apellido     |          |                |          +----------------+
+| - email        |          +----------------+
+| - telefono     |
+| - direccion    |
++----------------+
+        ^
+        |
+        +-----------------+
+        |                 |
++----------------+  +----------------+
+|     Paciente   |  |     Médico     |
++----------------+  +----------------+
+| - numeroHist   |  | - matricula    |||
++----------------+  |                |
+                    |                |
+                    +----------------+
+                          ^
+                          |
+           +------------------------------+
+           |                              |
++----------------+          +----------------+
+|  Especialidad  |<>--------|     Turno      |
++----------------+          +----------------+
+| - id           |          | - id           |
+| - nombre       |          | - fecha        |
+|                |          | - hora         |
++----------------+          | - observaciones|
+                           | - pacienteId   |
+                           | - medicoId     |
+                           | - especialidadId|
+                           | - estadoTurnoId |
+                           +----------------+
+                                    ^
+                                    |
+                            +----------------+
+                            |   EstadoTurno  |
+                            +----------------+
+                            | - id           |
+                            | - nombre       |
+                            +----------------+
+                                    ^
+                                    |
+                            +----------------+
+                            |    Horario     |
+                            +----------------+
+                            | - id           |
+                            | - entrada      |
+                            | - salida       |
+                            | - medicoId     |
+                            +----------------+
+
+
+
+Descripción de clases:
+Usuario
+id: Identificador único del usuario.
+nombre: Nombre del usuario.
+apellido: Apellido del usuario.
+email: Dirección de correo electrónico.
+telefono: Número de teléfono.
+direccion: Dirección física del usuario.
+Perfil
+id: Identificador único del perfil.
+nombre: Nombre del perfil (Administrador, Recepcionista, Médico).
+CorreoElectronico
+direccion: Dirección de correo electrónico.
+usuarioId: Identificador del usuario asociado.
+Paciente
+numeroHist: Número de historia clínica del paciente.
+Médico
+matricula: Número de matrícula profesional del médico.
+especialidades: Lista de especialidades del médico.
+Especialidad
+id: Identificador único de la especialidad.
+nombre: Nombre de la especialidad.
+Turno
+id: Identificador único del turno.
+fecha: Fecha del turno.
+hora: Hora del turno.
+observaciones: Observaciones del turno.
+pacienteId: Identificador del paciente.
+medicoId: Identificador del médico.
+especialidadId: Identificador de la especialidad.
+estadoTurnoId: Identificador del estado del turno.
+EstadoTurno
+id: Identificador único del estado del turno.
+nombre: Nombre del estado del turno (Nuevo, Reprogramado, Cancelado, No Asistió, Cerrado).
+Horario
+id: Identificador único del horario.
+entrada: Hora de entrada.
+salida: Hora de salida.
+medicoId: Identificador del médico.
+Notas adicionales:
+Seguridad y Perfiles de Acceso: La clase Perfil y su relación con Usuario permitirán definir roles y restringir accesos según el rol.
+Gestión de Turnos: La clase Turno gestionará los turnos, asegurándose de que no haya duplicaciones y que los turnos no sean vencidos.
+Estados de Turno: La clase EstadoTurno permitirá el seguimiento y estadísticas futuras.
+Notificaciones por Correo: Utilizando la clase CorreoElectronico, se enviarán confirmaciones y notificaciones necesarias.
+
+
