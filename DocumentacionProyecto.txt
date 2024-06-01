@@ -1,0 +1,144 @@
+Entendido. A continuación, te presento una propuesta detallada de cómo estructurar e implementar los atributos y métodos de las clases necesarias para la aplicación de gestión de turnos en la clínica médica, siguiendo los requerimientos y evitando clases innecesarias.
+
+### 1. Modelo de Dominio y Arquitectura de Clases
+
+#### 1.1. Introducción
+El modelo de dominio se enfoca en representar las entidades principales de la aplicación y sus relaciones. Las clases principales serán: Médico, Paciente, Turno, Especialidad, Usuario, y Horario de Trabajo.
+
+#### 1.2. Diagrama de Clases UML
+Aquí se incluiría un diagrama UML que representara visualmente las clases y sus relaciones. Por ahora, describiremos las clases y sus atributos.
+
+#### 1.3. Descripción de Clases
+
+**1.3.1. Clase Usuario**
+Representa a todos los tipos de usuarios del sistema: Administrador, Recepcionista y Médico.
+
+- **Atributos:**
+  - `id`: Identificador único del usuario (int)
+  - `nombre`: Nombre del usuario (String)
+  - `email`: Correo electrónico del usuario (String)
+  - `contraseña`: Contraseña del usuario (String)
+  - `rol`: Rol del usuario (String: "Administrador", "Recepcionista", "Médico")
+
+- **Métodos:**
+  - `autenticar(String nombre, String contraseña)`: Autentica al usuario en el sistema.
+  - `obtenerPermisos()`: Devuelve los permisos del usuario según su rol.
+
+**1.3.2. Clase Médico**
+Extiende de Usuario, incluye especialidades y turnos asignados.
+
+- **Atributos:**
+  - `especialidades`: Lista de especialidades asociadas (List<Especialidad>)
+  - `turnos`: Lista de turnos asignados (List<Turno>)
+  - `horariosTrabajo`: Lista de horarios de trabajo (List<HorarioTrabajo>)
+
+- **Métodos:**
+  - `asignarTurno(Turno turno)`: Asigna un turno al médico.
+  - `obtenerHorariosDisponibles(Date fecha)`: Devuelve los horarios disponibles del médico en una fecha específica.
+
+**1.3.3. Clase Paciente**
+Representa a los pacientes registrados en la clínica.
+
+- **Atributos:**
+  - `id`: Identificador único del paciente (int)
+  - `nombre`: Nombre del paciente (String)
+  - `email`: Correo electrónico del paciente (String)
+  - `telefono`: Número de teléfono del paciente (String)
+  - `direccion`: Dirección del paciente (String)
+  - `turnos`: Lista de turnos asignados (List<Turno>)
+
+- **Métodos:**
+  - `agregarTurno(Turno turno)`: Agrega un turno al paciente.
+
+**1.3.4. Clase Turno**
+Representa un turno asignado a un paciente con un médico en una especialidad y horario específico.
+
+- **Atributos:**
+  - `id`: Identificador único del turno (int)
+  - `fechaHora`: Fecha y hora del turno (Date)
+  - `paciente`: Paciente asignado al turno (Paciente)
+  - `medico`: Médico asignado al turno (Médico)
+  - `especialidad`: Especialidad del turno (Especialidad)
+  - `estado`: Estado del turno (String: "Nuevo", "Reprogramado", "Cancelado", "No Asistió", "Cerrado")
+  - `observaciones`: Observaciones del turno (String)
+
+- **Métodos:**
+  - `cambiarEstado(String nuevoEstado)`: Cambia el estado del turno.
+  - `agregarObservacion(String observacion)`: Agrega una observación al turno.
+
+**1.3.5. Clase Especialidad**
+Representa las diferentes especialidades médicas disponibles en la clínica.
+
+- **Atributos:**
+  - `id`: Identificador único de la especialidad (int)
+  - `nombre`: Nombre de la especialidad (String)
+  - `medicos`: Lista de médicos asociados (List<Médico>)
+
+- **Métodos:**
+  - `agregarMedico(Médico medico)`: Asigna un médico a la especialidad.
+
+**1.3.6. Clase HorarioTrabajo**
+Representa los horarios de trabajo de los médicos.
+
+- **Atributos:**
+  - `id`: Identificador único del horario (int)
+  - `medico`: Médico asociado al horario (Médico)
+  - `diaSemana`: Día de la semana del horario (String: "Lunes", "Martes", etc.)
+  - `horaInicio`: Hora de inicio del turno de trabajo (Time)
+  - `horaFin`: Hora de fin del turno de trabajo (Time)
+
+- **Métodos:**
+  - `asignarHorario(Médico medico, String diaSemana, Time horaInicio, Time horaFin)`: Asigna un horario de trabajo a un médico.
+
+#### 1.4. Relaciones Entre Clases
+- **Asociación:** Un `Médico` puede tener múltiples `Turnos` y estar asociado a múltiples `Especialidades`. Un `Paciente` puede tener múltiples `Turnos`.
+- **Composición:** Un `Turno` está compuesto por un `Paciente`, un `Médico`, y una `Especialidad`.
+- **Herencia:** La clase `Usuario` es extendida por `Médico`.
+
+### 2. Funcionalidades y Requisitos
+
+#### 2.1. Gestión de Médicos
+- **Agregar Médico:** Registrar un nuevo médico con sus especialidades y horarios de trabajo.
+- **Editar Médico:** Modificar la información y horarios de un médico existente.
+- **Eliminar Médico:** Desactivar un médico (no eliminar del sistema por historial de turnos).
+
+#### 2.2. Gestión de Pacientes
+- **Agregar Paciente:** Registrar un nuevo paciente con su información personal.
+- **Editar Paciente:** Modificar la información de un paciente existente.
+- **Ver Paciente:** Visualizar la información y turnos de un paciente.
+
+#### 2.3. Asignación de Turnos
+- **Seleccionar Paciente:** Elegir un paciente previamente registrado.
+- **Seleccionar Especialidad:** Escoger la especialidad para el turno.
+- **Propuesta de Horarios y Médicos:** El sistema sugiere horarios disponibles y médicos según la especialidad seleccionada.
+- **Seleccionar Médico y Horario:** Elegir un médico y horario específico de los sugeridos o manualmente.
+- **Registrar Turno:** Confirmar el turno con observaciones y enviar notificación por correo electrónico al paciente.
+
+#### 2.4. Reprogramación y Cancelación de Turnos
+- **Reprogramar Turno:** Modificar la fecha y/o hora de un turno existente.
+- **Cancelar Turno:** Marcar el turno como cancelado sin eliminarlo del sistema.
+
+#### 2.5. Perfiles de Acceso y Seguridad
+- **Administrador:** Acceso completo al sistema.
+- **Recepcionista:** Gestión de pacientes, médicos y turnos.
+- **Médico:** Visualización y modificación de sus turnos y observaciones.
+
+### 3. Implementación y Detalles Técnicos
+
+#### 3.1. Seguridad
+- **Autenticación:** Uso de credenciales únicas para cada usuario.
+- **Autorización:** Control de acceso basado en roles.
+
+#### 3.2. Rendimiento
+- **Optimización:** Manejo eficiente de usuarios concurrentes.
+- **Escalabilidad:** Diseño para soportar el crecimiento de la clínica.
+
+#### 3.3. Usabilidad
+- **Interfaz Intuitiva:** Diseño amigable y accesible para todos los usuarios.
+- **Notificaciones:** Envío automático de correos electrónicos de confirmación y recordatorios de turnos.
+
+#### 3.4. Compatibilidad
+- **Navegadores:** Compatibilidad con Chrome, Firefox, Safari y Edge.
+- **Plataformas:** Acceso desde dispositivos móviles y de escritorio.
+
+Esta estructura y descripción deberían proporcionar una base sólida para implementar la aplicación de gestión de turnos en la clínica médica, asegurando eficiencia y claridad en las operaciones.

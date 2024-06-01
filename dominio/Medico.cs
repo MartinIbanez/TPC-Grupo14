@@ -6,7 +6,7 @@ using System.Web;
 
 namespace dominio
 {
-    ¨//Extiende de Usuario, incluye especialidades y turnos asignados.
+    /*Extiende de Usuario, incluye especialidades y turnos asignados*/
 
     public class Medico : Usuario
     {
