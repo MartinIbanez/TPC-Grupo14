@@ -11,7 +11,7 @@ namespace TPC_Clinica_Grupo14
 {
 
 
-    public partial class Master
+    public partial class AdminMaster
     {
 
         /// <summary>
