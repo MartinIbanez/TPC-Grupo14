@@ -5,6 +5,7 @@ using System.Web;
 
 namespace dominio
 {
+    //VER ESTA CLASE PROBABLEMENTE NO SEA NECESARIA....usariamos Persona....
     public class Paciente
     {
      
@@ -15,10 +16,6 @@ namespace dominio
         public string telefono { get; set; }
         public string direccion { get; set; }
         public List<Turno> turnos { get; set; }
-
-        
-
-   
 
     }
 }
