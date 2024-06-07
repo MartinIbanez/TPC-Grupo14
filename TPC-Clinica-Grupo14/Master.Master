@@ -22,7 +22,7 @@
     <form id="form1" runat="server">
 
         <nav class="navbar navbar-expand-lg navbar-dark">
-            <a class="navbar-brand" href="">
+            <a class="navbar-brand" href="Default.aspx">
                 <img src="logo.jpg" alt="imag" height="50" />
                 UTN Salud
             </a>
@@ -32,12 +32,24 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item active">
-                        <a class="nav-link" href="Default.aspx">Inicio</a>
+                        <a class="nav-link" href="MenuAdministrador.aspx">ADMINISTRADOR</a>
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link" href="Login.aspx">Contacto</a>
+                        <a class="nav-link" href="MenuMedico.aspx">MEDICOS</a>
                     </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="MenuPaciente.aspx">PACIENTES</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="MenuRecepcionista.aspx">RECEPCIONISTA</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="">REGISTROS</a>
+                    </li>
+
                     <li class="nav-item">
                         <a class="nav-link" href="Pruebas.aspx">Pruebas</a>
                     </li>
@@ -45,7 +57,7 @@
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
 
-                        <a class="nav-link" href="Login.aspx">Login</a>
+                        <a class="nav-link" href="Login.aspx">INGRESAR</a>
                     </li>
                 </ul>
             </div>
