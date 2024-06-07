@@ -13,12 +13,18 @@ namespace TPC_Clinica_Grupo14
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            //Levanto datos Personas//
             PersonaNegocio pn = new PersonaNegocio();
             List<Persona> listaPersonas = new List<Persona>();
             listaPersonas = pn.Listar();
+            //Levanto datos Roles//
             RolNegocio rn = new RolNegocio();
-            List<Rol> listaRoles= new List<Rol>();
+            List<Rol> listaRoles = new List<Rol>();
             listaRoles = rn.Listar();
+            //Levanto datos Especialidades//
+            EspecialidadNegocio en = new EspecialidadNegocio();
+            List<Especialidad> listaEspecialidades = new List<Especialidad>();
+            listaEspecialidades = en.Listar();
 
             if (!IsPostBack)
             {
@@ -27,6 +33,9 @@ namespace TPC_Clinica_Grupo14
 
                 GridPruebaPersonas.DataSource = listaPersonas;
                 GridPruebaPersonas.DataBind();
+
+                GridPruebasEspecialidades.DataSource = listaEspecialidades;
+                GridPruebasEspecialidades.DataBind();
             }
         }
     }

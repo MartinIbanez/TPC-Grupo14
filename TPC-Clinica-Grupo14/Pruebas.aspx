@@ -6,6 +6,7 @@
         <h1>Arrancan las pruebas....</h1>
         <asp:GridView runat="server" ID="GridPruebaRoles"></asp:GridView>
         <asp:GridView runat="server" ID="GridPruebaPersonas"></asp:GridView>
+        <asp:GridView runat="server" ID="GridPruebasEspecialidades"></asp:GridView>
     </div>
 
 

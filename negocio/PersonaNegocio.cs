@@ -13,7 +13,6 @@ namespace negocio
         {
             AccesoDatos datos = new AccesoDatos();
             List<Persona> lista = new List<Persona>();
-
             try
             {
                 datos.SetearConsulta("SELECT P.ID, P.Nombre, P.Apellido, P.FechaNac, P.IDGenero, G.Nombre as Gen, P.NumDoc, P.Correo, P.Telefono, P.IDRol, R.Nombre as Rol, P.Activo, P.Password FROM Personas P INNER JOIN Generos G ON P.IDGenero = G.ID INNER JOIN Roles R ON P.IDRol = R.ID");
