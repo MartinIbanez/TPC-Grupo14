@@ -7,7 +7,7 @@ using dominio;
 
 namespace negocio
 {
-    public class PersonasNegocio
+    public class PersonaNegocio
     {
         public List<Persona> Listar()
         {
@@ -22,19 +22,19 @@ namespace negocio
                 while (datos.Lector.Read())
                 {
                     Persona aux = new Persona();
-                    aux.Id = (int)datos.Lector["ID"];
-                    aux.Nombre = (string)datos.Lector["Nombre"];
-                    aux.Apellido = (string)datos.Lector["Apellido"];
+                    aux.Id = int.Parse((datos.Lector["ID"].ToString()));
+                    aux.Nombre = datos.Lector["Nombre"].ToString();
+                    aux.Apellido = (string)datos.Lector["Apellido"].ToString();
                     aux.FechaNacimiento = (DateTime)datos.Lector["FechaNac"];
-                    aux.IdGenero = (int)datos.Lector["IDGenero"];
-                    aux.Gen = (string)datos.Lector["Gen"];
-                    aux.NumDoc = (string)datos.Lector["NumDoc"];
-                    aux.Correo = (string)datos.Lector["Correo"];
-                    aux.Telefono = (string)datos.Lector["Telefono"];
-                    aux.IdRol = (int)datos.Lector["IDRol"];
-                    aux.Role = (string)datos.Lector["Rol"];
+                    aux.IdGenero = int.Parse(datos.Lector["IDGenero"].ToString());
+                    aux.Gen = datos.Lector["Gen"].ToString();
+                    aux.NumDoc = datos.Lector["NumDoc"].ToString();
+                    aux.Correo = datos.Lector["Correo"].ToString();
+                    aux.Telefono = datos.Lector["Telefono"].ToString();
+                    aux.IdRol = int.Parse(datos.Lector["IDRol"].ToString());
+                    aux.Role = datos.Lector["Rol"].ToString();
                     aux.Activo = (bool)datos.Lector["Activo"];
-                    aux.Password = (string)datos.Lector["Password"];
+                    aux.Password = datos.Lector["Password"].ToString();
 
                     lista.Add(aux);
                 }
@@ -49,8 +49,8 @@ namespace negocio
                 datos.CerrarConexion();
             }
         }
-
-        public void Agregar(Persona nuevo)
+        
+        public void Agregar(Persona nuevo)  //Revisar!!!!!!!!!!!!
         {
             AccesoDatos datos = new AccesoDatos();
             try
@@ -79,8 +79,7 @@ namespace negocio
                 datos.CerrarConexion();
             }
         }
-
-        public void Modificar(Persona modificar)
+        public void Modificar(Persona modificar)    //Revisar!!!!!!!!!!!!
         {
             AccesoDatos datos = new AccesoDatos();
             try
@@ -110,7 +109,7 @@ namespace negocio
             }
         }
 
-        public void Eliminar(int id)
+        public void Eliminar(int id)        //Revisar!!!!!!!!!!!!
         {
             AccesoDatos datos = new AccesoDatos();
             try
@@ -129,7 +128,7 @@ namespace negocio
             }
         }
 
-        public Persona Buscar(int id)
+        public Persona Buscar(int id)   //Revisar!!!!!!!!!!!!
         {
             AccesoDatos datos = new AccesoDatos();
             Persona aux = new Persona();
@@ -167,7 +166,7 @@ namespace negocio
             }
         }
 
-        public Persona Buscar(string email)
+        public Persona Buscar(string email)     //Revisar!!!!!!!!!!!!
         {
             AccesoDatos datos = new AccesoDatos();
             Persona aux = new Persona();
@@ -205,7 +204,7 @@ namespace negocio
             }
         }
 
-        public Persona Login(string email, string password)
+        public Persona Login(string email, string password)     //Revisar!!!!!!!!!!!!
         {
             AccesoDatos datos = new AccesoDatos();
             Persona aux = null;
