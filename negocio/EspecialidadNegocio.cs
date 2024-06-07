@@ -20,7 +20,7 @@ namespace negocio
                 while (datos.Lector.Read())
                 {
                     Especialidad aux = new Especialidad();
-                    aux.Id = int.Parse((datos.Lector["ID"].ToString()));
+                    aux.Id = int.Parse(datos.Lector["ID"].ToString());
                     aux.Nombre = datos.Lector["Nombre"].ToString();
                     
                     lista.Add(aux);

@@ -4,9 +4,13 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div>
         <h1>Arrancan las pruebas....</h1>
+        <asp:DropDownList runat="server" ID="DropDownListEspecialidades"></asp:DropDownList>
+        <br />
+        <br />
+        <br />
         <asp:GridView runat="server" ID="GridPruebaRoles"></asp:GridView>
-        <asp:GridView runat="server" ID="GridPruebaPersonas"></asp:GridView>
-        <asp:GridView runat="server" ID="GridPruebasEspecialidades"></asp:GridView>
+        <%--<asp:GridView runat="server" ID="GridPruebaPersonas"></asp:GridView>
+        <asp:GridView runat="server" ID="GridPruebasEspecialidades"></asp:GridView>--%>
     </div>
 
 

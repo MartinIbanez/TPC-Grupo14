@@ -15,6 +15,15 @@ namespace TPC_Clinica_Grupo14
     {
 
         /// <summary>
+        /// DropDownListEspecialidades control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList DropDownListEspecialidades;
+
+        /// <summary>
         /// GridPruebaRoles control.
         /// </summary>
         /// <remarks>
@@ -22,23 +31,5 @@ namespace TPC_Clinica_Grupo14
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.GridView GridPruebaRoles;
-
-        /// <summary>
-        /// GridPruebaPersonas control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView GridPruebaPersonas;
-
-        /// <summary>
-        /// GridPruebasEspecialidades control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView GridPruebasEspecialidades;
     }
 }

@@ -15,8 +15,8 @@ namespace TPC_Clinica_Grupo14
         {
             //Levanto datos Personas//
             PersonaNegocio pn = new PersonaNegocio();
-            List<Persona> listaPersonas = new List<Persona>();
-            listaPersonas = pn.Listar();
+            //List<Persona> listaPersonas = new List<Persona>();
+            //listaPersonas = pn.Listar();
             //Levanto datos Roles//
             RolNegocio rn = new RolNegocio();
             List<Rol> listaRoles = new List<Rol>();
@@ -25,17 +25,28 @@ namespace TPC_Clinica_Grupo14
             EspecialidadNegocio en = new EspecialidadNegocio();
             List<Especialidad> listaEspecialidades = new List<Especialidad>();
             listaEspecialidades = en.Listar();
-
-            if (!IsPostBack)
+            try
             {
-                GridPruebaRoles.DataSource = listaRoles;
-                GridPruebaRoles.DataBind();
+                if (!IsPostBack)
+                {
+                    GridPruebaRoles.DataSource = listaRoles;
+                    GridPruebaRoles.DataBind();
 
-                GridPruebaPersonas.DataSource = listaPersonas;
-                GridPruebaPersonas.DataBind();
+                    DropDownListEspecialidades.DataSource = listaEspecialidades;
+                    DropDownListEspecialidades.DataTextField = "Nombre";
+                    DropDownListEspecialidades.DataValueField = "Id";
+                    DropDownListEspecialidades.DataBind();
 
-                GridPruebasEspecialidades.DataSource = listaEspecialidades;
-                GridPruebasEspecialidades.DataBind();
+                    //GridPruebaPersonas.DataSource = listaPersonas;
+                    //GridPruebaPersonas.DataBind();
+
+                    //GridPruebasEspecialidades.DataSource = listaEspecialidades;
+                    //GridPruebasEspecialidades.DataBind();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
             }
         }
     }
