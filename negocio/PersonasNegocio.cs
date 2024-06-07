@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using dominio;
 
 
 namespace negocio
@@ -15,8 +16,8 @@ namespace negocio
 
             try
             {
-                datos.setearConsulta("SELECT P.ID, P.Nombre, P.Apellido, P.FechaNac, P.IDGenero, G.Nombre as Gen, P.NumDoc, P.Correo, P.Telefono, P.IDRol, R.Nombre as Rol, P.Activo, P.Password FROM Personas P INNER JOIN Generos G ON P.IDGenero = G.ID INNER JOIN Roles R ON P.IDRol = R.ID");
-                datos.ejecutarLectura();
+                datos.SetearConsulta("SELECT P.ID, P.Nombre, P.Apellido, P.FechaNac, P.IDGenero, G.Nombre as Gen, P.NumDoc, P.Correo, P.Telefono, P.IDRol, R.Nombre as Rol, P.Activo, P.Password FROM Personas P INNER JOIN Generos G ON P.IDGenero = G.ID INNER JOIN Roles R ON P.IDRol = R.ID");
+                datos.EjecutarLectura();
 
                 while (datos.Lector.Read())
                 {
@@ -45,7 +46,7 @@ namespace negocio
             }
             finally
             {
-                datos.cerrarConexion();
+                datos.CerrarConexion();
             }
         }
 
@@ -54,20 +55,20 @@ namespace negocio
             AccesoDatos datos = new AccesoDatos();
             try
             {
-                datos.setearConsulta("INSERT INTO Personas (Nombre, Apellido, FechaNac, IDGenero, NumDoc, Correo, Telefono, IDRol, Activo, Password) " +
+                datos.SetearConsulta("INSERT INTO Personas (Nombre, Apellido, FechaNac, IDGenero, NumDoc, Correo, Telefono, IDRol, Activo, Password) " +
                                      "VALUES (@Nombre, @Apellido, @FechaNac, @IDGenero, @NumDoc, @Correo, @Telefono, @IDRol, @Activo, @Password)");
-                datos.setearParametro("@Nombre", nuevo.Nombre);
-                datos.setearParametro("@Apellido", nuevo.Apellido);
-                datos.setearParametro("@FechaNac", nuevo.FechaNacimiento);
-                datos.setearParametro("@IDGenero", nuevo.IdGenero);
-                datos.setearParametro("@NumDoc", nuevo.NumDoc);
-                datos.setearParametro("@Correo", nuevo.Correo);
-                datos.setearParametro("@Telefono", nuevo.Telefono);
-                datos.setearParametro("@IDRol", nuevo.IdRol);
-                datos.setearParametro("@Activo", nuevo.Activo);
-                datos.setearParametro("@Password", nuevo.Password);
+                datos.SetearParametro("@Nombre", nuevo.Nombre);
+                datos.SetearParametro("@Apellido", nuevo.Apellido);
+                datos.SetearParametro("@FechaNac", nuevo.FechaNacimiento);
+                datos.SetearParametro("@IDGenero", nuevo.IdGenero);
+                datos.SetearParametro("@NumDoc", nuevo.NumDoc);
+                datos.SetearParametro("@Correo", nuevo.Correo);
+                datos.SetearParametro("@Telefono", nuevo.Telefono);
+                datos.SetearParametro("@IDRol", nuevo.IdRol);
+                datos.SetearParametro("@Activo", nuevo.Activo);
+                datos.SetearParametro("@Password", nuevo.Password);
 
-                datos.ejecutarAccion();
+                datos.EjecutarAccion();
             }
             catch (Exception ex)
             {
@@ -75,7 +76,7 @@ namespace negocio
             }
             finally
             {
-                datos.cerrarConexion();
+                datos.CerrarConexion();
             }
         }
 
@@ -84,20 +85,20 @@ namespace negocio
             AccesoDatos datos = new AccesoDatos();
             try
             {
-                datos.setearConsulta("UPDATE Personas SET Nombre = @Nombre, Apellido = @Apellido, FechaNac = @FechaNac, IDGenero = @IDGenero, NumDoc = @NumDoc, Correo = @Correo, Telefono = @Telefono, IDRol = @IDRol, Activo = @Activo, Password = @Password WHERE ID = @ID");
-                datos.setearParametro("@Nombre", modificar.Nombre);
-                datos.setearParametro("@Apellido", modificar.Apellido);
-                datos.setearParametro("@FechaNac", modificar.FechaNacimiento);
-                datos.setearParametro("@IDGenero", modificar.IdGenero);
-                datos.setearParametro("@NumDoc", modificar.NumDoc);
-                datos.setearParametro("@Correo", modificar.Correo);
-                datos.setearParametro("@Telefono", modificar.Telefono);
-                datos.setearParametro("@IDRol", modificar.IdRol);
-                datos.setearParametro("@Activo", modificar.Activo);
-                datos.setearParametro("@Password", modificar.Password);
-                datos.setearParametro("@ID", modificar.Id);
+                datos.SetearConsulta("UPDATE Personas SET Nombre = @Nombre, Apellido = @Apellido, FechaNac = @FechaNac, IDGenero = @IDGenero, NumDoc = @NumDoc, Correo = @Correo, Telefono = @Telefono, IDRol = @IDRol, Activo = @Activo, Password = @Password WHERE ID = @ID");
+                datos.SetearParametro("@Nombre", modificar.Nombre);
+                datos.SetearParametro("@Apellido", modificar.Apellido);
+                datos.SetearParametro("@FechaNac", modificar.FechaNacimiento);
+                datos.SetearParametro("@IDGenero", modificar.IdGenero);
+                datos.SetearParametro("@NumDoc", modificar.NumDoc);
+                datos.SetearParametro("@Correo", modificar.Correo);
+                datos.SetearParametro("@Telefono", modificar.Telefono);
+                datos.SetearParametro("@IDRol", modificar.IdRol);
+                datos.SetearParametro("@Activo", modificar.Activo);
+                datos.SetearParametro("@Password", modificar.Password);
+                datos.SetearParametro("@ID", modificar.Id);
 
-                datos.ejecutarAccion();
+                datos.EjecutarAccion();
             }
             catch (Exception ex)
             {
@@ -105,7 +106,7 @@ namespace negocio
             }
             finally
             {
-                datos.cerrarConexion();
+                datos.CerrarConexion();
             }
         }
 
@@ -114,9 +115,9 @@ namespace negocio
             AccesoDatos datos = new AccesoDatos();
             try
             {
-                datos.setearConsulta("DELETE FROM Personas WHERE ID = @ID");
-                datos.setearParametro("@ID", id);
-                datos.ejecutarAccion();
+                datos.SetearConsulta("DELETE FROM Personas WHERE ID = @ID");
+                datos.SetearParametro("@ID", id);
+                datos.EjecutarAccion();
             }
             catch (Exception ex)
             {
@@ -124,7 +125,7 @@ namespace negocio
             }
             finally
             {
-                datos.cerrarConexion();
+                datos.CerrarConexion();
             }
         }
 
@@ -134,9 +135,9 @@ namespace negocio
             Persona aux = new Persona();
             try
             {
-                datos.setearConsulta("SELECT P.ID, P.Nombre, P.Apellido, P.FechaNac, P.IDGenero, G.Nombre as Gen, P.NumDoc, P.Correo, P.Telefono, P.IDRol, R.Nombre as Rol, P.Activo, P.Password FROM Personas P INNER JOIN Generos G ON P.IDGenero = G.ID INNER JOIN Roles R ON P.IDRol = R.ID WHERE P.ID = @ID");
-                datos.setearParametro("@ID", id);
-                datos.ejecutarLectura();
+                datos.SetearConsulta("SELECT P.ID, P.Nombre, P.Apellido, P.FechaNac, P.IDGenero, G.Nombre as Gen, P.NumDoc, P.Correo, P.Telefono, P.IDRol, R.Nombre as Rol, P.Activo, P.Password FROM Personas P INNER JOIN Generos G ON P.IDGenero = G.ID INNER JOIN Roles R ON P.IDRol = R.ID WHERE P.ID = @ID");
+                datos.SetearParametro("@ID", id);
+                datos.EjecutarLectura();
 
                 if (datos.Lector.Read())
                 {
@@ -162,7 +163,7 @@ namespace negocio
             }
             finally
             {
-                datos.cerrarConexion();
+                datos.CerrarConexion();
             }
         }
 
@@ -172,9 +173,9 @@ namespace negocio
             Persona aux = new Persona();
             try
             {
-                datos.setearConsulta("SELECT P.ID, P.Nombre, P.Apellido, P.FechaNac, P.IDGenero, G.Nombre as Gen, P.NumDoc, P.Correo, P.Telefono, P.IDRol, R.Nombre as Rol, P.Activo, P.Password FROM Personas P INNER JOIN Generos G ON P.IDGenero = G.ID INNER JOIN Roles R ON P.IDRol = R.ID WHERE P.Correo = @Correo");
-                datos.setearParametro("@Correo", email);
-                datos.ejecutarLectura();
+                datos.SetearConsulta("SELECT P.ID, P.Nombre, P.Apellido, P.FechaNac, P.IDGenero, G.Nombre as Gen, P.NumDoc, P.Correo, P.Telefono, P.IDRol, R.Nombre as Rol, P.Activo, P.Password FROM Personas P INNER JOIN Generos G ON P.IDGenero = G.ID INNER JOIN Roles R ON P.IDRol = R.ID WHERE P.Correo = @Correo");
+                datos.SetearParametro("@Correo", email);
+                datos.EjecutarLectura();
 
                 if (datos.Lector.Read())
                 {
@@ -200,7 +201,7 @@ namespace negocio
             }
             finally
             {
-                datos.cerrarConexion();
+                datos.CerrarConexion();
             }
         }
 
@@ -210,10 +211,10 @@ namespace negocio
             Persona aux = null;
             try
             {
-                datos.setearConsulta("SELECT P.ID, P.Nombre, P.Apellido, P.FechaNac, P.IDGenero, G.Nombre as Gen, P.NumDoc, P.Correo, P.Telefono, P.IDRol, R.Nombre as Rol, P.Activo, P.Password FROM Personas P INNER JOIN Generos G ON P.IDGenero = G.ID INNER JOIN Roles R ON P.IDRol = R.ID WHERE P.Correo = @Correo AND P.Password = @Password");
-                datos.setearParametro("@Correo", email);
-                datos.setearParametro("@Password", password);
-                datos.ejecutarLectura();
+                datos.SetearConsulta("SELECT P.ID, P.Nombre, P.Apellido, P.FechaNac, P.IDGenero, G.Nombre as Gen, P.NumDoc, P.Correo, P.Telefono, P.IDRol, R.Nombre as Rol, P.Activo, P.Password FROM Personas P INNER JOIN Generos G ON P.IDGenero = G.ID INNER JOIN Roles R ON P.IDRol = R.ID WHERE P.Correo = @Correo AND P.Password = @Password");
+                datos.SetearParametro("@Correo", email);
+                datos.SetearParametro("@Password", password);
+                datos.EjecutarLectura();
 
                 if (datos.Lector.Read())
                 {
@@ -240,7 +241,7 @@ namespace negocio
             }
             finally
             {
-                datos.cerrarConexion();
+                datos.CerrarConexion();
             }
         }
     }

@@ -33,7 +33,7 @@ namespace negocio
             comando.CommandText = query;
         }
 
-        public void setearProcedimiento(string sp)
+        public void SetearProcedimiento(string sp)
         {
             comando.CommandType = System.Data.CommandType.StoredProcedure;
             comando.CommandText = sp;
@@ -53,7 +53,7 @@ namespace negocio
             }
         }
 
-        public void ejecutarAccion()
+        public void EjecutarAccion()
         {
             comando.Connection = conexion;
             try
@@ -67,11 +67,11 @@ namespace negocio
             }
         }
 
-        public void setearParametro(string parametro, object valor)
+        public void SetearParametro(string parametro, object valor)
         {
             comando.Parameters.AddWithValue(parametro, valor);
         }
-        public void cerrarConexion()
+        public void CerrarConexion()
         {
             if (lector != null)
                 lector.Close();
