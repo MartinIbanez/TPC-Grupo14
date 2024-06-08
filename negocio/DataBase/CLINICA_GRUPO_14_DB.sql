@@ -53,6 +53,11 @@ CREATE TABLE Profesionales_x_Especialidad(
     PRIMARY KEY(IDProfesional,IDEspecialidad)
 )
 
+-- CREATE TABLE EstadoTurnos(
+--     ID SMALLINT NOT NULL PRIMARY KEY IDENTITY(1,1),
+--     Nombre VARCHAR(50)
+-- )
+
 
 --Ingreso de datos
 INSERT INTO Roles (Nombre) VALUES
@@ -126,7 +131,41 @@ INSERT INTO Profesionales_x_Especialidad (IDProfesional, IDEspecialidad) VALUES
 -- Profesional8: Neurología, Oftalmología
 (8, 3), (8, 7);
 
+Create Table Horarios(
+    Id smallint not null PRIMARY KEY IDENTITY(9,1),
+    HoraInicio TIME NOT NULL
+)
 
+INSERT INTO Horarios (HoraInicio)
+VALUES
+('09:00:00'),
+('10:00:00'),
+('11:00:00'),
+('12:00:00'),
+('13:00:00'),
+('14:00:00'),
+('15:00:00'),
+('16:00:00'),
+('17:00:00'),
+('18:00:00'),
+('19:00:00'),
+('20:00:00');
+
+Create Table EstadoTurnos(
+    Id SMALLINT NOT NULL PRIMARY KEY IDENTITY(1,1),
+    Nombre VARCHAR(50) NOT NULL
+)
+
+INSERT INTO EstadoTurnos(Nombre)
+VALUES
+('ABIERTO'),
+('CERRADO'),
+('CANCELADO'),
+('REPROGRAMADO'),
+('AUSENTE');
+
+
+-----HASTA ACA LA GENERACION
 
 --Consulta para ver especialidades de profesionales
 -- select
@@ -146,3 +185,32 @@ INSERT INTO Profesionales_x_Especialidad (IDProfesional, IDEspecialidad) VALUES
 -- select P.ID as IdProfesional,PER.Nombre as Nombre, PER.Apellido as Apellido from Profesionales P
 -- INNER JOIN Personas PER ON P.IdPersona=PER.ID
 
+
+--Consulta para personas (Tod@s)
+SELECT
+P.ID, P.Nombre, P.Apellido, P.FechaNac,
+P.IDGenero, G.Nombre as Gen, P.NumDoc,
+P.Correo, P.Telefono, P.IDRol, R.Nombre as Rol,
+P.Activo, P.Password 
+FROM Personas P 
+INNER JOIN Generos G ON P.IDGenero = G.ID
+INNER JOIN Roles R ON P.IDRol = R.ID
+
+
+--Consulta para roles
+select R.ID as Id, R.Nombre as Nombre from Roles R
+
+--Consulta de especialidades
+select E.ID,E.Nombre  from Especialidades E
+
+--Consulta de ProfesionalesXEspecialidad
+select * from Profesionales_x_Especialidad
+
+--consulta de Profesionales
+select * from Profesionales
+
+
+select * from Horarios
+
+
+SELECT * from EstadoTurnos
