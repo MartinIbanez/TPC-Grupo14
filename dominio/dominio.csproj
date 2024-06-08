@@ -71,8 +71,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Especialidad.cs" />
+    <Compile Include="EstadoTurno.cs" />
     <Compile Include="Genero.cs" />
-    <Compile Include="HorarioTrabajo.cs" />
+    <Compile Include="Horario.cs" />
     <Compile Include="Profesional.cs" />
     <Compile Include="Paciente.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

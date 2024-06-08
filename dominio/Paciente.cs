@@ -8,8 +8,6 @@ namespace dominio
     //VER ESTA CLASE PROBABLEMENTE NO SEA NECESARIA....usariamos Persona....
     public class Paciente
     {
-     
-
         public int id { get; set; }
         public string nombre { get; set; }
         public string email { get; set; }

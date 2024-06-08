@@ -5,17 +5,16 @@ using System.Web;
 
 namespace dominio
 {
-    public class Turno
+    public class Turno  //Falta tabla en BD
     {
-
-
-        public int id { get; set; }
-        public DateTime fechaHora { get; set; }
-        public Paciente paciente { get; set; }
-        public Profesional medico { get; set; }
-        public string especialidad { get; set; }
-        public string estado { get; set; }
-        public string observaciones { get; set; }
+        public int Id { get; set; }
+        public DateTime FechaTurno { get; set; }
+        public Horario HorarioTurno { get; set; }
+        public Paciente PacienteTurno { get; set; }
+        public Profesional ProfesionalTurno { get; set; }
+        public Especialidad EspecialidadTurno { get; set; }
+        public EstadoTurno Estado { get; set; }
+        public string Observaciones { get; set; }
 
 
     }
