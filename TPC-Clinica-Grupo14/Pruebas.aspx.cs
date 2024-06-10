@@ -14,7 +14,7 @@ namespace TPC_Clinica_Grupo14
         protected void Page_Load(object sender, EventArgs e)
         {
             //Levanto datos Personas//
-            PersonaNegocio pn = new PersonaNegocio();
+            //PersonaNegocio pn = new PersonaNegocio();
             //List<Persona> listaPersonas = new List<Persona>();
             //listaPersonas = pn.Listar();
             //Levanto datos Roles//
@@ -25,6 +25,10 @@ namespace TPC_Clinica_Grupo14
             EspecialidadNegocio en = new EspecialidadNegocio();
             List<Especialidad> listaEspecialidades = new List<Especialidad>();
             listaEspecialidades = en.Listar();
+            //Levato datos Profesionales
+            ProfesionalNegocio pn = new ProfesionalNegocio();
+            List<Profesional> listaProfesionales = new List<Profesional>();
+            listaProfesionales = pn.Listar();
             try
             {
                 if (!IsPostBack)
@@ -36,6 +40,13 @@ namespace TPC_Clinica_Grupo14
                     DropDownListEspecialidades.DataTextField = "Nombre";
                     DropDownListEspecialidades.DataValueField = "Id";
                     DropDownListEspecialidades.DataBind();
+                    Session.Add("listaEspecialidades", listaEspecialidades);     //agrego a la sesion asi no vuelvo a abrir la BD
+
+                    //DropDownListProfesionales.DataSource = listaProfesionales;
+                    //DropDownListProfesionales.DataTextField = "Nombre";
+                    //DropDownListProfesionales.DataValueField = "Id";
+                    //DropDownListProfesionales.DataBind();
+                    Session.Add("listaProfesionales", listaProfesionales);     //agrego a la sesion asi no vuelvo a abrir la BD
 
                     //GridPruebaPersonas.DataSource = listaPersonas;
                     //GridPruebaPersonas.DataBind();
@@ -48,6 +59,24 @@ namespace TPC_Clinica_Grupo14
             {
                 throw ex;
             }
+        }
+
+        protected void DropDownListEspecialidades_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            int idEspecialidad = int.Parse(DropDownListEspecialidades.SelectedItem.Value);
+            List<Profesional> listaProfesionalesAMostrar = new List<Profesional>();
+
+            foreach (Profesional p in (List<Profesional>)Session["listaProfesionales"])
+            {
+                if (p.Especialidades.Find(x => x.Id == idEspecialidad) != null)
+                {
+                    listaProfesionalesAMostrar.Add(p);
+                }
+            }
+            DropDownListProfesionales.DataSource = listaProfesionalesAMostrar;
+            DropDownListProfesionales.DataTextField = "Nombre";
+            DropDownListProfesionales.DataValueField = "Id";
+            DropDownListProfesionales.DataBind();
         }
     }
 }

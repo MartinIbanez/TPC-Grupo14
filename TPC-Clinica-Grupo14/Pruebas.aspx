@@ -4,8 +4,8 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div>
         <h1>Arrancan las pruebas....</h1>
-        <asp:DropDownList runat="server" ID="DropDownListEspecialidades"></asp:DropDownList>
-        <br />
+        <asp:DropDownList runat="server" ID="DropDownListEspecialidades" AutoPostBack="true" OnSelectedIndexChanged="DropDownListEspecialidades_SelectedIndexChanged"></asp:DropDownList>
+        <asp:DropDownList runat="server" ID="DropDownListProfesionales"></asp:DropDownList>
         <br />
         <br />
         <asp:GridView runat="server" ID="GridPruebaRoles"></asp:GridView>

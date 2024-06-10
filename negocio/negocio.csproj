@@ -74,6 +74,8 @@
     <Compile Include="AccesoDatos.cs" />
     <Compile Include="EspecialidadNegocio.cs" />
     <Compile Include="PersonaNegocio.cs" />
+    <Compile Include="ProfesionalesXEspecialidadNegocio.cs" />
+    <Compile Include="ProfesionalNegocio.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RolNegocio.cs" />
   </ItemGroup>

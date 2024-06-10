@@ -5,9 +5,14 @@ using System.Web;
 
 namespace dominio
 {
-    public class Horario    //Los horarios son bloques de 1 hora, de 09:00 a 21:00, el id va de 9 a 20 =)
+    public class Horario    //Los horarios de trabajo se van a cargar por dia. Puede haber mas de un horario por dia
     {
+        //to do: al momento de dar de alta un horario, hay que mostrar
+        //como horarios disponibles los que hayan quedado remanentes....es una validacion
         public int Id { get; set; }
-        //Algun campo mas?
+
+        public DayOfWeek Dia { get; set; }      //es un enum para los 7 dias de la semana, es compatible con Datetime
+        public int HoraEntrada { get; set; }
+        public int HoraSalida { get; set; }
     }
 }

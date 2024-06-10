@@ -14,11 +14,11 @@ namespace dominio
         public string Apellido { get; set; }
         public DateTime FechaNacimiento { get; set; }
         public int IdGenero { get; set; }
-        public string Gen { get; set; }
+        public string Gen { get; set; } //clase!!
         public string NumDoc { get; set; }
         public string Correo { get; set; }
         public string Telefono { get; set; }
-        public int IdRol { get; set; }       //(1  Admin) (2  Recepcionista) (3  Profesional) (4  Paciente)
+        public int IdRol { get; set; } //enum???      //(1  Admin) (2  Recepcionista) (3  Profesional) (4  Paciente)
         public string Role { get; set; }
         public bool Activo { get; set; }
         public string Password { get; set; }
