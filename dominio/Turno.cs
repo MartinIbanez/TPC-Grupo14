@@ -10,7 +10,7 @@ namespace dominio
         public int Id { get; set; }
         public DateTime FechaTurno { get; set; }
         public Horario HorarioTurno { get; set; }
-        public Paciente PacienteTurno { get; set; }
+        public Persona PacienteTurno { get; set; }
         public Profesional ProfesionalTurno { get; set; }
         public Especialidad EspecialidadTurno { get; set; }
         public EstadoTurno Estado { get; set; }

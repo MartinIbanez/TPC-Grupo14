@@ -13,7 +13,7 @@ namespace dominio
         public int IdProfesional { get; set; }
         public List<Especialidad> Especialidades { get; set; }
         //VER TURNOS...
-        public List<Turno> Turnos { get; set; }
+        public List<Horario> ListHorariosDispoibles { get; set; }
         //VER HORARIOS...
     }
    

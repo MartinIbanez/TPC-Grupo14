@@ -75,7 +75,6 @@
     <Compile Include="Genero.cs" />
     <Compile Include="Horario.cs" />
     <Compile Include="Profesional.cs" />
-    <Compile Include="Paciente.cs" />
     <Compile Include="ProfesionalesXEspecialidad.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Rol.cs" />
