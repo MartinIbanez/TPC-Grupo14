@@ -13,26 +13,27 @@ namespace TPC_Clinica_Grupo14
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            //Levanto datos Personas//
-            //PersonaNegocio pn = new PersonaNegocio();
-            //List<Persona> listaPersonas = new List<Persona>();
-            //listaPersonas = pn.Listar();
-            //Levanto datos Roles//
-            RolNegocio rn = new RolNegocio();
-            List<Rol> listaRoles = new List<Rol>();
-            listaRoles = rn.Listar();
-            //Levanto datos Especialidades//
-            EspecialidadNegocio en = new EspecialidadNegocio();
-            List<Especialidad> listaEspecialidades = new List<Especialidad>();
-            listaEspecialidades = en.Listar();
-            //Levato datos Profesionales
-            ProfesionalNegocio pn = new ProfesionalNegocio();
-            List<Profesional> listaProfesionales = new List<Profesional>();
-            listaProfesionales = pn.Listar();
             try
             {
                 if (!IsPostBack)
                 {
+                    //Levanto datos Personas//
+                    //PersonaNegocio pn = new PersonaNegocio();
+                    //List<Persona> listaPersonas = new List<Persona>();
+                    //listaPersonas = pn.Listar();
+                    //Levanto datos Roles//
+                    RolNegocio rn = new RolNegocio();
+                    List<Rol> listaRoles = new List<Rol>();
+                    listaRoles = rn.Listar();
+                    //Levanto datos Especialidades//
+                    EspecialidadNegocio en = new EspecialidadNegocio();
+                    List<Especialidad> listaEspecialidades = new List<Especialidad>();
+                    listaEspecialidades = en.Listar();
+                    //Levato datos Profesionales
+                    ProfesionalNegocio pn = new ProfesionalNegocio();
+                    List<Profesional> listaProfesionales = new List<Profesional>();
+                    listaProfesionales = pn.Listar();
+                    //-----------
                     GridPruebaRoles.DataSource = listaRoles;
                     GridPruebaRoles.DataBind();
 
@@ -73,10 +74,27 @@ namespace TPC_Clinica_Grupo14
                     listaProfesionalesAMostrar.Add(p);
                 }
             }
+            Session.Add("listaProfesionalesAMostrar", listaProfesionalesAMostrar);
+
             DropDownListProfesionales.DataSource = listaProfesionalesAMostrar;
             DropDownListProfesionales.DataTextField = "Nombre";
-            DropDownListProfesionales.DataValueField = "Id";
+            DropDownListProfesionales.DataValueField = "IdProfesional";
             DropDownListProfesionales.DataBind();
+
+            //DropDownListHorariosDisponibles.SelectedIndex = -1; //fuerzo el cambio
+            //se necesita esto?
+        }
+
+        protected void DropDownListProfesionales_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            int idProf = int.Parse(DropDownListProfesionales.SelectedValue);
+
+            Profesional prof = new Profesional();
+            prof = ((List<Profesional>)Session["listaProfesionalesAMostrar"]).Find(x=>x.IdProfesional==idProf);
+
+
+            DropDownListHorariosDisponibles.DataSource = prof.MostrarHorarios();
+            DropDownListHorariosDisponibles.DataBind();
         }
     }
 }

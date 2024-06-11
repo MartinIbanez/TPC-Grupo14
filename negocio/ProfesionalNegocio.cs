@@ -15,10 +15,14 @@ namespace negocio
 
             EspecialidadNegocio en = new EspecialidadNegocio();
             List<Especialidad> listEspecialidades = en.Listar();  //cargo la lista de especialidades
+            Especialidad espAux = new Especialidad();
 
             ProfesionalesXEspecialidadNegocio pxe = new ProfesionalesXEspecialidadNegocio();
             List<ProfesionalesXEspecialidad> listPxE = pxe.Listar();
-            Especialidad espAux = new Especialidad();
+
+            HorarioNegocio hn = new HorarioNegocio();
+            List<Horario> listHorarios = hn.Listar();
+
             try
             {   //Levanto nombre y apellido profesional
                 datos.SetearConsulta("select PR.ID as ID,P.Nombre as Nombre,P.Apellido as Apellido from Profesionales PR INNER JOIN Personas P ON P.ID=PR.IdPersona");
@@ -30,7 +34,10 @@ namespace negocio
                     aux.IdProfesional = int.Parse((datos.Lector["ID"].ToString()));
                     aux.Nombre = datos.Lector["Nombre"].ToString();
                     aux.Apellido = (string)datos.Lector["Apellido"].ToString();
-                    aux.Especialidades = new List<Especialidad>();  //Instancio la lista para poder cargarla
+                    aux.Especialidades = new List<Especialidad>();      //Instancio la lista para poder cargarla
+                    aux.ListHorariosDisponibles = new List<Horario>();   //Instancio la lista para poder cargarla
+
+
                     //---Datos que no muestro por ahora...---
 
                     //aux.FechaNacimiento = (DateTime)datos.Lector["FechaNac"];
@@ -43,7 +50,7 @@ namespace negocio
                     //aux.Role = datos.Lector["Rol"].ToString();
                     //aux.Activo = (bool)datos.Lector["Activo"];
                     //aux.Password = datos.Lector["Password"].ToString();
-                    
+
 
                     //Este bloque carga las especialidades de profesional en cuestion...
                     List<ProfesionalesXEspecialidad> listPxEFiltrados = listPxE.FindAll(x=>x.IdProfesional == aux.IdProfesional);
@@ -56,6 +63,15 @@ namespace negocio
                             aux.Especialidades.Add(espAux);
                         }
                     }
+                    //Este bloque carga los horarios de profesional en cuestion
+                    foreach(Horario h in listHorarios)
+                    {
+                        if(h.IdProfesional == aux.IdProfesional)
+                        {
+                            aux.ListHorariosDisponibles.Add(h);
+                        }
+                    }
+
                     lista.Add(aux);
                 }
                 return lista;

@@ -15,6 +15,15 @@ namespace TPC_Clinica_Grupo14
     {
 
         /// <summary>
+        /// ScriptManager1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.ScriptManager ScriptManager1;
+
+        /// <summary>
         /// DropDownListEspecialidades control.
         /// </summary>
         /// <remarks>
@@ -31,6 +40,15 @@ namespace TPC_Clinica_Grupo14
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList DropDownListProfesionales;
+
+        /// <summary>
+        /// DropDownListHorariosDisponibles control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList DropDownListHorariosDisponibles;
 
         /// <summary>
         /// GridPruebaRoles control.

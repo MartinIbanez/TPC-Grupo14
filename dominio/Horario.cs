@@ -10,9 +10,20 @@ namespace dominio
         //to do: al momento de dar de alta un horario, hay que mostrar
         //como horarios disponibles los que hayan quedado remanentes....es una validacion
         public int Id { get; set; }
+        public int IdProfesional { get; set; }
 
         public DayOfWeek Dia { get; set; }      //es un enum para los 7 dias de la semana, es compatible con Datetime
-        public int HoraEntrada { get; set; }
-        public int HoraSalida { get; set; }
+        public int HoraInicio { get; set; }
+        public int HoraFin { get; set; }
+
+        public List<int> ObtenerHoras()
+        {
+            List<int> horas=new List<int>();
+            for (int i = this.HoraInicio; i < this.HoraFin; i++) 
+            {
+                horas.Add(i);
+            }
+            return horas;
+        }
     }
 }
