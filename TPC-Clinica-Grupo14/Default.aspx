@@ -6,4 +6,11 @@
     <div class="container">
         <img src="https://statics-cuidateplus.marca.com/cms/styles/natural/azblob/2023-01/urgencias-hospital.jpg.webp?itok=_-ftKkXO" alt="Imagen de urgencias hospitalarias" />
     </div>
+
+     <footer class="footer">
+
+     <p>&copy;<%:DateTime.Now.Year %> PROGRAMACION 3 | MARTIN IBAÑEZ - GONZALO BIANCHINI - EMILIANO DIAZ</p>
+
+ </footer>
+
 </asp:Content>

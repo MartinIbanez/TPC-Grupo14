@@ -5,7 +5,7 @@
     background-color: #16202e;
     text-align: center;
     color: #fff;
-    /*padding: 10 px;*/
+    padding: 10px 0;
     position: fixed;
     left: 0;
     bottom: 0px;
@@ -45,3 +45,5 @@ body {
 .navbar-toggler-icon {
     background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba%2855, 55, 55, 0.5%29' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
 }
+
+

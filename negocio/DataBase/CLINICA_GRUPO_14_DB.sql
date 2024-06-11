@@ -131,25 +131,11 @@ INSERT INTO Profesionales_x_Especialidad (IDProfesional, IDEspecialidad) VALUES
 -- Profesional8: Neurología, Oftalmología
 (8, 3), (8, 7);
 
-Create Table Horarios(
-    Id smallint not null PRIMARY KEY IDENTITY(9,1),
-    HoraInicio TIME NOT NULL
-)
 
-INSERT INTO Horarios (HoraInicio)
-VALUES
-('09:00:00'),
-('10:00:00'),
-('11:00:00'),
-('12:00:00'),
-('13:00:00'),
-('14:00:00'),
-('15:00:00'),
-('16:00:00'),
-('17:00:00'),
-('18:00:00'),
-('19:00:00'),
-('20:00:00');
+-- CREATE TABLE Horarios_x_Profesional(
+--     IdProfesional SMALLINT FOREIGN KEY NOT NULL REFERENCES Profesionales(Id),
+--     IdHorarios SMALLINT FOREIGN KEY NOT NULL REFERENCES Horarios(Id),
+--     PRIMARY KEY(IdProfesional,IdHorarios)
 
 Create Table EstadoTurnos(
     Id SMALLINT NOT NULL PRIMARY KEY IDENTITY(1,1),
@@ -164,6 +150,32 @@ VALUES
 ('REPROGRAMADO'),
 ('AUSENTE');
 
+CREATE TABLE Horarios(
+    Id SMALLINT NOT NULL PRIMARY KEY IDENTITY(1,1),
+    IdProfesional SMALLINT NOT NULL FOREIGN KEY REFERENCES Profesionales(ID),
+    DayOfWeek SMALLINT NOT NULL,
+    HoraInicio SMALLINT NOT NULL,
+    HoraFin SMALLINT NOT NULL
+)
+
+INSERT INTO Horarios (IdProfesional, DayOfWeek, HoraInicio, HoraFin)
+VALUES
+(1, 1, 9, 12),  -- Profesional 1, Lunes, 09:00-12:00
+(1, 3, 9, 12),  -- Profesional 1, Miércoles, 09:00-12:00
+(2, 2, 14, 18), -- Profesional 2, Martes, 14:00-18:00
+(3, 4, 10, 15), -- Profesional 3, Jueves, 10:00-15:00
+(3, 5, 15, 18), -- Profesional 3, Viernes, 15:00-18:00
+(4, 1, 9, 14),  -- Profesional 4, Lunes, 09:00-14:00
+(4, 5, 14, 18), -- Profesional 4, Viernes, 14:00-18:00
+(5, 2, 16, 20), -- Profesional 5, Martes, 16:00-20:00
+(5, 4, 9, 13),  -- Profesional 5, Jueves, 09:00-13:00
+(6, 6, 8, 14), -- Profesional 6, Sabado, 08:00-14:00
+(7, 3, 13, 17), -- Profesional 7, Miercoles, 13:00-17:00
+(8, 1, 9, 12),  -- Profesional 8, Lunes, 09:00-12:00
+(8, 3, 9, 12), -- Profesional 8, Miercoles, 09:00-12:00
+(8, 5, 9, 12); -- Profesional 8, Viernes, 09:00-12:00
+
+select * from Horarios
 
 -----HASTA ACA LA GENERACION
 
@@ -201,16 +213,23 @@ INNER JOIN Roles R ON P.IDRol = R.ID
 select R.ID as Id, R.Nombre as Nombre from Roles R
 
 --Consulta de especialidades
-select E.ID,E.Nombre  from Especialidades E
+select E.ID,E.Nombre  from Especialidades E 
 
 --Consulta de ProfesionalesXEspecialidad
-select * from Profesionales_x_Especialidad
+select PXE.IDProfesional as IdProfesional,PXE.IDEspecialidad as IdEspecialidad from Profesionales_x_Especialidad PXE
 
---consulta de Profesionales
-select * from Profesionales
-
+--consulta de Profesionales con Nombre y Apellido
+select PR.ID as ID,P.Nombre as Nombre,P.Apellido as Apellido from Profesionales PR INNER JOIN Personas P ON P.ID=PR.IdPersona
 
 select * from Horarios
 
-
 SELECT * from EstadoTurnos
+
+select PXE.IDProfesional as IdProfesional,PXE.IDEspecialidad as IdEspecialidad from Profesionales_x_Especialidad PXE
+-- where PXE.IDProfesional = 1
+select * from Horarios
+
+--Consulta de todos los horarios disponibles
+select H.Id as Id,H.IdProfesional as IdProfesional,H.DayOfWeek as DayOfWeek,H.HoraInicio as HoraInicio,H.HoraFin as HoraFin FROM Horarios H
+
+

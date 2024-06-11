@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Master.Master" AutoEventWireup="true" CodeBehind="MenuMedico.aspx.cs" Inherits="TPC_Clinica_Grupo14.Formulario_web1" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Master.Master" AutoEventWireup="true" CodeBehind="Medicos.aspx.cs" Inherits="TPC_Clinica_Grupo14.Medicos" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <link href="Estilos.css" rel="stylesheet" />
@@ -74,9 +74,13 @@
             </div>
 
             <div class="content">
-                <!-- Aquí iría el contenido principal de la página -->
+
+                <asp:GridView ID="dgvMedicos" runat="server"></asp:GridView>
+               
+
             </div>
         </div>
    
+
 
 </asp:Content>

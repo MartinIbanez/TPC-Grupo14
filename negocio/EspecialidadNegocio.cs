@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using dominio;
 
+
 namespace negocio
 {
     public class EspecialidadNegocio
