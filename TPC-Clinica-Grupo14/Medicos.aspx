@@ -2,6 +2,7 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <link href="Estilos.css" rel="stylesheet" />
+
     <style>
         body {
             display: flex;

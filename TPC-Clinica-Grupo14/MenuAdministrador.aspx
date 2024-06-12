@@ -22,19 +22,19 @@
 
         .main {
             display: flex;
-            margin-top: 60px; 
-            padding-bottom: 60px; 
+            margin-top: 60px;
+            padding-bottom: 60px;
         }
 
         .sidebar {
-            height: calc(100vh - 60px); 
+            height: calc(100vh - 60px);
             width: 250px;
             position: fixed;
-            top: 60px; 
+            top: 60px;
             left: 0;
             background-color: #343a40;
             padding-top: 20px;
-            z-index: 999; 
+            z-index: 999;
             overflow-y: auto;
         }
 
@@ -51,11 +51,11 @@
                 }
 
         .content {
-            margin-left: 260px; 
+            margin-left: 260px;
             padding: 20px;
             flex-grow: 1;
-            overflow: auto; 
-            padding-bottom: 60px; 
+            overflow: auto;
+            padding-bottom: 60px;
         }
     </style>
 

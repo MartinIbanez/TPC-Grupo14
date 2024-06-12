@@ -4,8 +4,6 @@
     <link href="Estilos.css" rel="stylesheet" />
     <style>
         body {
-            display: flex;
-            flex-direction: column;
             margin: 0;
         }
 
@@ -23,7 +21,6 @@
         .main {
             display: flex;
             margin-top: 60px; /* Ajusta esto según la altura de tu cabecera */
-            padding-bottom: 60px; /* Espacio para el footer */
         }
 
         .sidebar {
@@ -55,35 +52,51 @@
             padding: 20px;
             flex-grow: 1;
             overflow: auto; /* Para manejar el desbordamiento del contenido */
-            padding-bottom: 60px; /* Espacio para el footer */
         }
-    </style>
 
+        .table-responsive {
+            max-height: 600px;
+            overflow-x: auto;
+        }
+
+            .table-responsive .grid-view {
+                width: 100%;
+            }
+    </style>
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <link href="Estilos.css" rel="stylesheet" />
-
     <div class="main">
         <div class="sidebar">
-            <a class="nav-link" href="Especialidades.aspx">ESPECIALIDADES </a>
+            <a class="nav-link" href="Especialidades.aspx">ESPECIALIDADES</a>
             <a class="nav-link" href="Turnos.aspx">TURNOS</a>
             <a class="nav-link" href="Pacientes.aspx">PACIENTES</a>
             <a class="nav-link" href="Medicos.aspx">MEDICOS</a>
         </div>
+
+        <div class="content">
+            <div class="table-responsive">
+                <asp:GridView runat="server" ID="dgvEspecialidades" OnSelectedIndexChanged="dgvEspecialidades_SelectedIndexChanged" AutoGenerateColumns="False" DataKeyNames="Id" CssClass="table table-striped table-bordered table-dark grid-view">
+                    <Columns>
+                        <asp:BoundField DataField="Id" HeaderText="ID" Visible="false" />
+                        <asp:BoundField DataField="Nombre" HeaderText="Nombre" />
+                        <asp:CommandField ShowSelectButton="true" SelectText="Seleccionar" HeaderText="Acción" ControlStyle-CssClass="btn btn-sm btn-primary" />
+                    </Columns>
+                </asp:GridView>
+            </div>
+        </div>
+
+            <div class="col-md-4 mt-9 border">
+            <asp:TextBox ID="txtId" runat="server" CssClass="form-control" ReadOnly="true" Visible="false"></asp:TextBox>
+            <asp:Label ID="lblNombreEspecialidad" runat="server" AssociatedControlID="txtNombre" CssClass="form-label fw-bold">Especialidad Seleccionada</asp:Label>
+            <asp:TextBox ID="txtNombre" runat="server" CssClass="form-control"></asp:TextBox>
+
+            <asp:Button ID="btnAgregar" runat="server" CssClass="btn btn-success" Text="Agregar" OnClick="btnAgregar_Click" />
+            <asp:Button ID="btnModificar" runat="server" CssClass="btn btn-warning" Text="Modificar" OnClick="btnModificar_Click" />
+            <asp:Button ID="btnEliminar" runat="server" CssClass="btn btn-danger" Text="Eliminar" OnClick="btnEliminar_Click" />
+            <asp:Button ID="btnCancelar" runat="server" CssClass="btn btn-secondary" Text="Cancelar" OnClick="btnCancelar_Click" />
+
+
+        </div>
     </div>
-
-
-
-    <div class="content">
-
-        <asp:GridView runat="server" ID="dgvEspecialidades"></asp:GridView>
-
-
-
-        <!-- Aquí iría el contenido principal de la página -->
-
-    </div>
-
-
 </asp:Content>

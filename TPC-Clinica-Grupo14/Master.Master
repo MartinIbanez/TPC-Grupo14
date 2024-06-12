@@ -66,12 +66,11 @@
         </nav>
 
 
-
-        <div class="container">
-            <hr />
+        <div class="main-content">
+        
+            
             <div>
-                <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
-                </asp:ContentPlaceHolder>
+                <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">  </asp:ContentPlaceHolder>
             </div>
         </div>
     </form>
