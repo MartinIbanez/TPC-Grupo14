@@ -15,7 +15,7 @@ namespace negocio
             List<Persona> lista = new List<Persona>();
             try
             {
-                datos.SetearConsulta("SELECT P.ID, P.Nombre, P.Apellido, P.FechaNac, P.IDGenero, G.Nombre as Gen, P.NumDoc, P.Correo, P.Telefono, P.IDRol, R.Nombre as Rol, P.Activo, P.Password FROM Personas P INNER JOIN Generos G ON P.IDGenero = G.ID INNER JOIN Roles R ON P.IDRol = R.ID");
+                datos.SetearConsulta("SELECT P.ID, P.Nombre, P.Apellido, P.FechaNac, P.IDGenero, G.Nombre as Gen, P.NumDoc, P.Correo, P.Telefono, P.IDRol, R.Nombre as Rol, P.Activo FROM Personas P INNER JOIN Generos G ON P.IDGenero = G.ID INNER JOIN Roles R ON P.IDRol = R.ID");
                 datos.EjecutarLectura();
 
                 while (datos.Lector.Read())
@@ -33,7 +33,7 @@ namespace negocio
                     aux.IdRol = int.Parse(datos.Lector["IDRol"].ToString());
                     aux.Role = datos.Lector["Rol"].ToString();
                     aux.Activo = (bool)datos.Lector["Activo"];
-                    aux.Password = datos.Lector["Password"].ToString();
+                    
 
                     lista.Add(aux);
                 }
