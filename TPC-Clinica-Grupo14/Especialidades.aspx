@@ -2,7 +2,8 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <link href="Estilos.css" rel="stylesheet" />
-    <style>
+
+    <style> 
         body {
             margin: 0;
         }
@@ -63,9 +64,11 @@
                 width: 100%;
             }
     </style>
+
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+
     <div class="main">
         <div class="sidebar">
             <a class="nav-link" href="Especialidades.aspx">ESPECIALIDADES</a>
@@ -78,7 +81,7 @@
             <div class="table-responsive">
                 <asp:GridView runat="server" ID="dgvEspecialidades" OnSelectedIndexChanged="dgvEspecialidades_SelectedIndexChanged" AutoGenerateColumns="False" DataKeyNames="Id" CssClass="table table-striped table-bordered table-dark grid-view">
                     <Columns>
-                        <asp:BoundField DataField="Id" HeaderText="ID" Visible="false" />
+                        <asp:BoundField DataField="Id" HeaderText="ID" Visible="true" />
                         <asp:BoundField DataField="Nombre" HeaderText="Nombre" />
                         <asp:CommandField ShowSelectButton="true" SelectText="Seleccionar" HeaderText="Acción" ControlStyle-CssClass="btn btn-sm btn-primary" />
                     </Columns>
@@ -86,7 +89,7 @@
             </div>
         </div>
 
-            <div class="col-md-4 mt-9 border">
+            <div class="col-md-4 mt-3 border">
             <asp:TextBox ID="txtId" runat="server" CssClass="form-control" ReadOnly="true" Visible="false"></asp:TextBox>
             <asp:Label ID="lblNombreEspecialidad" runat="server" AssociatedControlID="txtNombre" CssClass="form-label fw-bold">Especialidad Seleccionada</asp:Label>
             <asp:TextBox ID="txtNombre" runat="server" CssClass="form-control"></asp:TextBox>
