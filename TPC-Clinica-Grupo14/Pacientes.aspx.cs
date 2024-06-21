@@ -30,15 +30,8 @@ namespace TPC_Clinica_Grupo14
 
             try
             {
-                List<Persona> Lista = personaNegocio.Listar();
-
-                // asigna en la listaPaciente  con IDRol = 4 ,solo los pacientes de la lista Lista.
-                // Filtrar personas con IDRol = 4
-                listaPacientes = Lista.Where(p => p.IdRol == 4).ToList();
-
-
+                listaPacientes = personaNegocio.ListarPaciente();
                 dgvPacientes.DataSource = listaPacientes;
-                // filtraciones de datos para mostrar solo los pacientes
                 dgvPacientes.DataBind();
             }
             catch (Exception ex)
@@ -55,15 +48,68 @@ namespace TPC_Clinica_Grupo14
         protected void dgvPacientes_SelectedIndexChanged(object sender, EventArgs e)
         {
             GridViewRow row = dgvPacientes.SelectedRow;
-            txtId.Text = row.Cells[0].Text;
-            txtNombre.Text = row.Cells[1].Text;
-            txtApellido.Text = row.Cells[2].Text;
-            txtDNI.Text = row.Cells[3].Text;
-            txtFechaNacimiento.Text = row.Cells[4].Text;
+            if (int.TryParse(dgvPacientes.DataKeys[row.RowIndex].Value.ToString(), out int id))
+            {
+                txtId.Text = id.ToString();
+                txtNombre.Text = row.Cells[0].Text;
+                txtApellido.Text = row.Cells[1].Text;
+                txtFechaNacimiento.Text = row.Cells[2].Text;
+                int Idgenero = Convert.ToInt32(row.Cells[3].Text);
+
+                if (Idgenero == 1)
+                {
+                    txtGenero.Text = "Masculino";
+                }
+                else
+                {
+                    if (Idgenero == 2)
+                    {
+                        txtGenero.Text = "Femenino";
+                    }
+                    else
+                    {
+                        txtGenero.Text = "Otro";
+                    }
+                }
+
+                txtDNI.Text = row.Cells[4].Text;
+                txtCorreo.Text = row.Cells[5].Text;
+                txtTelefono.Text = row.Cells[6].Text;
+
+                // Obtener datos adicionales del objeto persona basado en el Id
+                Persona persona = personaNegocio.ObtenerPacientePorId(id);
+
+                if (persona != null)
+                {
+
+                    txtActivo.Text = persona.Activo ? "Sí" : "No";
+                }
+            }
+
         }
+
+
 
         protected void btnAgregar_Click(object sender, EventArgs e)
         {
+            Persona persona = new Persona();
+            persona.Nombre = txtNombre.Text;
+            persona.Apellido = txtApellido.Text;
+            persona.NumDoc = txtDNI.Text;
+            persona.FechaNacimiento = Convert.ToDateTime(txtFechaNacimiento.Text);
+            persona.IdRol = 4;
+
+            try
+            {
+                personaNegocio.AgregarPaciente(persona);
+                CargarPacientes();
+                LimpiarCampos();
+            }
+            catch (Exception ex)
+            {
+                Response.Write("error" + ex.Message);
+            }
+
 
         }
 
@@ -97,6 +143,10 @@ namespace TPC_Clinica_Grupo14
             txtApellido.Text = string.Empty;
             txtDNI.Text = string.Empty;
             txtFechaNacimiento.Text = string.Empty;
+            txtGenero.Text = string.Empty;
+            txtCorreo.Text = string.Empty;
+            txtTelefono.Text = string.Empty;
+            txtActivo.Text = string.Empty;
         }
 
 
