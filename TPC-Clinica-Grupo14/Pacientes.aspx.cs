@@ -139,11 +139,86 @@ namespace TPC_Clinica_Grupo14
 
         protected void btnModificar_Click(object sender, EventArgs e)
         {
+            try
+            {
+                // Obtener los valores de los campos de texto
+                int idPaciente = Convert.ToInt32(txtId.Text);
+                string nombre = txtNombre.Text;
+                string apellido = txtApellido.Text;
+                DateTime fechaNacimiento = DateTime.Parse(txtFechaNacimiento.Text);
+                int idGenero = ObtenerGeneroId(txtGenero.Text);
+                string numDoc = txtDNI.Text;
+                string correo = txtCorreo.Text;
+                string telefono = txtTelefono.Text;
+                bool activo = txtActivo.Text.ToLower() == "sí";
 
+                // Verificar si el paciente ya existe en la base de datos por su DNI
+                List<Persona> listaPacientes = personaNegocio.ListarPaciente();
+                if (listaPacientes.Any(p => p.NumDoc == numDoc && p.Id != idPaciente))
+                {
+                    // Mostrar mensaje de error si el paciente con el mismo DNI ya existe pero tiene un ID diferente
+                    Response.Write("<script>alert('Error: Ya existe un paciente con ese DNI');</script>");
+                    return;
+                }
+
+                // Crear una instancia de Persona con los nuevos datos
+                Persona pacienteModificado = new Persona
+                {
+                    Id = idPaciente,
+                    Nombre = nombre,
+                    Apellido = apellido,
+                    FechaNacimiento = fechaNacimiento,
+                    IdGenero = idGenero,
+                    NumDoc = numDoc,
+                    Correo = correo,
+                    Telefono = telefono,
+                    Activo = activo,
+                    IdRol = 4 // Asignar el rol de paciente
+                };
+
+                // Llamar al método para modificar el paciente en la base de datos
+                personaNegocio.ModificarPaciente(pacienteModificado);
+
+                // Recargar la lista de pacientes
+                CargarPacientes();
+
+                // Limpiar los campos de texto
+                LimpiarCampos();
+
+                // Mostrar mensaje de éxito
+                Response.Write("<script>alert('Paciente modificado con éxito');</script>");
+            }
+            catch (Exception ex)
+            {
+                // Manejo de errores
+                Response.Write("<script>alert('Error al modificar el paciente: " + ex.Message + "');</script>");
+            }
         }
 
         protected void btnEliminar_Click(object sender, EventArgs e)
         {
+            try
+            {
+                // Obtener el ID del paciente a eliminar
+                int idPaciente = Convert.ToInt32(txtId.Text);
+
+                // Llamar al método para eliminar el paciente de la base de datos
+                personaNegocio.EliminarPaciente(idPaciente);
+
+                // Recargar la lista de pacientes
+                CargarPacientes();
+
+                // Limpiar los campos de texto
+                LimpiarCampos();
+
+                // Mostrar mensaje de éxito
+                Response.Write("<script>alert('Paciente eliminado con éxito');</script>");
+            }
+            catch (Exception ex)
+            {
+                // Manejo de errores
+                Response.Write("<script>alert('Error al eliminar el paciente: " + ex.Message + "');</script>");
+            }
 
         }
 

@@ -158,7 +158,56 @@ namespace negocio
         }
 
 
+        public void ModificarPaciente(Persona nuevo)
+        {
+            AccesoDatos datos = new AccesoDatos();
+            try
+            {
+                datos.SetearConsulta("UPDATE Personas SET Nombre = @Nombre, Apellido = @Apellido, FechaNac = @FechaNac, IDGenero = @IDGenero, NumDoc = @NumDoc, Correo = @Correo, Telefono = @Telefono, IDRol = @IDRol, Activo = @Activo WHERE ID = @ID");
+                datos.SetearParametro("@Nombre", nuevo.Nombre);
+                datos.SetearParametro("@Apellido", nuevo.Apellido);
+                datos.SetearParametro("@FechaNac", nuevo.FechaNacimiento);
+                datos.SetearParametro("@IDGenero", nuevo.IdGenero);
+                datos.SetearParametro("@NumDoc", nuevo.NumDoc);
+                datos.SetearParametro("@Correo", nuevo.Correo);
+                datos.SetearParametro("@Telefono", nuevo.Telefono);
+                datos.SetearParametro("@IDRol", nuevo.IdRol);
+                datos.SetearParametro("@Activo", nuevo.Activo);
+                datos.SetearParametro("@ID", nuevo.Id);
+                datos.EjecutarAccion();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
 
+            }
+            finally
+            {
+                datos.CerrarConexion();
+            }
+
+        }
+
+        public void EliminarPaciente(int idPaciente)
+        {
+            AccesoDatos datos = new AccesoDatos();
+            try
+            {
+                datos.SetearConsulta("DELETE FROM Personas WHERE ID = @ID");
+                datos.SetearParametro("@ID", idPaciente);
+                datos.EjecutarAccion();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+
+            }
+            finally
+            {
+                datos.CerrarConexion();
+            }
+
+        }
 
 
 
