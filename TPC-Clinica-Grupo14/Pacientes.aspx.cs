@@ -54,24 +54,7 @@ namespace TPC_Clinica_Grupo14
                 txtNombre.Text = row.Cells[0].Text;
                 txtApellido.Text = row.Cells[1].Text;
                 txtFechaNacimiento.Text = row.Cells[2].Text;
-                int Idgenero = Convert.ToInt32(row.Cells[3].Text);
-
-                if (Idgenero == 1)
-                {
-                    txtGenero.Text = "Masculino";
-                }
-                else
-                {
-                    if (Idgenero == 2)
-                    {
-                        txtGenero.Text = "Femenino";
-                    }
-                    else
-                    {
-                        txtGenero.Text = "Otro";
-                    }
-                }
-
+                txtGenero.Text = row.Cells[3].Text;
                 txtDNI.Text = row.Cells[4].Text;
                 txtCorreo.Text = row.Cells[5].Text;
                 txtTelefono.Text = row.Cells[6].Text;
@@ -88,6 +71,47 @@ namespace TPC_Clinica_Grupo14
 
         }
 
+        // Método para mostrar el nombre del género en la grilla
+        protected void dgvPacientes_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            if (e.Row.RowType == DataControlRowType.DataRow)
+            {
+                int Idgenero = Convert.ToInt32(DataBinder.Eval(e.Row.DataItem, "IdGenero"));
+                string nombreGenero = ObtenerNombreGenero(Idgenero);
+                e.Row.Cells[3].Text = nombreGenero;
+            }
+        }
+
+
+        // Método para obtener el nombre del género
+        private string ObtenerNombreGenero(int idGenero)
+        {
+            switch (idGenero)
+            {
+                case 1:
+                    return "Masculino";
+                case 2:
+                    return "Femenino";
+                default:
+                    return "Otro";
+            }
+        }
+
+
+
+        // Método para obtener el Id del género
+        private int ObtenerGeneroId(string genero)
+        {
+            switch (genero.ToLower())
+            {
+                case "masculino":
+                    return 1;
+                case "femenino":
+                    return 2;
+                default:
+                    return 3; // Otro
+            }
+        }
 
 
         protected void btnAgregar_Click(object sender, EventArgs e)

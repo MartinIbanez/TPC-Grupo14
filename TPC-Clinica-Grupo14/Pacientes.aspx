@@ -122,12 +122,12 @@
             <!-- Aquí iría el contenido principal de la página -->
             <div class="table-responsive">
                 <!-- Aquí va la GridView de pacientes que se levanta de una base de datos -->
-                <asp:GridView runat="server" ID="dgvPacientes" OnSelectedIndexChanged="dgvPacientes_SelectedIndexChanged" AutoGenerateColumns="False" DataKeyNames="ID" CssClass="table table-striped table-bordered table-dark grid-view">
+                <asp:GridView runat="server" ID="dgvPacientes" OnSelectedIndexChanged="dgvPacientes_SelectedIndexChanged" AutoGenerateColumns="False" DataKeyNames="ID" CssClass="table table-striped table-bordered table-dark grid-view" OnRowDataBound="dgvPacientes_RowDataBound">
                     <Columns>
                         <asp:BoundField DataField="Nombre" HeaderText="Nombre" />
                         <asp:BoundField DataField="Apellido" HeaderText="Apellido" />
                         <asp:BoundField DataField="FechaNacimiento" HeaderText="Fecha de Nacimiento" />
-                        <asp:BoundField DataField="IdGenero" HeaderText="Genero" />
+                        <asp:BoundField DataField="IdGenero" HeaderText="Género" />
                         <asp:BoundField DataField="NumDoc" HeaderText="DNI" />
                         <asp:BoundField DataField="Correo" HeaderText="Correo" />
                         <asp:BoundField DataField="Telefono" HeaderText="Teléfono" />
