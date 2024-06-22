@@ -15,7 +15,7 @@ namespace negocio
             List<Persona> lista = new List<Persona>();
             try
             {
-                datos.SetearConsulta("SELECT P.ID, P.Nombre, P.Apellido, P.FechaNac, P.IDGenero, G.Nombre as Gen, P.NumDoc, P.Correo, P.Telefono, P.IDRol, R.Nombre as Rol, P.Activo, P.Password FROM Personas P INNER JOIN Generos G ON P.IDGenero = G.ID INNER JOIN Roles R ON P.IDRol = R.ID");
+                datos.SetearConsulta("SELECT P.ID, P.Nombre, P.Apellido, P.FechaNac, P.IDGenero, G.Nombre as Gen, P.NumDoc, P.Correo, P.Telefono, P.IDRol, R.Nombre as Rol, P.Activo FROM Personas P INNER JOIN Generos G ON P.IDGenero = G.ID INNER JOIN Roles R ON P.IDRol = R.ID");
                 datos.EjecutarLectura();
 
                 while (datos.Lector.Read())
@@ -33,7 +33,7 @@ namespace negocio
                     aux.IdRol = int.Parse(datos.Lector["IDRol"].ToString());
                     aux.Role = datos.Lector["Rol"].ToString();
                     aux.Activo = (bool)datos.Lector["Activo"];
-                    aux.Password = datos.Lector["Password"].ToString();
+                    
 
                     lista.Add(aux);
                 }
@@ -48,7 +48,171 @@ namespace negocio
                 datos.CerrarConexion();
             }
         }
-        
+
+        public List<Persona> ListarPaciente()
+        {
+            AccesoDatos datos = new AccesoDatos();
+            List<Persona> lista = new List<Persona>();
+            try
+            {
+                datos.SetearConsulta("SELECT P.ID, P.Nombre, P.Apellido, P.FechaNac, P.IDGenero, P.NumDoc, P.Correo, P.Telefono, P.IDRol, P.Activo FROM Personas P where IDrol = 4");
+                datos.EjecutarLectura();
+
+                while (datos.Lector.Read())
+                {
+                    Persona aux = new Persona();
+                    aux.Id = int.Parse(datos.Lector["ID"].ToString());
+                    aux.Nombre = datos.Lector["Nombre"].ToString();
+                    aux.Apellido = datos.Lector["Apellido"].ToString();
+                    aux.FechaNacimiento = (DateTime)datos.Lector["FechaNac"];
+                    aux.IdGenero = int.Parse(datos.Lector["IDGenero"].ToString());
+                    aux.NumDoc = datos.Lector["NumDoc"].ToString();
+                    aux.Correo = datos.Lector["Correo"].ToString();
+                    aux.Telefono = datos.Lector["Telefono"].ToString();
+                    aux.IdRol = int.Parse(datos.Lector["IDRol"].ToString());
+                    aux.Activo = (bool)datos.Lector["Activo"];
+
+                    lista.Add(aux);
+
+                }
+                return lista;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.CerrarConexion();
+            }
+        }
+
+
+        public Persona ObtenerPacientePorId(int id)
+        {
+            // logica para obetener el paciente por ID
+            AccesoDatos datos = new AccesoDatos();
+
+            try
+            {
+                datos.SetearConsulta("SELECT P.ID, P.Nombre, P.Apellido, P.FechaNac, P.IDGenero, P.NumDoc, P.Correo, P.Telefono, P.IDRol, P.Activo FROM Personas P WHERE P.ID = @ID");
+                datos.SetearParametro("@ID", id);
+                datos.EjecutarLectura();
+
+                if (datos.Lector.Read())
+                {
+                    Persona aux = new Persona();
+                    aux.Id = int.Parse(datos.Lector["ID"].ToString());
+                    aux.Nombre = datos.Lector["Nombre"].ToString();
+                    aux.Apellido = datos.Lector["Apellido"].ToString();
+                    aux.FechaNacimiento = (DateTime)datos.Lector["FechaNac"];
+                    aux.IdGenero = int.Parse(datos.Lector["IDGenero"].ToString());
+                    aux.NumDoc = datos.Lector["NumDoc"].ToString();
+                    aux.Correo = datos.Lector["Correo"].ToString();
+                    aux.Telefono = datos.Lector["Telefono"].ToString();
+                    aux.IdRol = int.Parse(datos.Lector["IDRol"].ToString());
+                    aux.Activo = (bool)datos.Lector["Activo"];
+
+                    return aux;
+                }
+                return null;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.CerrarConexion();
+            }
+
+        }
+
+
+        public void AgregarPaciente(Persona nuevo)
+        {
+            AccesoDatos datos = new AccesoDatos();
+            try
+            {
+                datos.SetearConsulta("INSERT INTO Personas (Nombre, Apellido, FechaNac, IDGenero, NumDoc, Correo, Telefono, IDRol, Activo) VALUES (@Nombre, @Apellido, @FechaNac, @IDGenero, @NumDoc, @Correo, @Telefono, @IDRol, @Activo)");
+                datos.SetearParametro("@Nombre", nuevo.Nombre);
+                datos.SetearParametro("@Apellido", nuevo.Apellido);
+                datos.SetearParametro("@FechaNac", nuevo.FechaNacimiento);
+                datos.SetearParametro("@IDGenero", nuevo.IdGenero);
+                datos.SetearParametro("@NumDoc", nuevo.NumDoc);
+                datos.SetearParametro("@Correo", nuevo.Correo);
+                datos.SetearParametro("@Telefono", nuevo.Telefono);
+                datos.SetearParametro("@IDRol", nuevo.IdRol);
+                datos.SetearParametro("@Activo", nuevo.Activo);
+                datos.EjecutarAccion();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+
+            }
+            finally
+            {
+                datos.CerrarConexion();
+            }
+        }
+
+
+        public void ModificarPaciente(Persona nuevo)
+        {
+            AccesoDatos datos = new AccesoDatos();
+            try
+            {
+                datos.SetearConsulta("UPDATE Personas SET Nombre = @Nombre, Apellido = @Apellido, FechaNac = @FechaNac, IDGenero = @IDGenero, NumDoc = @NumDoc, Correo = @Correo, Telefono = @Telefono, IDRol = @IDRol, Activo = @Activo WHERE ID = @ID");
+                datos.SetearParametro("@Nombre", nuevo.Nombre);
+                datos.SetearParametro("@Apellido", nuevo.Apellido);
+                datos.SetearParametro("@FechaNac", nuevo.FechaNacimiento);
+                datos.SetearParametro("@IDGenero", nuevo.IdGenero);
+                datos.SetearParametro("@NumDoc", nuevo.NumDoc);
+                datos.SetearParametro("@Correo", nuevo.Correo);
+                datos.SetearParametro("@Telefono", nuevo.Telefono);
+                datos.SetearParametro("@IDRol", nuevo.IdRol);
+                datos.SetearParametro("@Activo", nuevo.Activo);
+                datos.SetearParametro("@ID", nuevo.Id);
+                datos.EjecutarAccion();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+
+            }
+            finally
+            {
+                datos.CerrarConexion();
+            }
+
+        }
+
+        public void EliminarPaciente(int idPaciente)
+        {
+            AccesoDatos datos = new AccesoDatos();
+            try
+            {
+                datos.SetearConsulta("DELETE FROM Personas WHERE ID = @ID");
+                datos.SetearParametro("@ID", idPaciente);
+                datos.EjecutarAccion();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+
+            }
+            finally
+            {
+                datos.CerrarConexion();
+            }
+
+        }
+
+
+
+
+
         public void Agregar(Persona nuevo)  //Revisar!!!!!!!!!!!!
         {
             AccesoDatos datos = new AccesoDatos();
@@ -78,6 +242,8 @@ namespace negocio
                 datos.CerrarConexion();
             }
         }
+
+
         public void Modificar(Persona modificar)    //Revisar!!!!!!!!!!!!
         {
             AccesoDatos datos = new AccesoDatos();

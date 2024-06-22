@@ -68,11 +68,14 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Default.aspx" />
+    <Content Include="Especialidades.aspx" />
     <Content Include="Estilos.css" />
+    <Content Include="Medicos.aspx" />
     <Content Include="MenuAdministrador.aspx" />
     <Content Include="MenuMedico.aspx" />
     <Content Include="Global.asax" />
     <Content Include="MenuRecepcionista.aspx" />
+    <Content Include="Pacientes.aspx" />
     <Content Include="Pruebas.aspx" />
     <Content Include="Web.config" />
     <Content Include="Login.aspx" />
@@ -85,6 +88,20 @@
     </Compile>
     <Compile Include="Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Especialidades.aspx.cs">
+      <DependentUpon>Especialidades.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Especialidades.aspx.designer.cs">
+      <DependentUpon>Especialidades.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Medicos.aspx.cs">
+      <DependentUpon>Medicos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Medicos.aspx.designer.cs">
+      <DependentUpon>Medicos.aspx</DependentUpon>
     </Compile>
     <Compile Include="MenuAdministrador.aspx.cs">
       <DependentUpon>MenuAdministrador.aspx</DependentUpon>
@@ -116,6 +133,13 @@
     </Compile>
     <Compile Include="MenuRecepcionista.aspx.designer.cs">
       <DependentUpon>MenuRecepcionista.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pacientes.aspx.cs">
+      <DependentUpon>Pacientes.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pacientes.aspx.designer.cs">
+      <DependentUpon>Pacientes.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Login.aspx.cs">

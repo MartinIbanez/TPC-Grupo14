@@ -16,6 +16,8 @@
     <link href="Estilos.css" rel="stylesheet" />
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+
 </head>
 
 <body>
@@ -64,22 +66,16 @@
         </nav>
 
 
-
-        <div class="container">
-            <hr />
+        <div class="main-content">
+        
+            
             <div>
-                <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
-                </asp:ContentPlaceHolder>
+                <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">  </asp:ContentPlaceHolder>
             </div>
         </div>
     </form>
 
-    <footer class="footer">
-
-        <p>&copy;<%:DateTime.Now.Year %> PROGRAMACION 3 | MARTIN IBAÑEZ - GONZALO BIANCHINI - EMILIANO DIAZ</p>
-
-    </footer>
-
+  
 
 </body>
 </html>
