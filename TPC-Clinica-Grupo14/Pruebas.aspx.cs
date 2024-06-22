@@ -17,32 +17,32 @@ namespace TPC_Clinica_Grupo14
             { 
                 if (!IsPostBack)
                 {
-                 
-                    //RolNegocio rn = new RolNegocio();
-                    //List<Rol> listaRoles = new List<Rol>();
-                    //listaRoles = rn.Listar();
-                  
-                    //EspecialidadNegocio en = new EspecialidadNegocio();
-                    //List<Especialidad> listaEspecialidades = new List<Especialidad>();
-                    //listaEspecialidades = en.Listar();
-                   
-                    //ProfesionalNegocio pn = new ProfesionalNegocio();
-                    //List<Profesional> listaProfesionales = new List<Profesional>();
-                    //listaProfesionales = pn.Listar();
-                   
-                    //GridPruebaRoles.DataSource = listaRoles;
-                    //GridPruebaRoles.DataBind();
 
-                    //DropDownListEspecialidades.DataSource = listaEspecialidades;
-                    //DropDownListEspecialidades.DataTextField = "Nombre";
-                    //DropDownListEspecialidades.DataValueField = "Id";
-                    //DropDownListEspecialidades.DataBind();
-                    //Session.Add("listaEspecialidades", listaEspecialidades);     //agrego a la sesion asi no vuelvo a abrir la BD
+                    RolNegocio rn = new RolNegocio();
+                    List<Rol> listaRoles = new List<Rol>();
+                    listaRoles = rn.Listar();
 
-                   
-                    //Session.Add("listaProfesionales", listaProfesionales);     //agrego a la sesion asi no vuelvo a abrir la BD
+                    EspecialidadNegocio en = new EspecialidadNegocio();
+                    List<Especialidad> listaEspecialidades = new List<Especialidad>();
+                    listaEspecialidades = en.Listar();
 
-                   
+                    ProfesionalNegocio pn = new ProfesionalNegocio();
+                    List<Profesional> listaProfesionales = new List<Profesional>();
+                    listaProfesionales = pn.Listar();
+
+                    GridPruebaRoles.DataSource = listaRoles;
+                    GridPruebaRoles.DataBind();
+
+                    DropDownListEspecialidades.DataSource = listaEspecialidades;
+                    DropDownListEspecialidades.DataTextField = "Nombre";
+                    DropDownListEspecialidades.DataValueField = "Id";
+                    DropDownListEspecialidades.DataBind();
+                    Session.Add("listaEspecialidades", listaEspecialidades);     //agrego a la sesion asi no vuelvo a abrir la BD
+
+
+                    Session.Add("listaProfesionales", listaProfesionales);     //agrego a la sesion asi no vuelvo a abrir la BD
+
+
                 }
             }
             catch (Exception ex)

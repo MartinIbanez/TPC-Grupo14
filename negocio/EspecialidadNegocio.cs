@@ -93,7 +93,10 @@ namespace negocio
             {
                 throw ex;
             }
-            finally { datos.CerrarConexion(); }
+            finally 
+            {
+                datos.CerrarConexion(); 
+            }
 
 
         }

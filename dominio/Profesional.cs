@@ -7,6 +7,7 @@ using System.Web;
 namespace dominio
 {
     /*Extiende de Usuario, incluye especialidades y turnos asignados*/
+    //ESTO NO Va. USUARIO NO TIENE TURNOS...EL TURNO TIENE USUARIOS(paciente y profesional entre otras cosas)
 
     public class Profesional : Persona
     {

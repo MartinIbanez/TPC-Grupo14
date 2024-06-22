@@ -90,7 +90,7 @@ namespace negocio
 
         public Persona ObtenerPacientePorId(int id)
         {
-            // logica para obetener el paciente por ID
+            // logica para obtener el paciente por ID
             AccesoDatos datos = new AccesoDatos();
 
             try
