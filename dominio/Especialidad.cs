@@ -12,6 +12,11 @@ namespace dominio
         public int Id { get; set; }
         public string Nombre { get; set; }
 
+        //public static implicit operator Especialidad(Profesional v)
+        //{
+        //    throw new NotImplementedException();
+        //}     QUE ES ESTO?????
+
         //public List<Profesional> medicos { get; set; }
     }
 }

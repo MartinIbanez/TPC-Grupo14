@@ -75,6 +75,7 @@
             <a class="nav-link" href="Turnos.aspx">TURNOS</a>
             <a class="nav-link" href="Pacientes.aspx">PACIENTES</a>
             <a class="nav-link" href="Medicos.aspx">MEDICOS</a>
+            <%--ESTO DE ACA ARRIBA DEBERIA IR EN LA MASTER????--%>
         </div>
 
         <div class="content">
@@ -98,7 +99,6 @@
             <asp:Button ID="btnModificar" runat="server" CssClass="btn btn-warning" Text="Modificar" OnClick="btnModificar_Click" />
             <asp:Button ID="btnEliminar" runat="server" CssClass="btn btn-danger" Text="Eliminar" OnClick="btnEliminar_Click" />
             <asp:Button ID="btnCancelar" runat="server" CssClass="btn btn-secondary" Text="Cancelar" OnClick="btnCancelar_Click" />
-
 
         </div>
     </div>

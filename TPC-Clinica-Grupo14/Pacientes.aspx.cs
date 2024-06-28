@@ -21,9 +21,6 @@ namespace TPC_Clinica_Grupo14
         }
 
 
-
-
-
         private void CargarPacientes()
         {
             List<Persona> listaPacientes = new List<Persona>();
@@ -68,7 +65,6 @@ namespace TPC_Clinica_Grupo14
                     txtActivo.Text = persona.Activo ? "Sí" : "No";
                 }
             }
-
         }
 
         // Método para mostrar el nombre del género en la grilla
@@ -133,7 +129,6 @@ namespace TPC_Clinica_Grupo14
             {
                 Response.Write("error" + ex.Message);
             }
-
 
         }
 

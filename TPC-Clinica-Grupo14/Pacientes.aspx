@@ -60,6 +60,8 @@
     </style>
 </asp:Content>
 
+
+
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <link href="Estilos.css" rel="stylesheet" />
 
@@ -67,7 +69,7 @@
         <!--botones laterales-->
         <div class="sidebar">
             <a class="nav-link" href="Especialidades.aspx">ESPECIALIDADES </a>
-            <a class="nav-link" href="">TURNOS</a>
+            <a class="nav-link" href="blabla">TURNOS</a>
             <a class="nav-link" href="Pacientes.aspx">PACIENTES</a>
             <a class="nav-link" href="Medicos.aspx">MEDICOS</a>
         </div>

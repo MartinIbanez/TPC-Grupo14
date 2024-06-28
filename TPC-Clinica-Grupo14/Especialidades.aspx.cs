@@ -8,6 +8,8 @@ using System.Web.UI.WebControls;
 using dominio;
 using negocio;
 
+
+
 namespace TPC_Clinica_Grupo14
 {
     public partial class Especialidades : System.Web.UI.Page
@@ -84,10 +86,6 @@ namespace TPC_Clinica_Grupo14
             {
                 Console.WriteLine("Error al agregar nueva especialidad: " + ex.Message);
             }
-
-
-
-
         }
 
         protected void btnModificar_Click(object sender, EventArgs e)
