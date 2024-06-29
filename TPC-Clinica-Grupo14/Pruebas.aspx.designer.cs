@@ -60,6 +60,15 @@ namespace TPC_Clinica_Grupo14
         protected global::System.Web.UI.WebControls.DropDownList DropDownListHorariosDisponibles;
 
         /// <summary>
+        /// LabelInfoTurno control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label LabelInfoTurno;
+
+        /// <summary>
         /// GridPruebaRoles control.
         /// </summary>
         /// <remarks>

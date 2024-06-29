@@ -35,12 +35,18 @@ namespace TPC_Clinica_Grupo14
                     GridPruebaRoles.DataSource = listaRoles;
                     GridPruebaRoles.DataBind();
 
+                    
+
                     DropDownListEspecialidades.DataSource = listaEspecialidades;
                     DropDownListEspecialidades.DataTextField = "Nombre";
                     DropDownListEspecialidades.DataValueField = "Id";
                     Session.Add("listaEspecialidades", listaEspecialidades);     //agrego a la sesion asi no vuelvo a abrir la BD
                     Session.Add("listaProfesionales", listaProfesionales);       //agrego a la sesion asi no vuelvo a abrir la BD
+                    
                     DropDownListEspecialidades.DataBind();
+                    DropDownListEspecialidades.SelectedIndex = 0;               //1er elemento
+
+                    //DropDownListEspecialidades_SelectedIndexChanged(sender, e); //Fuerzo el evento
                 }
             }
             catch (Exception ex)
@@ -62,7 +68,7 @@ namespace TPC_Clinica_Grupo14
             {
                 if (p.Especialidades.Find(x => x.Id == idEspecialidad) != null)
                 {
-                    listaProfesionalesAMostrar.Add(p);
+                    listaProfesionalesAMostrar.Add(p);  //CARGO LA LISTA DE PROFESIONALES QUE TIENEN LA ESPECIALIDAD SELECCIONADA
                 }
             }
             Session.Add("listaProfesionalesAMostrar", listaProfesionalesAMostrar);
@@ -72,8 +78,10 @@ namespace TPC_Clinica_Grupo14
             DropDownListProfesionales.DataValueField = "IdProfesional";
             DropDownListProfesionales.DataBind();
 
-            DropDownListDia.Items.Clear();
-            DropDownListHorariosDisponibles.Items.Clear();
+            DropDownListProfesionales_SelectedIndexChanged(sender, e);      //Fuerzo el evento
+
+            //DropDownListDia.Items.Clear();
+            //DropDownListHorariosDisponibles.Items.Clear();
 
             //DropDownListHorariosDisponibles.SelectedIndex = -1; //fuerzo el cambio
             //se necesita esto?
@@ -86,18 +94,16 @@ namespace TPC_Clinica_Grupo14
             Profesional prof = new Profesional();
             prof = ((List<Profesional>)Session["listaProfesionalesAMostrar"]).Find(x=>x.IdProfesional==idProf);
 
-            //DropDownListProfesionales.DataSource = prof;
-
-            List<string> DiasDispobibles = new List<String>();      //aca defino la lista de DIAS
-            foreach (Horario i in prof.ListHorariosDisponibles)
+            List<string> DiasDisponibles = new List<String>();      //aca defino la lista de DIAS
+            foreach (Horario h in prof.ListHorariosDisponibles)
             {
-                DiasDispobibles.Add(i.Dia.ToString());
+                DiasDisponibles.Add(h.Dia.ToString());              //CARGO LA LISTA DE DIAS DISPONIBLES EN BASE AL PROFESIONAL SELECCIONADO
             }
 
-            DropDownListDia.DataSource = DiasDispobibles;
+            DropDownListDia.DataSource = DiasDisponibles;
             DropDownListDia.DataBind();
 
-            DropDownListHorariosDisponibles.Items.Clear();
+            DropDownListDia_SelectedIndexChanged(sender, e);
         }
 
         protected void DropDownListDia_SelectedIndexChanged(object sender, EventArgs e)
@@ -111,33 +117,53 @@ namespace TPC_Clinica_Grupo14
             h = prof.ListHorariosDisponibles.Find(x => x.Dia.ToString() == DiaSeleccionado);
 
             DropDownListHorariosDisponibles.DataSource = h.ObtenerHoras();
-            DropDownListHorariosDisponibles.DataBind();
+            DropDownListHorariosDisponibles.DataBind();     
+
+            DropDownListHorariosDisponibles_SelectedIndexChanged(sender, e);
         }
 
         protected void DropDownListHorariosDisponibles_SelectedIndexChanged(object sender, EventArgs e)
         {
-           //TODO
-            
+            string especialidad_selected=DropDownListEspecialidades.SelectedItem.ToString();
+            string profesional_selected=DropDownListProfesionales.SelectedItem.ToString();
+            string dia_selected=DropDownListDia.SelectedItem.ToString();
+            string hora_selected=DropDownListHorariosDisponibles.SelectedItem.ToString();
+
+            LabelInfoTurno.Text =
+                "INFO:" +
+                " Especialidad: " + especialidad_selected +
+                " Profesional: " + profesional_selected +
+                " Dia: " + dia_selected +
+                " Hora: " + hora_selected;
         }
+
+        
         ////////////////////////////////////
         //ACA ESTAN LOS EVENTOS DE DATABOUND
         ////////////////////////////////////
-        protected void DropDownListEspecialidades_DataBound(object sender, EventArgs e)
-        {
-            List<Especialidad> le = new List<Especialidad>();
-            le = (List<Especialidad>)Session["listaEspecialidades"];        //Recupero la lista especialidades completa
-            DropDownListEspecialidades.SelectedValue = le[0].Id.ToString(); //anda?
-        }
+        //protected void DropDownListEspecialidades_DataBound(object sender, EventArgs e)
+        //{
+        //    List<Especialidad> le = new List<Especialidad>();
+        //    le = (List<Especialidad>)Session["listaEspecialidades"];        //Recupero la lista especialidades completa
 
-        protected void DropDownListProfesionales_DataBound(object sender, EventArgs e)
-        {
+        //    DropDownListEspecialidades.SelectedValue = le[0].Id.ToString(); //Muestro la 1era especialidad
+        //    int idEspecialidad = int.Parse(DropDownListEspecialidades.SelectedItem.Value);
 
-        }
 
-        protected void DropDownListHorariosDisponibles_DataBound(object sender, EventArgs e)
-        {
+        //    //////POR ACA GONZOOOO
+        //    //////POR ACA GONZOOOO
+        //    //////POR ACA GONZOOOO!!!!!!
+        //    //TODO BINDEAR EL RESTO DE LOS DDL
+        //}
 
-        }
+        //protected void DropDownListProfesionales_DataBound(object sender, EventArgs e)
+        //{
 
+        //}
+
+        //protected void DropDownListHorariosDisponibles_DataBound(object sender, EventArgs e)
+        //{
+
+        //}
     }
 }

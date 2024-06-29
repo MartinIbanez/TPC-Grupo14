@@ -9,11 +9,16 @@
         <asp:UpdatePanel runat="server">
             <ContentTemplate>
                 <h1>Arrancan las pruebas....</h1>
-                <%--CADA DDL TIENE 2 EVENTOS: ONSELECTEDINDEXCHANGED y ONDATABOUND, este ultimo lo usamos para precargar los valores en las transiciones--%>
-                <asp:DropDownList runat="server" ID="DropDownListEspecialidades" AutoPostBack="true" OnSelectedIndexChanged="DropDownListEspecialidades_SelectedIndexChanged" OnDataBound="DropDownListEspecialidades_DataBound"></asp:DropDownList>
-                <asp:DropDownList runat="server" ID="DropDownListProfesionales" AutoPostBack="true" OnSelectedIndexChanged="DropDownListProfesionales_SelectedIndexChanged" OnDataBound="DropDownListProfesionales_DataBound"></asp:DropDownList>
-                <asp:DropDownList runat="server" ID="DropDownListDia" AutoPostBack="true" OnSelectedIndexChanged="DropDownListDia_SelectedIndexChanged" OnDataBound="DropDownListEspecialidades_DataBound"></asp:DropDownList>
-                <asp:DropDownList runat="server" ID="DropDownListHorariosDisponibles" AutoPostBack="true" OnSelectedIndexChanged="DropDownListHorariosDisponibles_SelectedIndexChanged" OnDataBound="DropDownListHorariosDisponibles_DataBound"></asp:DropDownList>
+                
+                <asp:DropDownList runat="server" ID="DropDownListEspecialidades" AutoPostBack="true" OnSelectedIndexChanged="DropDownListEspecialidades_SelectedIndexChanged" ></asp:DropDownList>
+                <asp:DropDownList runat="server" ID="DropDownListProfesionales" AutoPostBack="true" OnSelectedIndexChanged="DropDownListProfesionales_SelectedIndexChanged" ></asp:DropDownList>
+                <asp:DropDownList runat="server" ID="DropDownListDia" AutoPostBack="true" OnSelectedIndexChanged="DropDownListDia_SelectedIndexChanged" ></asp:DropDownList>
+                <asp:DropDownList runat="server" ID="DropDownListHorariosDisponibles" AutoPostBack="true" OnSelectedIndexChanged="DropDownListHorariosDisponibles_SelectedIndexChanged" ></asp:DropDownList>
+                <br />
+                <br />
+                <br />
+                <asp:Label ID="LabelInfoTurno" Text="Prueba de texto turno!" CssClass="form-control" runat="server" />
+                <br />
                 <br />
                 <br />
                 <asp:GridView runat="server" ID="GridPruebaRoles"></asp:GridView>
