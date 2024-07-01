@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -46,7 +47,7 @@ namespace TPC_Clinica_Grupo14
                     DropDownListEspecialidades.DataBind();
                     DropDownListEspecialidades.SelectedIndex = 0;               //1er elemento
 
-                    //DropDownListEspecialidades_SelectedIndexChanged(sender, e); //Fuerzo el evento
+                    
                 }
             }
             catch (Exception ex)
@@ -71,6 +72,7 @@ namespace TPC_Clinica_Grupo14
                     listaProfesionalesAMostrar.Add(p);  //CARGO LA LISTA DE PROFESIONALES QUE TIENEN LA ESPECIALIDAD SELECCIONADA
                 }
             }
+            //Revisar la posibilidad de vacias este elemento de la sesion y volverlo a cargar...por las dudas...
             Session.Add("listaProfesionalesAMostrar", listaProfesionalesAMostrar);
 
             DropDownListProfesionales.DataSource = listaProfesionalesAMostrar;
@@ -78,13 +80,15 @@ namespace TPC_Clinica_Grupo14
             DropDownListProfesionales.DataValueField = "IdProfesional";
             DropDownListProfesionales.DataBind();
 
-            DropDownListProfesionales_SelectedIndexChanged(sender, e);      //Fuerzo el evento
+            DropDownListProfesionales_SelectedIndexChanged(sender, e);          //Fuerzo el evento
+            //CalendarioTurnos_DayRender(sender, e);                            //Fuerzo el evento  
 
             //DropDownListDia.Items.Clear();
             //DropDownListHorariosDisponibles.Items.Clear();
 
             //DropDownListHorariosDisponibles.SelectedIndex = -1; //fuerzo el cambio
             //se necesita esto?
+
         }
 
         protected void DropDownListProfesionales_SelectedIndexChanged(object sender, EventArgs e)
@@ -103,9 +107,14 @@ namespace TPC_Clinica_Grupo14
             DropDownListDia.DataSource = DiasDisponibles;
             DropDownListDia.DataBind();
 
-            DropDownListDia_SelectedIndexChanged(sender, e);
+            Session.Add("listaDiasDisponibles",DiasDisponibles);
+
+            DropDownListDia_SelectedIndexChanged(sender, e);      
         }
 
+        //
+        //  VER ESTE EVENTO DIA NO PINTA LOS DIAS!
+        //
         protected void DropDownListDia_SelectedIndexChanged(object sender, EventArgs e)
         {
             int idProf = int.Parse(DropDownListProfesionales.SelectedValue);
@@ -116,19 +125,27 @@ namespace TPC_Clinica_Grupo14
             Horario h = new Horario();
             h = prof.ListHorariosDisponibles.Find(x => x.Dia.ToString() == DiaSeleccionado);
 
-            DropDownListHorariosDisponibles.DataSource = h.ObtenerHoras();
-            DropDownListHorariosDisponibles.DataBind();     
+            List<string> horas = new List<string>();
+            horas = h.ObtenerHoras();
 
-            DropDownListHorariosDisponibles_SelectedIndexChanged(sender, e);
+            DropDownListHorariosDisponibles.DataSource = horas;
+            DropDownListHorariosDisponibles.DataBind();
+
+            Session.Add("listaHorasDisponibles", horas);
+
+            //DropDownListHorariosDisponibles_SelectedIndexChanged(sender, e);             //comentada por estar en visible=false
         }
 
+        //
+        //  VER ESTE EVENTO HORA NO PINTA LOS DIAS!
+        //
         protected void DropDownListHorariosDisponibles_SelectedIndexChanged(object sender, EventArgs e)
         {
             string especialidad_selected=DropDownListEspecialidades.SelectedItem.ToString();
             string profesional_selected=DropDownListProfesionales.SelectedItem.ToString();
-            string dia_selected=DropDownListDia.SelectedItem.ToString();
+            string dia_selected = DropDownListDia.SelectedItem.ToString();
             string hora_selected=DropDownListHorariosDisponibles.SelectedItem.ToString();
-
+            
             LabelInfoTurno.Text =
                 "INFO:" +
                 " Especialidad: " + especialidad_selected +
@@ -137,7 +154,51 @@ namespace TPC_Clinica_Grupo14
                 " Hora: " + hora_selected;
         }
 
-        
+        protected void CalendarioTurnos_DayRender(object sender, DayRenderEventArgs e)
+        { 
+            List<string> DiasDisponibles = new List<string>();
+            List<string> DiasOcupados = new List<string>();
+
+            DiasDisponibles = (List<string>)Session["listaDiasDisponibles"];        //recupero los dias disponibles
+            //DiasDisponibles = (List<string>)DropDownListDia.DataSource;
+            if (DiasDisponibles == null)
+            {
+                //no hago nada porque aun no cargue opciones
+            }
+            else if (DiasDisponibles.Contains(e.Day.Date.DayOfWeek.ToString()))
+            {
+                e.Cell.BackColor = System.Drawing.Color.LightGreen;
+                e.Cell.ToolTip = "Dia Busyyyyyy";
+            }
+
+            /*
+            Days.Add(DayOfWeek.Monday);
+            Days.Add(DayOfWeek.Wednesday);
+            Days.Add(DayOfWeek.Friday);
+
+       
+            if(Days.Contains(e.Day.Date.DayOfWeek))
+            {
+                e.Cell.BackColor = System.Drawing.Color.LightGreen;
+                e.Cell.ToolTip = "Dia Busi";
+            }
+            */
+        }
+
+        //De aca tengo que tomar la fecha
+        //TODO
+        //NO MANTIENE PINTADA LOS DIAS
+        protected void CalendarioTurnos_SelectionChanged(object sender, EventArgs e)
+        {
+            //tengo que volver a pintar los dias
+            CalendarioTurnos.DataBind();
+            DateTime fechaSeleccionada = CalendarioTurnos.SelectedDate;
+            LabelTurnoSeleccionado.Text = fechaSeleccionada.Date.ToString("dd/MM/yyyy");    //Pido la fecha en este formato
+        }
+
+
+
+
         ////////////////////////////////////
         //ACA ESTAN LOS EVENTOS DE DATABOUND
         ////////////////////////////////////

@@ -12,10 +12,16 @@
                 
                 <asp:DropDownList runat="server" ID="DropDownListEspecialidades" AutoPostBack="true" OnSelectedIndexChanged="DropDownListEspecialidades_SelectedIndexChanged" ></asp:DropDownList>
                 <asp:DropDownList runat="server" ID="DropDownListProfesionales" AutoPostBack="true" OnSelectedIndexChanged="DropDownListProfesionales_SelectedIndexChanged" ></asp:DropDownList>
-                <asp:DropDownList runat="server" ID="DropDownListDia" AutoPostBack="true" OnSelectedIndexChanged="DropDownListDia_SelectedIndexChanged" ></asp:DropDownList>
-                <asp:DropDownList runat="server" ID="DropDownListHorariosDisponibles" AutoPostBack="true" OnSelectedIndexChanged="DropDownListHorariosDisponibles_SelectedIndexChanged" ></asp:DropDownList>
+                <asp:DropDownList runat="server" visible="false" ID="DropDownListDia" AutoPostBack="true" OnSelectedIndexChanged="DropDownListDia_SelectedIndexChanged" ></asp:DropDownList>
+                <asp:DropDownList runat="server" visible ="false" ID="DropDownListHorariosDisponibles" AutoPostBack="true" OnSelectedIndexChanged="DropDownListHorariosDisponibles_SelectedIndexChanged" ></asp:DropDownList>
                 <br />
                 <br />
+                <br />
+                <h2>Prueba Calendario...    </h2>
+                <asp:Calendar runat="server" ID="CalendarioTurnos" OnDayRender="CalendarioTurnos_DayRender" OnSelectionChanged="CalendarioTurnos_SelectionChanged"></asp:Calendar>
+                <br />
+                <br />
+                <asp:Label ID="LabelTurnoSeleccionado" Text="Prueba de texto turno!" CssClass="form-control" runat="server" />
                 <br />
                 <asp:Label ID="LabelInfoTurno" Text="Prueba de texto turno!" CssClass="form-control" runat="server" />
                 <br />
