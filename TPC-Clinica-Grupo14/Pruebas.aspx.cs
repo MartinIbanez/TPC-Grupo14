@@ -154,46 +154,68 @@ namespace TPC_Clinica_Grupo14
                 " Hora: " + hora_selected;
         }
 
-        protected void CalendarioTurnos_DayRender(object sender, DayRenderEventArgs e)
+        protected void CalendarioTurnos_DayRender(object sender, DayRenderEventArgs ev)
         { 
             List<string> DiasDisponibles = new List<string>();
-            List<string> DiasOcupados = new List<string>();
+            //List<string> DiasOcupados = new List<string>();
 
-            DiasDisponibles = (List<string>)Session["listaDiasDisponibles"];        //recupero los dias disponibles
-            //DiasDisponibles = (List<string>)DropDownListDia.DataSource;
+            DiasDisponibles = (List<string>)Session["listaDiasDisponibles"];        //Recupero los dias disponibles
+                                                                                    //para volver a pintarlos
             if (DiasDisponibles == null)
             {
                 //no hago nada porque aun no cargue opciones
             }
-            else if (DiasDisponibles.Contains(e.Day.Date.DayOfWeek.ToString()))
+            else if (DiasDisponibles.Contains(ev.Day.Date.DayOfWeek.ToString()))
             {
-                e.Cell.BackColor = System.Drawing.Color.LightGreen;
-                e.Cell.ToolTip = "Dia Busyyyyyy";
+                ev.Cell.BackColor = System.Drawing.Color.LightGreen;
+                ev.Cell.ToolTip = "Dia Busyyyyyy";
             }
-
-            /*
-            Days.Add(DayOfWeek.Monday);
-            Days.Add(DayOfWeek.Wednesday);
-            Days.Add(DayOfWeek.Friday);
-
-       
-            if(Days.Contains(e.Day.Date.DayOfWeek))
-            {
-                e.Cell.BackColor = System.Drawing.Color.LightGreen;
-                e.Cell.ToolTip = "Dia Busi";
-            }
-            */
         }
 
-        //De aca tengo que tomar la fecha
-        //TODO
-        //NO MANTIENE PINTADA LOS DIAS
+        
         protected void CalendarioTurnos_SelectionChanged(object sender, EventArgs e)
         {
-            //tengo que volver a pintar los dias
-            CalendarioTurnos.DataBind();
             DateTime fechaSeleccionada = CalendarioTurnos.SelectedDate;
-            LabelTurnoSeleccionado.Text = fechaSeleccionada.Date.ToString("dd/MM/yyyy");    //Pido la fecha en este formato
+            List<string> dd = (List<string>)Session["listaDiasDisponibles"];
+            
+
+            if(dd.Contains(fechaSeleccionada.Date.DayOfWeek.ToString())/* && fechaSeleccionada != null && dd != null*/)
+            {
+                LabelTurnoSeleccionado.Text = fechaSeleccionada.Date.ToString("dd/MM/yyyy");    //Pido la fecha en este formato
+                LabelInfoTurno.Text = "Usted a seleccionado : " + LabelTurnoSeleccionado.Text;
+            }
+            else
+            {
+                LabelTurnoSeleccionado.Text = "No aplica...";
+                LabelInfoTurno.Text = "DIA NO DISPONIBLEEEE!!!";
+            }
+
+            //Instancio un turno....
+            Turno turnoAsignado = new Turno();
+            turnoAsignado.Id = 0;
+            turnoAsignado.FechaTurno = fechaSeleccionada;
+            turnoAsignado.PacienteTurno = new Persona();
+            turnoAsignado.PacienteTurno.Apellido = "Perez ejemplo...";
+            turnoAsignado.ProfesionalTurno = new Profesional();
+            turnoAsignado.ProfesionalTurno.Apellido = DropDownListProfesionales.SelectedItem.ToString();
+            turnoAsignado.EspecialidadTurno = new Especialidad();
+            turnoAsignado.EspecialidadTurno.Nombre = DropDownListEspecialidades.SelectedItem.ToString();
+            turnoAsignado.Estado = new EstadoTurno();
+            turnoAsignado.Observaciones = "Sin observaciones....";
+
+            turnoAsignado.PacienteTurno.Apellido = "Pepito ejemplo";
+            //turnoAsignado.ProfesionalTurno.Apellido = "Bovazzi";
+            //to do...resto de info del turno...
+
+            CardIdTurno.Text = turnoAsignado.Id.ToString();
+            CardFechaTurno.Text = turnoAsignado.FechaTurno.ToString();
+            CardPaciente.Text = turnoAsignado.PacienteTurno.Apellido;
+            CardProfesional.Text = turnoAsignado.ProfesionalTurno.Apellido;
+            CardEspecialidad.Text = turnoAsignado.EspecialidadTurno.Nombre;
+            
+
+
+
         }
 
 

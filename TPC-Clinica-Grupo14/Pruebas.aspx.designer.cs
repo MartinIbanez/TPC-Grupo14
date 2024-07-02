@@ -87,6 +87,51 @@ namespace TPC_Clinica_Grupo14
         protected global::System.Web.UI.WebControls.Label LabelInfoTurno;
 
         /// <summary>
+        /// CardIdTurno control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label CardIdTurno;
+
+        /// <summary>
+        /// CardFechaTurno control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label CardFechaTurno;
+
+        /// <summary>
+        /// CardPaciente control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label CardPaciente;
+
+        /// <summary>
+        /// CardProfesional control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label CardProfesional;
+
+        /// <summary>
+        /// CardEspecialidad control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label CardEspecialidad;
+
+        /// <summary>
         /// GridPruebaRoles control.
         /// </summary>
         /// <remarks>
