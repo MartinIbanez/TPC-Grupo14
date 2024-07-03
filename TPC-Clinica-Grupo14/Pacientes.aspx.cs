@@ -27,7 +27,7 @@ namespace TPC_Clinica_Grupo14
 
             try
             {
-                listaPacientes = personaNegocio.ListarPaciente();
+                listaPacientes = personaNegocio.ListarPacientes();
                 dgvPacientes.DataSource = listaPacientes;
                 dgvPacientes.DataBind();
             }
@@ -148,7 +148,7 @@ namespace TPC_Clinica_Grupo14
                 bool activo = txtActivo.Text.ToLower() == "sí";
 
                 // Verificar si el paciente ya existe en la base de datos por su DNI
-                List<Persona> listaPacientes = personaNegocio.ListarPaciente();
+                List<Persona> listaPacientes = personaNegocio.ListarPacientes();
                 if (listaPacientes.Any(p => p.NumDoc == numDoc && p.Id != idPaciente))
                 {
                     // Mostrar mensaje de error si el paciente con el mismo DNI ya existe pero tiene un ID diferente

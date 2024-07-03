@@ -26,6 +26,8 @@
                             <asp:Label ID="LabelTurnoSeleccionado" Text="Prueba de texto turno!" CssClass="form-control" runat="server" />
                             <br />
                             <asp:Label ID="LabelInfoTurno" Text="Prueba de texto turno!" CssClass="form-control" runat="server" />
+                            <br />
+                            <asp:DropDownList ID="DropDownListPacientes" AutoPostBack="true" OnSelectedIndexChanged="DropDownListPacientes_SelectedIndexChanged" runat="server"></asp:DropDownList>
                         </div>
                         <div class="col">
                             <%--aca va una tarjeta con la info del turno--%>

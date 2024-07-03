@@ -33,10 +33,13 @@ namespace TPC_Clinica_Grupo14
                     List<Profesional> listaProfesionales = new List<Profesional>();
                     listaProfesionales = pn.Listar();
 
+                    PersonaNegocio personaNegocio = new PersonaNegocio();
+                    List<Persona> listaPacientes = new List<Persona>();
+                    listaPacientes = personaNegocio.ListarPacientes();
+
                     GridPruebaRoles.DataSource = listaRoles;
                     GridPruebaRoles.DataBind();
 
-                    
 
                     DropDownListEspecialidades.DataSource = listaEspecialidades;
                     DropDownListEspecialidades.DataTextField = "Nombre";
@@ -44,10 +47,16 @@ namespace TPC_Clinica_Grupo14
                     Session.Add("listaEspecialidades", listaEspecialidades);     //agrego a la sesion asi no vuelvo a abrir la BD
                     Session.Add("listaProfesionales", listaProfesionales);       //agrego a la sesion asi no vuelvo a abrir la BD
                     
+
                     DropDownListEspecialidades.DataBind();
                     DropDownListEspecialidades.SelectedIndex = 0;               //1er elemento
 
-                    
+                    DropDownListPacientes.DataSource = listaPacientes;
+                    DropDownListPacientes.DataTextField = "Nombre";
+                    DropDownListPacientes.DataValueField = "Id";
+                    DropDownListPacientes.DataBind();
+                    Session.Add("listaPacientes", listaPacientes);
+
                 }
             }
             catch (Exception ex)
@@ -81,13 +90,8 @@ namespace TPC_Clinica_Grupo14
             DropDownListProfesionales.DataBind();
 
             DropDownListProfesionales_SelectedIndexChanged(sender, e);          //Fuerzo el evento
-            //CalendarioTurnos_DayRender(sender, e);                            //Fuerzo el evento  
-
-            //DropDownListDia.Items.Clear();
-            //DropDownListHorariosDisponibles.Items.Clear();
-
-            //DropDownListHorariosDisponibles.SelectedIndex = -1; //fuerzo el cambio
-            //se necesita esto?
+            
+            CardEspecialidad.Text=DropDownListEspecialidades.SelectedItem.ToString();
 
         }
 
@@ -108,6 +112,8 @@ namespace TPC_Clinica_Grupo14
             DropDownListDia.DataBind();
 
             Session.Add("listaDiasDisponibles",DiasDisponibles);
+
+            CardProfesional.Text = prof.Apellido;
 
             DropDownListDia_SelectedIndexChanged(sender, e);      
         }
@@ -154,6 +160,11 @@ namespace TPC_Clinica_Grupo14
                 " Hora: " + hora_selected;
         }
 
+        protected void DropDownListPacientes_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            CardPaciente.Text=DropDownListPacientes.SelectedItem.ToString();    //actualizo la ficha turno
+        }
+
         protected void CalendarioTurnos_DayRender(object sender, DayRenderEventArgs ev)
         { 
             List<string> DiasDisponibles = new List<string>();
@@ -195,7 +206,7 @@ namespace TPC_Clinica_Grupo14
             turnoAsignado.Id = 0;
             turnoAsignado.FechaTurno = fechaSeleccionada;
             turnoAsignado.PacienteTurno = new Persona();
-            turnoAsignado.PacienteTurno.Apellido = "Perez ejemplo...";
+            turnoAsignado.PacienteTurno.Apellido = DropDownListPacientes.SelectedItem.ToString();
             turnoAsignado.ProfesionalTurno = new Profesional();
             turnoAsignado.ProfesionalTurno.Apellido = DropDownListProfesionales.SelectedItem.ToString();
             turnoAsignado.EspecialidadTurno = new Especialidad();
@@ -203,7 +214,7 @@ namespace TPC_Clinica_Grupo14
             turnoAsignado.Estado = new EstadoTurno();
             turnoAsignado.Observaciones = "Sin observaciones....";
 
-            turnoAsignado.PacienteTurno.Apellido = "Pepito ejemplo";
+            //turnoAsignado.PacienteTurno.Apellido = "Pepito ejemplo";
             //turnoAsignado.ProfesionalTurno.Apellido = "Bovazzi";
             //to do...resto de info del turno...
 
@@ -212,11 +223,8 @@ namespace TPC_Clinica_Grupo14
             CardPaciente.Text = turnoAsignado.PacienteTurno.Apellido;
             CardProfesional.Text = turnoAsignado.ProfesionalTurno.Apellido;
             CardEspecialidad.Text = turnoAsignado.EspecialidadTurno.Nombre;
-            
-
-
-
         }
+
 
 
 

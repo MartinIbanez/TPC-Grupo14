@@ -49,7 +49,7 @@ namespace negocio
             }
         }
 
-        public List<Persona> ListarPaciente()
+        public List<Persona> ListarPacientes()
         {
             AccesoDatos datos = new AccesoDatos();
             List<Persona> lista = new List<Persona>();
@@ -208,8 +208,6 @@ namespace negocio
             }
 
         }
-
-
 
 
 

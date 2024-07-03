@@ -87,6 +87,15 @@ namespace TPC_Clinica_Grupo14
         protected global::System.Web.UI.WebControls.Label LabelInfoTurno;
 
         /// <summary>
+        /// DropDownListPacientes control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList DropDownListPacientes;
+
+        /// <summary>
         /// CardIdTurno control.
         /// </summary>
         /// <remarks>
