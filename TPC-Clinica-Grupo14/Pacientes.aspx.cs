@@ -23,18 +23,15 @@ namespace TPC_Clinica_Grupo14
 
         private void CargarPacientes()
         {
-            List<Persona> listaPacientes = new List<Persona>();
-
             try
             {
-                listaPacientes = personaNegocio.ListarPacientes();
+                List<Persona> listaPacientes = personaNegocio.ListarPacientes();
                 dgvPacientes.DataSource = listaPacientes;
                 dgvPacientes.DataBind();
             }
             catch (Exception ex)
             {
-                // Manejo de errores
-                Response.Write("error" + ex.Message);
+                Response.Write("Error al cargar pacientes: " + ex.Message);
             }
 
         }
@@ -51,7 +48,7 @@ namespace TPC_Clinica_Grupo14
                 txtNombre.Text = row.Cells[0].Text;
                 txtApellido.Text = row.Cells[1].Text;
                 txtFechaNacimiento.Text = row.Cells[2].Text;
-                txtGenero.Text = row.Cells[3].Text;
+                txtGenero.SelectedValue = row.Cells[3].Text; // Asigna el valor correcto del género
                 txtDNI.Text = row.Cells[4].Text;
                 txtCorreo.Text = row.Cells[5].Text;
                 txtTelefono.Text = row.Cells[6].Text;
@@ -61,8 +58,7 @@ namespace TPC_Clinica_Grupo14
 
                 if (persona != null)
                 {
-
-                    txtActivo.Text = persona.Activo ? "Sí" : "No";
+                    txtActivo.SelectedValue = persona.Activo ? "true" : "false";
                 }
             }
         }
@@ -72,80 +68,95 @@ namespace TPC_Clinica_Grupo14
         {
             if (e.Row.RowType == DataControlRowType.DataRow)
             {
-                int Idgenero = Convert.ToInt32(DataBinder.Eval(e.Row.DataItem, "IdGenero"));
-                string nombreGenero = ObtenerNombreGenero(Idgenero);
-                e.Row.Cells[3].Text = nombreGenero;
-            }
-        }
+                // Encuentra la celda que contiene el Id del género
+                TableCell generoCell = e.Row.Cells[3];
+
+                // Obtén el Id del género
+                string idGenero = generoCell.Text;
 
 
-        // Método para obtener el nombre del género
-        private string ObtenerNombreGenero(int idGenero)
-        {
-            switch (idGenero)
-            {
-                case 1:
-                    return "Masculino";
-                case 2:
-                    return "Femenino";
-                default:
-                    return "Otro";
-            }
-        }
-
-
-
-        // Método para obtener el Id del género
-        private int ObtenerGeneroId(string genero)
-        {
-            switch (genero.ToLower())
-            {
-                case "masculino":
-                    return 1;
-                case "femenino":
-                    return 2;
-                default:
-                    return 3; // Otro
+                switch (idGenero)
+                {
+                    case "1":
+                        generoCell.Text = "Masculino";
+                        break;
+                    case "2":
+                        generoCell.Text = "Femenino";
+                        break;
+                    case "3":
+                        generoCell.Text = "Otro";
+                        break;
+                    default:
+                        generoCell.Text = "Desconocido";
+                        break;
+                }
             }
         }
 
 
         protected void btnAgregar_Click(object sender, EventArgs e)
         {
-            Persona persona = new Persona();
-            persona.Nombre = txtNombre.Text;
-            persona.Apellido = txtApellido.Text;
-            persona.NumDoc = txtDNI.Text;
-            persona.FechaNacimiento = Convert.ToDateTime(txtFechaNacimiento.Text);
-            persona.IdRol = 4;
-
             try
             {
+                // Verificar si el DNI está vacío
+                if (string.IsNullOrWhiteSpace(txtDNI.Text))
+                {
+                    Response.Write("<script>alert('Error: El campo DNI no puede estar vacío');</script>");
+                    return;
+                }
+
+                string numDoc = txtDNI.Text;
+
+                // Verificar si ya existe un paciente con el mismo DNI
+                List<Persona> listaPacientes = personaNegocio.ListarPacientes();
+                if (listaPacientes.Any(p => p.NumDoc == numDoc))
+                {
+                    // Mostrar mensaje de error si ya existe un paciente con el mismo DNI
+                    Response.Write("<script>alert('Error: Ya existe un paciente con ese DNI');</script>");
+                    return;
+                }
+
+
+                // Crear una nueva instancia de Persona con los datos ingresados
+                Persona persona = new Persona
+                {
+                    Nombre = txtNombre.Text,
+                    Apellido = txtApellido.Text,
+                    FechaNacimiento = Convert.ToDateTime(txtFechaNacimiento.Text),
+                    IdGenero = Convert.ToInt32(txtGenero.SelectedValue),
+                    NumDoc = txtDNI.Text,
+                    Correo = txtCorreo.Text,
+                    Telefono = txtTelefono.Text,
+                    // si no se ingreso la condicion de activo ponerlo por defecto como activo
+                    Activo = txtActivo.Text.ToLower() == "sí",
+                    IdRol = 4 // Asignar el rol de paciente
+                };
+
                 personaNegocio.AgregarPaciente(persona);
                 CargarPacientes();
                 LimpiarCampos();
+                Response.Write("<script>alert('Paciente agregado con éxito');</script>");
             }
             catch (Exception ex)
             {
-                Response.Write("error" + ex.Message);
+                Response.Write("Error al agregar paciente: " + ex.Message);
             }
-
         }
 
         protected void btnModificar_Click(object sender, EventArgs e)
         {
             try
             {
+                // Verificar si el DNI está vacío
+                if (string.IsNullOrWhiteSpace(txtDNI.Text))
+                {
+                    Response.Write("<script>alert('Error: El campo DNI no puede estar vacío');</script>");
+                    return;
+                }
+
                 // Obtener los valores de los campos de texto
                 int idPaciente = Convert.ToInt32(txtId.Text);
-                string nombre = txtNombre.Text;
-                string apellido = txtApellido.Text;
-                DateTime fechaNacimiento = DateTime.Parse(txtFechaNacimiento.Text);
-                int idGenero = ObtenerGeneroId(txtGenero.Text);
                 string numDoc = txtDNI.Text;
-                string correo = txtCorreo.Text;
-                string telefono = txtTelefono.Text;
-                bool activo = txtActivo.Text.ToLower() == "sí";
 
                 // Verificar si el paciente ya existe en la base de datos por su DNI
                 List<Persona> listaPacientes = personaNegocio.ListarPacientes();
@@ -160,14 +171,14 @@ namespace TPC_Clinica_Grupo14
                 Persona pacienteModificado = new Persona
                 {
                     Id = idPaciente,
-                    Nombre = nombre,
-                    Apellido = apellido,
-                    FechaNacimiento = fechaNacimiento,
-                    IdGenero = idGenero,
+                    Nombre = txtNombre.Text,
+                    Apellido = txtApellido.Text,
+                    FechaNacimiento = DateTime.Parse(txtFechaNacimiento.Text),
+                    IdGenero = Convert.ToInt32(txtGenero.SelectedValue),
                     NumDoc = numDoc,
-                    Correo = correo,
-                    Telefono = telefono,
-                    Activo = activo,
+                    Correo = txtCorreo.Text,
+                    Telefono = txtTelefono.Text,
+                    Activo = txtActivo.SelectedValue == "true",
                     IdRol = 4 // Asignar el rol de paciente
                 };
 
@@ -176,22 +187,18 @@ namespace TPC_Clinica_Grupo14
 
                 // Recargar la lista de pacientes
                 CargarPacientes();
-
-                // Limpiar los campos de texto
                 LimpiarCampos();
-
-                // Mostrar mensaje de éxito
                 Response.Write("<script>alert('Paciente modificado con éxito');</script>");
             }
             catch (Exception ex)
             {
-                // Manejo de errores
-                Response.Write("<script>alert('Error al modificar el paciente: " + ex.Message + "');</script>");
+                Response.Write("Error al modificar el paciente: " + ex.Message);
             }
         }
 
         protected void btnEliminar_Click(object sender, EventArgs e)
         {
+
             try
             {
                 // Obtener el ID del paciente a eliminar
@@ -202,17 +209,12 @@ namespace TPC_Clinica_Grupo14
 
                 // Recargar la lista de pacientes
                 CargarPacientes();
-
-                // Limpiar los campos de texto
                 LimpiarCampos();
-
-                // Mostrar mensaje de éxito
                 Response.Write("<script>alert('Paciente eliminado con éxito');</script>");
             }
             catch (Exception ex)
             {
-                // Manejo de errores
-                Response.Write("<script>alert('Error al eliminar el paciente: " + ex.Message + "');</script>");
+                Response.Write("Error al eliminar el paciente: " + ex.Message);
             }
 
         }
@@ -222,14 +224,7 @@ namespace TPC_Clinica_Grupo14
             LimpiarCampos();
         }
 
-        protected void btnListar_Click(object sender, EventArgs e)
-        {
-            CargarPacientes();
-
-
-        }
-
-
+  
         private void LimpiarCampos()
         {
             txtId.Text = string.Empty;
@@ -237,10 +232,10 @@ namespace TPC_Clinica_Grupo14
             txtApellido.Text = string.Empty;
             txtDNI.Text = string.Empty;
             txtFechaNacimiento.Text = string.Empty;
-            txtGenero.Text = string.Empty;
+            txtGenero.SelectedIndex = 0; // Resetear a la primera opción
             txtCorreo.Text = string.Empty;
             txtTelefono.Text = string.Empty;
-            txtActivo.Text = string.Empty;
+            txtActivo.SelectedIndex = 0; // Resetear a la primera opción
         }
 
 
