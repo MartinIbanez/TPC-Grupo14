@@ -37,9 +37,15 @@ namespace TPC_Clinica_Grupo14
                     List<Persona> listaPacientes = new List<Persona>();
                     listaPacientes = personaNegocio.ListarPacientes();
 
-                    GridPruebaRoles.DataSource = listaRoles;
-                    GridPruebaRoles.DataBind();
+                    TurnoNegocio turnoNegocio = new TurnoNegocio();
+                    List<Turno> listaTurnos = new List<Turno>();
+                    listaTurnos = turnoNegocio.Listar();
 
+                    //GridPruebaRoles.DataSource = listaRoles;
+                    //GridPruebaRoles.DataBind();
+
+                    GridPruebaTurnos.DataSource = listaTurnos;
+                    GridPruebaTurnos.DataBind();
 
                     DropDownListEspecialidades.DataSource = listaEspecialidades;
                     DropDownListEspecialidades.DataTextField = "Nombre";
@@ -56,6 +62,7 @@ namespace TPC_Clinica_Grupo14
                     DropDownListPacientes.DataValueField = "Id";
                     DropDownListPacientes.DataBind();
                     Session.Add("listaPacientes", listaPacientes);
+
 
                 }
             }
@@ -131,15 +138,15 @@ namespace TPC_Clinica_Grupo14
             Horario h = new Horario();
             h = prof.ListHorariosDisponibles.Find(x => x.Dia.ToString() == DiaSeleccionado);
 
-            List<string> horas = new List<string>();
-            horas = h.ObtenerHoras();
+            List<int> horas = new List<int>();
+            horas = h.ObtenerHorasInt();/* h.ObtenerHoras();*/
 
             DropDownListHorariosDisponibles.DataSource = horas;
             DropDownListHorariosDisponibles.DataBind();
 
             Session.Add("listaHorasDisponibles", horas);
 
-            //DropDownListHorariosDisponibles_SelectedIndexChanged(sender, e);             //comentada por estar en visible=false
+            DropDownListHorariosDisponibles_SelectedIndexChanged(sender, e);             //comentada por estar en visible=false
         }
 
         //
@@ -150,7 +157,7 @@ namespace TPC_Clinica_Grupo14
             string especialidad_selected=DropDownListEspecialidades.SelectedItem.ToString();
             string profesional_selected=DropDownListProfesionales.SelectedItem.ToString();
             string dia_selected = DropDownListDia.SelectedItem.ToString();
-            string hora_selected=DropDownListHorariosDisponibles.SelectedItem.ToString();
+            string hora_selected=(int.Parse((DropDownListHorariosDisponibles.SelectedItem).ToString())).ToString("D2") + ":00";
             
             LabelInfoTurno.Text =
                 "INFO:" +
@@ -211,7 +218,7 @@ namespace TPC_Clinica_Grupo14
             turnoAsignado.ProfesionalTurno.Apellido = DropDownListProfesionales.SelectedItem.ToString();
             turnoAsignado.EspecialidadTurno = new Especialidad();
             turnoAsignado.EspecialidadTurno.Nombre = DropDownListEspecialidades.SelectedItem.ToString();
-            turnoAsignado.Estado = new EstadoTurno();
+            turnoAsignado.EstadoTurno = 0;  //ABIERTO
             turnoAsignado.Observaciones = "Sin observaciones....";
 
             //turnoAsignado.PacienteTurno.Apellido = "Pepito ejemplo";
@@ -223,6 +230,38 @@ namespace TPC_Clinica_Grupo14
             CardPaciente.Text = turnoAsignado.PacienteTurno.Apellido;
             CardProfesional.Text = turnoAsignado.ProfesionalTurno.Apellido;
             CardEspecialidad.Text = turnoAsignado.EspecialidadTurno.Nombre;
+        }
+
+        protected void btnCrearTurno_Click(object sender, EventArgs e)
+        {
+            LabelTurnoCreado.Visible = true;
+            TimerTurnoCreado.Enabled = true;    //Disparo el timer para mostrar confirmacion de turno!
+            TurnoNegocio turnoNegocio = new TurnoNegocio();
+            Turno nuevo = new Turno();
+
+            nuevo.FechaTurno = CalendarioTurnos.SelectedDate;
+            nuevo.HoraTurno = int.Parse(DropDownListHorariosDisponibles.SelectedValue);
+
+            int idPaciente = int.Parse(DropDownListPacientes.SelectedValue);                                                        //id paciente seleccionado
+            nuevo.PacienteTurno = ((List<Persona>)Session["listaPacientes"]).Find(x=>x.Id == idPaciente);                           //busco por id paciente
+
+            int idProfesional = int.Parse(DropDownListProfesionales.SelectedValue);                                                 //id profesional seleccionado
+            nuevo.ProfesionalTurno = ((List<Profesional>)Session["listaProfesionales"]).Find(x=>x.IdProfesional == idProfesional);
+
+            int idEspecialidad = int.Parse(DropDownListEspecialidades.SelectedValue);
+            nuevo.EspecialidadTurno = ((List<Especialidad>)Session["listaEspecialidades"]).Find(x => x.Id == idEspecialidad);
+
+            nuevo.EstadoTurno = 0;      //ABIERTO
+
+            nuevo.Observaciones = "";
+
+            turnoNegocio.Agregar(nuevo);
+        }
+
+        protected void TimerTurnoCreado_Tick(object sender, EventArgs e)
+        {
+            LabelTurnoCreado.Visible = false;
+            TimerTurnoCreado.Enabled = false;
         }
 
 

@@ -28,6 +28,11 @@
                             <asp:Label ID="LabelInfoTurno" Text="Prueba de texto turno!" CssClass="form-control" runat="server" />
                             <br />
                             <asp:DropDownList ID="DropDownListPacientes" AutoPostBack="true" OnSelectedIndexChanged="DropDownListPacientes_SelectedIndexChanged" runat="server"></asp:DropDownList>
+                            <asp:Button ID="btnCrearTurno" CssClass="btn btn-success" Text="CREAR TURNO" runat="server" OnClick="btnCrearTurno_Click" />
+                            <br />
+                            <br />
+                            <asp:Label ID="LabelTurnoCreado" Visible="false" class="alert alert-success" Text="TURNO CREADO!" runat="server" />
+                            <asp:Timer ID="TimerTurnoCreado" runat="server" Interval="4000" OnTick="TimerTurnoCreado_Tick" Enabled="false"></asp:Timer>
                         </div>
                         <div class="col">
                             <%--aca va una tarjeta con la info del turno--%>
@@ -40,6 +45,7 @@
                                 <div class="card-body">
                                     <h5 class="card-title">
                                         <asp:Label ID="CardFechaTurno" Text="Martes 02/07/2024 ejemplo..." runat="server" />
+
                                     </h5>
                                     <p class="card-text">
                                         Presentarse con 15 min de anticipacion y estudios previos. blablabla
@@ -64,11 +70,13 @@
                             </div>
                             <%--aca termina la tarjeta--%>
                         </div>
+
                     </div>
                 </div>
                 <%--aca terminan las 4 columnas--%>
                 <br />
                 <br />
+                <asp:GridView runat="server" ID="GridPruebaTurnos"></asp:GridView>
                 <br />
                 <br />
                 <br />
@@ -78,7 +86,7 @@
                 <br />
                 <br />
                 <br />
-                <asp:GridView runat="server" ID="GridPruebaRoles"></asp:GridView>
+                <%--<asp:GridView runat="server" ID="GridPruebaRoles"></asp:GridView>--%>
                 <%--<asp:GridView runat="server" ID="GridPruebaPersonas"></asp:GridView>
                 <asp:GridView runat="server" ID="GridPruebasEspecialidades"></asp:GridView>--%>
             </ContentTemplate>

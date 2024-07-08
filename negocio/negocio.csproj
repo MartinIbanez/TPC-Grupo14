@@ -79,6 +79,7 @@
     <Compile Include="ProfesionalNegocio.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RolNegocio.cs" />
+    <Compile Include="TurnoNegocio.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

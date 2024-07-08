@@ -15,7 +15,7 @@ namespace dominio
         public DayOfWeek Dia { get; set; }      //es un enum para los 7 dias de la semana, es compatible con Datetime
         public int HoraInicio { get; set; }
         public int HoraFin { get; set; }
-            
+
         public List<string> ObtenerHoras()
         {
             List<int> horas=new List<int>();
@@ -31,6 +31,16 @@ namespace dominio
                 listHorasString.Add(h.ToString("D2") + ":00");  //paso el int hora a formato hora
             }
             return listHorasString;
+        }
+
+        public List<int> ObtenerHorasInt()
+        {
+            List<int> horas = new List<int>();
+            for (int i = this.HoraInicio; i < this.HoraFin; i++)
+            {
+                horas.Add(i);
+            }
+            return horas;
         }
 
     }
