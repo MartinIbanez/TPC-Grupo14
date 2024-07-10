@@ -15,7 +15,7 @@
                     <label for="txtPassword">Contraseña</label>
                     <input type="password" class="form-control" id="txtPassword" runat="server" />
 
-                   
+                   <asp:Button ID="btnIngresar" runat="server" Text="Ingresar" OnClick="btnIngresar_Click" CssClass="btn btn-primary mt-2 mb-3" />
                 </div>
             </div>
         </div>

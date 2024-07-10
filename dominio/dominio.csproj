@@ -80,6 +80,7 @@
     <Compile Include="Rol.cs" />
     <Compile Include="Turno.cs" />
     <Compile Include="Persona.cs" />
+    <Compile Include="Usuario.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
