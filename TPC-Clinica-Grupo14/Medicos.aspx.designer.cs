@@ -15,33 +15,6 @@ namespace TPC_Clinica_Grupo14
     {
 
         /// <summary>
-        /// Control txtId.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtId;
-
-        /// <summary>
-        /// Control lblIdProfesional.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblIdProfesional;
-
-        /// <summary>
-        /// Control txtIdProfesional.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtIdProfesional;
-
-        /// <summary>
         /// Control lblNombreMedico.
         /// </summary>
         /// <remarks>

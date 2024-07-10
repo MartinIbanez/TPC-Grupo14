@@ -22,11 +22,6 @@
             <div class="row">
                 <div class="col-md-6">
                     <div class="form-group">
-                        <asp:TextBox ID="txtId" runat="server" CssClass="form-control" ReadOnly="false" Visible="true"></asp:TextBox>
-
-                        <asp:Label ID="lblIdProfesional" runat="server" AssociatedControlID="txtIdProfesional" CssClass="form-label fw-bold">ID Profesional</asp:Label>
-                        <asp:TextBox ID="txtIdProfesional" runat="server" CssClass="form-control"></asp:TextBox>
-
                         <asp:Label ID="lblNombreMedico" runat="server" AssociatedControlID="txtNombre" CssClass="form-label fw-bold">Nombre del Médico</asp:Label>
                         <asp:TextBox ID="txtNombre" runat="server" CssClass="form-control"></asp:TextBox>
 
@@ -37,11 +32,11 @@
                         <asp:TextBox ID="txtFechaNacimiento" runat="server" CssClass="form-control"></asp:TextBox>
 
                         <!-- DropDownList para Especialidades -->
-                        <asp:Label ID="lblEspecialidadMedico" runat="server" AssociatedControlID="ddlEspecialidad" CssClass="form-label fw-bold">Seleccione una Especialidad</asp:Label>
+                        <asp:Label ID="lblEspecialidadMedico" runat="server" AssociatedControlID="ddlEspecialidad" CssClass="form-label fw-bold"> Especialidad</asp:Label>
                         <asp:DropDownList ID="ddlEspecialidad" runat="server" CssClass="form-control">
                             <asp:ListItem Text="Seleccione una opción" Value="0"></asp:ListItem>
-                        </asp:DropDownList>
 
+                        </asp:DropDownList>
                     </div>
                 </div>
 
@@ -64,7 +59,6 @@
                         </asp:DropDownList>
                     </div>
                 </div>
-
             </div>
 
             <div class="row">

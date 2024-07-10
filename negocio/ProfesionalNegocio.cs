@@ -25,7 +25,11 @@ namespace negocio
 
             try
             {   //Levanto nombre y apellido profesional
-                datos.SetearConsulta("select PR.ID as ID,P.Nombre as Nombre,P.Apellido as Apellido from Profesionales PR INNER JOIN Personas P ON P.ID=PR.IdPersona");
+                datos.SetearConsulta("SELECT PR.ID AS ID, P.Nombre, P.Apellido, P.FechaNac, P.NumDoc, P.Correo, P.Telefono, P.Activo, E.Nombre AS Especialidad " +
+                                     "FROM Profesionales PR " +
+                                     "INNER JOIN Personas P ON P.ID = PR.IdPersona " +
+                                     "LEFT JOIN Profesionales_x_Especialidad PXE ON PR.ID = PXE.IDProfesional " +
+                                     "LEFT JOIN Especialidades E ON PXE.IDEspecialidad = E.Id");
                 datos.EjecutarLectura();    
 
                 while (datos.Lector.Read())
@@ -34,21 +38,21 @@ namespace negocio
                     aux.IdProfesional = int.Parse((datos.Lector["ID"].ToString()));
                     aux.Nombre = datos.Lector["Nombre"].ToString();
                     aux.Apellido = (string)datos.Lector["Apellido"].ToString();
+                    aux.FechaNacimiento = (DateTime)datos.Lector["FechaNac"];
+                    aux.NumDoc = datos.Lector["NumDoc"].ToString();
+                    aux.Correo = datos.Lector["Correo"].ToString();
+                    aux.Telefono = datos.Lector["Telefono"].ToString();
+                    aux.Activo = (bool)datos.Lector["Activo"];
+
+
                     aux.Especialidades = new List<Especialidad>();      //Instancio la lista para poder cargarla
-                    aux.ListHorariosDisponibles = new List<Horario>();   //Instancio la lista para poder cargarla
-
-
                     //---Datos que no muestro por ahora...---
 
-                    //aux.FechaNacimiento = (DateTime)datos.Lector["FechaNac"];
+                   // aux.ListHorariosDisponibles = new List<Horario>();   //Instancio la lista para poder cargarla
                     //aux.IdGenero = int.Parse(datos.Lector["IDGenero"].ToString());
                     //aux.Gen = datos.Lector["Gen"].ToString();
-                    //aux.NumDoc = datos.Lector["NumDoc"].ToString();
-                    //aux.Correo = datos.Lector["Correo"].ToString();
-                    //aux.Telefono = datos.Lector["Telefono"].ToString();
                     //aux.IdRol = int.Parse(datos.Lector["IDRol"].ToString());
                     //aux.Role = datos.Lector["Rol"].ToString();
-                    //aux.Activo = (bool)datos.Lector["Activo"];
                     //aux.Password = datos.Lector["Password"].ToString();
 
 
@@ -64,13 +68,13 @@ namespace negocio
                         }
                     }
                     //Este bloque carga los horarios de profesional en cuestion
-                    foreach(Horario h in listHorarios)
+                  /*  foreach(Horario h in listHorarios)
                     {
                         if(h.IdProfesional == aux.IdProfesional)
                         {
                             aux.ListHorariosDisponibles.Add(h);
                         }
-                    }
+                    }*/
 
                     lista.Add(aux);
                 }

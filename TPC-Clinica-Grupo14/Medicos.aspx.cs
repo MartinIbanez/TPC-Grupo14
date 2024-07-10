@@ -18,9 +18,9 @@ namespace TPC_Clinica_Grupo14
         {
             if (!IsPostBack)
             {
-                cargarListaProfesionales();
                 cargarListaEspecialidades();
-                
+                cargarListaProfesionales();
+
 
             }
         }
@@ -29,31 +29,28 @@ namespace TPC_Clinica_Grupo14
         {
             try
             {
-                List<Especialidad> Lista = especialidadNegocio.Listar();
-                ddlEspecialidad.DataSource = Lista;
-                ddlEspecialidad.DataTextField = "Nombre";
-                ddlEspecialidad.DataValueField = "Id";
+                EspecialidadNegocio especialidadNegocio = new EspecialidadNegocio();
+                List<Especialidad> listaEspecialidades = especialidadNegocio.Listar();
+                ddlEspecialidad.DataSource = listaEspecialidades;
+                ddlEspecialidad.DataTextField = "Nombre"; // Asume que "Nombre" es el campo a mostrar
+                ddlEspecialidad.DataValueField = "Id"; // Asume que "Id" es el campo de valor
                 ddlEspecialidad.DataBind();
+
+                // Agrega un ítem por defecto
+                ddlEspecialidad.Items.Insert(0, new ListItem("Seleccione una opción", "0"));
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Error al cargar la lista de Especialidades: " + ex.Message);
+
+                throw ex;
             }
 
         }
 
         protected void cargarListaProfesionales()
         {
-            try
-            {
-                List<Profesional> Lista = profesionalNegocio.Listar();
-                dgvMedicos.DataSource = Lista;
-                dgvMedicos.DataBind();
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine("Error al cargar la lista de Medicos: " + ex.Message);
-            }
+            dgvMedicos.DataSource = profesionalNegocio.Listar();
+            dgvMedicos.DataBind();
 
         }
 
@@ -93,8 +90,7 @@ namespace TPC_Clinica_Grupo14
 
         private void LimpiarCampos()
         {
-            txtId.Text = "";
-            txtIdProfesional.Text = "";
+
             txtNombre.Text = "";
             txtApellido.Text = "";
             txtFechaNacimiento.Text = "";
