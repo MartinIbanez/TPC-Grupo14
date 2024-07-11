@@ -1,5 +1,3 @@
-
-
 CREATE DATABASE CLINICA_GRUPO_14_DB
 GO
 USE CLINICA_GRUPO_14_DB
@@ -32,6 +30,7 @@ CREATE TABLE Personas(
     IDGenero SMALLINT NOT NULL FOREIGN KEY REFERENCES Generos(ID),
     NumDoc VARCHAR(50) NOT NULL,
     Correo VARCHAR(50) NOT NULL UNIQUE,
+	
     Telefono VARCHAR(50),
     IDRol SMALLINT NOT NULL FOREIGN KEY REFERENCES Roles(ID),
     --rol sale de otra tabla
@@ -43,6 +42,16 @@ CREATE TABLE Especialidades(
     Nombre VARCHAR(50) NOT NULL
 )
 
+CREATE TABLE Usuarios(
+    ID SMALLINT NOT NULL PRIMARY KEY IDENTITY(1,1),
+    Usuario VARCHAR(50) NOT NULL,
+    Pass VARCHAR(50) NOT NULL,
+    TipoUser INT NOT NULL,
+    Email VARCHAR(50) NOT NULL,
+   	
+)
+
+
 CREATE TABLE Profesionales(
     ID SMALLINT NOT NULL PRIMARY KEY IDENTITY(1,1),
     IdPersona SMALLINT NOT NULL FOREIGN KEY REFERENCES Personas(ID)
@@ -53,6 +62,8 @@ CREATE TABLE Profesionales_x_Especialidad(
     IDEspecialidad SMALLINT NOT NULL FOREIGN KEY REFERENCES Especialidades(ID),
     PRIMARY KEY(IDProfesional,IDEspecialidad)
 )
+
+
 
 -- CREATE TABLE EstadoTurnos(
 --     ID SMALLINT NOT NULL PRIMARY KEY IDENTITY(1,1),
@@ -66,6 +77,13 @@ INSERT INTO Roles (Nombre) VALUES
 ('Recepcionista'),
 ('Profesional'),
 ('Paciente')
+
+INSERT INTO Usuarios(Id,Usuario,Pass,TipoUser,Email) VALUES
+('1','Admin','admin','1','administrador@clinic.com'),
+('2','Recepcionista','recep','2','rececpcionista@clinic.com'),
+('3','Medico','medico','3','profesional@clinic.com'),
+('4','Paciente','paciente','4','paciente@clinic.com');
+
 
 INSERT INTO Generos (Nombre) VALUES
 ('Masculino'),

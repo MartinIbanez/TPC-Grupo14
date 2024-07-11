@@ -8,6 +8,7 @@ using System.Linq.Expressions;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Web.UI.WebControls.WebParts;
 
 namespace TPC_Clinica_Grupo14
 {
@@ -63,19 +64,23 @@ namespace TPC_Clinica_Grupo14
                         }
 
                     }
-                    else
-                    {
-                        Session.Add("error", "user o pass incorrectos");
-                        Response.Redirect("../Error.aspx",false);
-                    }
+                    
 
                 }
+                else
+                {
+                    Session.Add("error", "user o pass incorrectos");
+                   
+                    Response.Redirect("Error.aspx", false);
+                }
+
+
             }
 
             catch (Exception ex)
             {
                 Session.Add("error", ex.ToString());
-                Response.Redirect("../Error.aspx",false);
+                Response.Redirect("Error.aspx",false);
             }
         }
     }
