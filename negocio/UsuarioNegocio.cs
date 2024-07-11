@@ -54,7 +54,7 @@ namespace negocio
                 datos.SetearConsulta("SELECT Id, Usuario, Pass, TipoUser FROM Usuarios WHERE Usuario = @User AND Pass = @Pass");
                 datos.SetearParametro("@User", usuario.User);
                 datos.SetearParametro("@Pass", usuario.Pass);
-
+                
                 datos.EjecutarLectura();
 
                 if (datos.Lector.Read())

@@ -15,6 +15,7 @@ namespace TPC_Clinica_Grupo14
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            
 
         }
 
@@ -23,20 +24,20 @@ namespace TPC_Clinica_Grupo14
         protected void btnIngresar_Click(object sender, EventArgs e)
         {
             Usuario usuario;
-            UsuarioNegocio usuarioNegocio = new negocio.UsuarioNegocio();
+            UsuarioNegocio negocio = new UsuarioNegocio(); 
 
             int nroUser = 5;
 
             try
             {
 
-                usuario = new Usuario(txtUser.Value, txtPassword.Value, nroUser);
-                usuarioNegocio.Loguear(usuario);
+                usuario = new Usuario(txtUser.Value, txtPassword.Value, nroUser); //crea instancia usuario
+                negocio.Loguear(usuario);
                 nroUser = (int)usuario.TipoUsuario;
 
-                if (usuarioNegocio.Loguear(usuario))
+                if (negocio.Loguear(usuario))
                 {
-                    if (usuarioNegocio.Loguear(usuario))
+                    if (negocio.Loguear(usuario))
                     {
                         Session.Add("usuario", usuario);
                         Session.Add("IDUsuario", usuario.Id);
@@ -62,6 +63,11 @@ namespace TPC_Clinica_Grupo14
                         }
 
                     }
+                    else
+                    {
+                        Session.Add("error", "user o pass incorrectos");
+                        Response.Redirect("../Error.aspx",false);
+                    }
 
                 }
             }
@@ -69,7 +75,7 @@ namespace TPC_Clinica_Grupo14
             catch (Exception ex)
             {
                 Session.Add("error", ex.ToString());
-                Response.Redirect("Login.aspx");
+                Response.Redirect("../Error.aspx",false);
             }
         }
     }

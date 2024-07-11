@@ -18,7 +18,7 @@ namespace dominio
     public class Usuario
     {
         public int Id { get; set; }
-        public String User { get; set; }
+        public string User { get; set; }
         public string Pass { get; set; }
         public TipoUsuario TipoUsuario { get; set; }
         public string Email { get; set; }
@@ -31,6 +31,7 @@ namespace dominio
         {
             User = user;
             Pass = pass;
+
             if (tipoUsuario == 1)
             {
                 TipoUsuario = TipoUsuario.Admin;

@@ -48,9 +48,7 @@
                     <li class="nav-item">
                         <a class="nav-link" href="MenuRecepcionista.aspx">RECEPCIONISTA</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="">REGISTROS</a>
-                    </li>
+                   
 
                     <li class="nav-item">
                         <a class="nav-link" href="Pruebas.aspx">Pruebas</a>
