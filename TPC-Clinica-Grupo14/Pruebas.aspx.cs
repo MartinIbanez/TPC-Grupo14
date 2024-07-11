@@ -264,6 +264,17 @@ namespace TPC_Clinica_Grupo14
             TimerTurnoCreado.Enabled = false;
         }
 
+        //protected void dgvProfesionales_Load(object sender, EventArgs e)
+        //{
+        //    ProfesionalNegocio profesionalNegocio = new ProfesionalNegocio();
+        //    List<Profesional> lista = new List<Profesional>();
+
+        //    lista = profesionalNegocio.Listar();
+
+        //    dgvProfesionales.DataSource = lista;
+        //    dgvProfesionales.DataBind();
+        //}
+
 
 
 
