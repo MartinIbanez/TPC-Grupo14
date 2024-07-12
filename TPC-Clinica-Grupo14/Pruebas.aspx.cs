@@ -85,7 +85,6 @@ namespace TPC_Clinica_Grupo14
             
             List<Profesional> listaProfesionalesAMostrar = new List<Profesional>();
 
-            //foreach (Profesional p in (List<Profesional>)Session["listaProfesionales"])
             foreach (Profesional p in listaProfesionales)
             {
                 if (p.Especialidades.Find(x => x.Id == idEspecialidad) != null)
@@ -99,12 +98,10 @@ namespace TPC_Clinica_Grupo14
             DropDownListProfesionales.DataSource = listaProfesionalesAMostrar;
             DropDownListProfesionales.DataTextField = "Nombre";
             DropDownListProfesionales.DataValueField = "IdProfesional";
-            //DropDownListProfesionales.DataBind();
-
-            //DropDownListProfesionales_SelectedIndexChanged(sender, e);          //Fuerzo el evento
-            DropDownListProfesionales.SelectedIndex = 0;        //Muestro el 1er profesional disponible?
             DropDownListProfesionales.DataBind();
 
+            DropDownListProfesionales.SelectedIndex = 0;        //Muestro el 1er profesional disponible
+            
 
             DropDownListHorariosDisponibles.DataSource = listaProfesionalesAMostrar[0].ListHorariosDisponibles; //muestro el horario del 1er profesional?
             DropDownListHorariosDisponibles.DataValueField = "Id";
@@ -118,23 +115,36 @@ namespace TPC_Clinica_Grupo14
 
         protected void DropDownListProfesionales_SelectedIndexChanged(object sender, EventArgs e)
         {
+            ProfesionalNegocio profNegocio = new ProfesionalNegocio();
+            List<Profesional> listaProfesionales = new List<Profesional>();
+            listaProfesionales = profNegocio.Listar();
+            //listaProf = (List<Profesional>)DropDownListProfesionales.DataSource;
             int idProf = int.Parse(DropDownListProfesionales.SelectedValue);
-            List<Profesional> listaProf = new List<Profesional>();
-            listaProf = (List<Profesional>)DropDownListProfesionales.DataSource;
 
             Profesional prof = new Profesional();
             //prof = ((List<Profesional>)Session["listaProfesionalesAMostrar"]).Find(x=>x.IdProfesional==idProf);
-            prof = listaProf.Find(x => x.IdProfesional == idProf);
+            prof = listaProfesionales.Find(x => x.IdProfesional == idProf);
 
-            //List<string> DiasDisponibles = new List<String>();      //aca defino la lista de DIAS
-            List<Horario> DiasDisponibles = new List<Horario>();
-            foreach (Horario h in prof.ListHorariosDisponibles)
+            int idEspecialidad = int.Parse(DropDownListEspecialidades.SelectedValue);
+
+            List<Profesional> listaProfesionalesAMostrar = new List<Profesional>();
+
+            foreach (Profesional p in listaProfesionales)
             {
-                DiasDisponibles.Add(h);                                 //CARGO LA LISTA DE DIAS DISPONIBLES EN BASE AL PROFESIONAL SELECCIONADO
+                if (p.Especialidades.Find(x => x.Id == idEspecialidad) != null)
+                {
+                    listaProfesionalesAMostrar.Add(p);  //CARGO LA LISTA DE PROFESIONALES QUE TIENEN LA ESPECIALIDAD SELECCIONADA
+                }
             }
+            ////List<string> DiasDisponibles = new List<String>();      //aca defino la lista de DIAS
+            //List<Horario> DiasDisponibles = new List<Horario>();
+            //foreach (Horario h in prof.ListHorariosDisponibles)
+            //{
+            //    DiasDisponibles.Add(h);                                 //CARGO LA LISTA DE DIAS DISPONIBLES EN BASE AL PROFESIONAL SELECCIONADO
+            //}
 
-            DropDownListDia.DataSource = DiasDisponibles;
-            DropDownListDia.DataBind();
+            //DropDownListDia.DataSource = DiasDisponibles;
+            //DropDownListDia.DataBind();
 
             //Session.Add("listaDiasDisponibles",DiasDisponibles);
 
@@ -148,6 +158,8 @@ namespace TPC_Clinica_Grupo14
         //
         //  VER ESTE EVENTO DIA NO PINTA LOS DIAS!
         //
+
+        //ESTE EVENTO Y ESTE CONTROL NO VA MAS, USAMOS CALENDARIO
         protected void DropDownListDia_SelectedIndexChanged(object sender, EventArgs e)
         {
             int idProf = int.Parse(DropDownListProfesionales.SelectedValue);

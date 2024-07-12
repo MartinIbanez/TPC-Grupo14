@@ -43,6 +43,7 @@ namespace negocio
 
 
                     aux.Especialidades = new List<Especialidad>();      //Instancio la lista para poder cargarla
+                    aux.ListHorariosDisponibles = new List<Horario>();
                     //---Datos que no muestro por ahora...---
 
                    // aux.ListHorariosDisponibles = new List<Horario>();   //Instancio la lista para poder cargarla
@@ -65,13 +66,13 @@ namespace negocio
                         }
                     }
                     //Este bloque carga los horarios de profesional en cuestion
-                  /*  foreach(Horario h in listHorarios)
+                    foreach (Horario h in listHorarios)
                     {
-                        if(h.IdProfesional == aux.IdProfesional)
+                        if (h.IdProfesional == aux.IdProfesional)
                         {
                             aux.ListHorariosDisponibles.Add(h);
                         }
-                    }*/
+                    }
 
                     lista.Add(aux);
                 }
