@@ -19,16 +19,16 @@
                             <asp:DropDownList runat="server" ID="DropDownListProfesionales" AutoPostBack="true" OnSelectedIndexChanged="DropDownListProfesionales_SelectedIndexChanged" CssClass="btn btn-secondary dropdown-toggle" role="button" data-bs-toggle="dropdown"></asp:DropDownList>
                             <br />
                             <br />
-                            <asp:DropDownList runat="server" ID="DropDownListHorariosDisponibles" AutoPostBack="true" OnSelectedIndexChanged="DropDownListHorariosDisponibles_SelectedIndexChanged" CssClass="btn btn-secondary dropdown-toggle" role="button" data-bs-toggle="dropdown"></asp:DropDownList>
+                            <asp:DropDownList runat="server" ID="DropDownListHorariosDisponibles" Visible="false" AutoPostBack="true" OnSelectedIndexChanged="DropDownListHorariosDisponibles_SelectedIndexChanged" CssClass="btn btn-secondary dropdown-toggle" role="button" data-bs-toggle="dropdown"></asp:DropDownList>
                         </div>
                         <div class="col">
                         </div>
-                            <asp:DropDownList runat="server" ID="DropDownListDia" Visible="false" AutoPostBack="true" OnSelectedIndexChanged="DropDownListDia_SelectedIndexChanged"></asp:DropDownList>
+                            <%--<asp:DropDownList runat="server" ID="DropDownListDia" Visible="false" AutoPostBack="true" OnSelectedIndexChanged="DropDownListDia_SelectedIndexChanged"></asp:DropDownList>--%>
                         <div class="col">
                         </div>
                         <div class="col">
                             <h2>Prueba Calendario...    </h2>
-                            <asp:Calendar runat="server" ID="CalendarioTurnos" AutoPostBack="true" OnDayRender="CalendarioTurnos_DayRender" OnSelectionChanged="CalendarioTurnos_SelectionChanged"></asp:Calendar>
+                            <asp:Calendar runat="server" ID="CalendarioTurnos" Visible="false" AutoPostBack="true" OnDayRender="CalendarioTurnos_DayRender" OnSelectionChanged="CalendarioTurnos_SelectionChanged"></asp:Calendar>
                         </div>
                         <div class="col">
                             <asp:Label ID="LabelTurnoSeleccionado" Text="Prueba de texto turno!" CssClass="form-control" runat="server" />
