@@ -1,4 +1,5 @@
 
+
 CREATE DATABASE CLINICA_GRUPO_14_DB
 GO
 USE CLINICA_GRUPO_14_DB
@@ -137,18 +138,21 @@ INSERT INTO Profesionales_x_Especialidad (IDProfesional, IDEspecialidad) VALUES
 --     IdHorarios SMALLINT FOREIGN KEY NOT NULL REFERENCES Horarios(Id),
 --     PRIMARY KEY(IdProfesional,IdHorarios)
 
-Create Table EstadoTurnos(
-    Id SMALLINT NOT NULL PRIMARY KEY IDENTITY(1,1),
-    Nombre VARCHAR(50) NOT NULL
-)
 
-INSERT INTO EstadoTurnos(Nombre)
-VALUES
-('ABIERTO'),
-('CERRADO'),
-('CANCELADO'),
-('REPROGRAMADO'),
-('AUSENTE');
+-- ESTA ES INNECESARIA
+
+-- Create Table EstadoTurnos(
+--     Id SMALLINT NOT NULL PRIMARY KEY IDENTITY(1,1),
+--     Nombre VARCHAR(50) NOT NULL
+-- )
+
+-- INSERT INTO EstadoTurnos(Nombre)
+-- VALUES
+-- ('ABIERTO'),
+-- ('CERRADO'),
+-- ('CANCELADO'),
+-- ('REPROGRAMADO'),
+-- ('AUSENTE');
 
 CREATE TABLE Horarios(
     Id SMALLINT NOT NULL PRIMARY KEY IDENTITY(1,1),
@@ -160,22 +164,73 @@ CREATE TABLE Horarios(
 
 INSERT INTO Horarios (IdProfesional, DayOfWeek, HoraInicio, HoraFin)
 VALUES
-(1, 1, 9, 12),  -- Profesional 1, Lunes, 09:00-12:00
-(1, 3, 9, 12),  -- Profesional 1, Miércoles, 09:00-12:00
-(2, 2, 14, 18), -- Profesional 2, Martes, 14:00-18:00
-(3, 4, 10, 15), -- Profesional 3, Jueves, 10:00-15:00
+--
+
+(1, 1, 9, 12),  -- Profesional 1, Lunes, 09:00-12:00        LEONEL
+(1, 3, 9, 12),  -- Profesional 1, Miércoles, 09:00-12:00    
+(2, 2, 14, 18), -- Profesional 2, Martes, 14:00-18:00       ALICIA
+(3, 4, 10, 15), -- Profesional 3, Jueves, 10:00-15:00       MAXIMILIANO
 (3, 5, 15, 18), -- Profesional 3, Viernes, 15:00-18:00
-(4, 1, 9, 14),  -- Profesional 4, Lunes, 09:00-14:00
+(4, 1, 9, 14),  -- Profesional 4, Lunes, 09:00-14:00        MICAELA
 (4, 5, 14, 18), -- Profesional 4, Viernes, 14:00-18:00
-(5, 2, 16, 20), -- Profesional 5, Martes, 16:00-20:00
+(5, 2, 16, 20), -- Profesional 5, Martes, 16:00-20:00       SEBASTIAN
 (5, 4, 9, 13),  -- Profesional 5, Jueves, 09:00-13:00
-(6, 6, 8, 14), -- Profesional 6, Sabado, 08:00-14:00
-(7, 3, 13, 17), -- Profesional 7, Miercoles, 13:00-17:00
-(8, 1, 9, 12),  -- Profesional 8, Lunes, 09:00-12:00
-(8, 3, 9, 12), -- Profesional 8, Miercoles, 09:00-12:00
-(8, 5, 9, 12); -- Profesional 8, Viernes, 09:00-12:00
+(6, 6, 8, 14), -- Profesional 6, Sabado, 08:00-14:00        TOTA
+(7, 3, 13, 17), -- Profesional 7, Miercoles, 13:00-17:00    MAURICIO
+(8, 1, 9, 12),  -- Profesional 8, Lunes, 09:00-12:00        LUCILA
+(8, 3, 9, 12), -- Profesional 8, Miercoles, 09:00-12:00     LUCILA
+(8, 5, 9, 12); -- Profesional 8, Viernes, 09:00-12:00       LUCILA
+
+-- Drop Table Turnos
+
+CREATE TABLE Turnos(
+    Id smallint not null PRIMARY KEY IDENTITY(1,1),
+    IdProfesional SMALLINT NOT NULL FOREIGN KEY REFERENCES Profesionales(ID),
+    IdPaciente SMALLINT NOT NULL FOREIGN KEY REFERENCES Personas(ID),
+    FechaTurno DATE not null,
+    HoraTurno smallint not null,
+    IdEspecialidad SMALLINT not null FOREIGN KEY REFERENCES Especialidades(ID),
+    Estado smallint not null,
+    -- ('ABIERTO')      0
+    -- ('CERRADO')      1
+    -- ('CANCELADO')    2
+    -- ('AUSENTE')      3
+    Observaciones varchar(100)
+)
+
+-- Turnos de prueba
+
+INSERT INTO Turnos(IdProfesional,IdPaciente,FechaTurno,HoraTurno,IdEspecialidad,Estado,Observaciones)
+VALUES
+(2,6,'2024-07-09',16,3,1,'Examen ok, vuelve a control en 1 año'),
+-- Dra Alicia
+-- Paciente Josefina
+-- TURNO 09/0/24, 16:00
+-- Neurologia,
+-- ESTADO TURNO: CERRADO (1)
+
+(8,8,'2024-07-12',9,7,0,'');
+-- Dra Lucila
+-- Paciente Delfina
+-- Turno 12/07/24, 09:00
+-- Oftalmologia,
+-- ESTADO TURNO: ABIERTO (0)
+
+INSERT INTO Turnos(IdProfesional,IdPaciente,FechaTurno,HoraTurno,IdEspecialidad,Estado,Observaciones)
+VALUES
+(2,6,'2024-07-09',16,3,1,'Examen ok, vuelve a control en 1 año')
+
+-- DROP TABLE Turnos
+select * from Turnos
+
+-- Consulta para listar turnos!
+select T.Id as Id,T.IdProfesional as IdProfesional,Per.Nombre as NombreProfesional,Per.Apellido as ApellidoProfesional,T.IdPaciente as IdPaciente,P.Nombre as NombrePaciente,P.Apellido as ApellidoPaciente,E.Nombre as EspecialidadTurno,T.Estado as Estado,T.FechaTurno as FechaTurno,T.HoraTurno as HoraTurno, T.Observaciones as Observaciones from Turnos T INNER JOIN Profesionales PRO ON PRO.ID=T.IdProfesional INNER JOIN Personas P ON P.ID=T.IdPaciente INNER JOIN Personas Per ON Per.ID=PRO.IdPersona INNER JOIN Especialidades E ON E.ID=T.IdEspecialidad
+
 
 select * from Horarios
+select * from Personas
+
+
 
 -----HASTA ACA LA GENERACION
 
@@ -232,4 +287,9 @@ select * from Horarios
 --Consulta de todos los horarios disponibles
 select H.Id as Id,H.IdProfesional as IdProfesional,H.DayOfWeek as DayOfWeek,H.HoraInicio as HoraInicio,H.HoraFin as HoraFin FROM Horarios H
 
+select * from Especialidades
 
+
+select * from Personas
+
+select * from Profesionales

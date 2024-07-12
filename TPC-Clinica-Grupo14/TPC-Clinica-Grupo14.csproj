@@ -67,7 +67,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="ColumnaLateral.css" />
     <Content Include="Default.aspx" />
+    <Content Include="Error.aspx" />
     <Content Include="Especialidades.aspx" />
     <Content Include="Estilos.css" />
     <Content Include="Medicos.aspx" />
@@ -77,6 +79,7 @@
     <Content Include="MenuRecepcionista.aspx" />
     <Content Include="Pacientes.aspx" />
     <Content Include="Pruebas.aspx" />
+    <Content Include="Turnos.aspx" />
     <Content Include="Web.config" />
     <Content Include="Login.aspx" />
     <Content Include="MenuPaciente.aspx" />
@@ -88,6 +91,13 @@
     </Compile>
     <Compile Include="Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Error.aspx.cs">
+      <DependentUpon>Error.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Error.aspx.designer.cs">
+      <DependentUpon>Error.aspx</DependentUpon>
     </Compile>
     <Compile Include="Especialidades.aspx.cs">
       <DependentUpon>Especialidades.aspx</DependentUpon>
@@ -162,6 +172,13 @@
     </Compile>
     <Compile Include="MenuPaciente.aspx.designer.cs">
       <DependentUpon>MenuPaciente.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Turnos.aspx.cs">
+      <DependentUpon>Turnos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Turnos.aspx.designer.cs">
+      <DependentUpon>Turnos.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

@@ -4,7 +4,7 @@
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <link href="Estilos.css" rel="stylesheet" />
+    <link href="ColumnaLateral.css" rel="stylesheet" />
 
     <h1>SESION CON PERMISOS DE PACIENTES</h1>
 
@@ -17,14 +17,15 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" href="">ESPECIALIDADES</a>
+                    <a class="nav-link" href="Especialidades.aspx">ESPECIALIDADES</a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="">TURNOS</a>
+                    <a class="nav-link" href="Turnos.aspx">TURNOS</a>
                 </li>
 
-                
-
+            </ul>
+        </div>
+    </nav>
 
 </asp:Content>

@@ -5,7 +5,7 @@ using System.Web;
 
 namespace dominio
 {
-    public class Turno  //Falta tabla en BD
+    public class Turno  //Homogeneizar tablas en BDs....
     {
         public int Id { get; set; }
         public DateTime FechaTurno { get; set; }
@@ -21,16 +21,6 @@ namespace dominio
         //-- ('CERRADO')        1
         //-- ('CANCELADO')      2
         //-- ('AUSENTE')        3
-
-
-        //public enum Estado 
-        //{
-        //    ABIERTO = 0,
-        //    CERRADO = 1,
-        //    CANCELADO = 2,
-        //    AUSENTE = 3
-        //}
-        //public Estado EstadoTurno { get; set; }
 
 
         public string Observaciones { get; set; }

@@ -16,32 +16,32 @@ namespace dominio
         public int HoraInicio { get; set; }
         public int HoraFin { get; set; }
 
-        public List<string> ObtenerHoras()
-        {
-            List<int> horas=new List<int>();
-            for (int i = this.HoraInicio; i < this.HoraFin; i++) 
-            {
-                horas.Add(i);
-            }
+        //public List<string> ObtenerHoras()
+        //{
+        //    List<int> horas=new List<int>();
+        //    for (int i = this.HoraInicio; i < this.HoraFin; i++) 
+        //    {
+        //        horas.Add(i);
+        //    }
             
-            List<string> listHorasString = new List<string>();
+        //    List<string> listHorasString = new List<string>();
 
-            foreach (int h in horas)
-            {
-                listHorasString.Add(h.ToString("D2") + ":00");  //paso el int hora a formato hora
-            }
-            return listHorasString;
-        }
+        //    foreach (int h in horas)
+        //    {
+        //        listHorasString.Add(h.ToString("D2") + ":00");  //paso el int hora a formato hora
+        //    }
+        //    return listHorasString;
+        //}
 
-        public List<int> ObtenerHorasInt()
-        {
-            List<int> horas = new List<int>();
-            for (int i = this.HoraInicio; i < this.HoraFin; i++)
-            {
-                horas.Add(i);
-            }
-            return horas;
-        }
+        //public List<int> ObtenerHorasInt()
+        //{
+        //    List<int> horas = new List<int>();
+        //    for (int i = this.HoraInicio; i < this.HoraFin; i++)
+        //    {
+        //        horas.Add(i);
+        //    }
+        //    return horas;
+        //}
 
     }
 }

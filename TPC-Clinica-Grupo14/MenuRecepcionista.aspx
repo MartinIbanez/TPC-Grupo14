@@ -4,7 +4,7 @@
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <link href="Estilos.css" rel="stylesheet" />
+    <link href="ColumnaLateral.css" rel="stylesheet" />
 
     <h1>SESION CON PERMISOS DE RECEPCIONISTA</h1>
 

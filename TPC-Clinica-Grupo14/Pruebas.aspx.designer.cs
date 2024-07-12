@@ -42,15 +42,6 @@ namespace TPC_Clinica_Grupo14
         protected global::System.Web.UI.WebControls.DropDownList DropDownListProfesionales;
 
         /// <summary>
-        /// DropDownListDia control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList DropDownListDia;
-
-        /// <summary>
         /// DropDownListHorariosDisponibles control.
         /// </summary>
         /// <remarks>
@@ -58,6 +49,15 @@ namespace TPC_Clinica_Grupo14
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList DropDownListHorariosDisponibles;
+
+        /// <summary>
+        /// DropDownListDia control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList DropDownListDia;
 
         /// <summary>
         /// CalendarioTurnos control.

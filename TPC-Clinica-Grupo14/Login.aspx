@@ -3,27 +3,21 @@
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    
-    <div class="mb-3">
-        <label for="txtEmail" class="form-label">Email / Usuario</label>
-        <asp:TextBox ID="txtEmail" runat="server" CssClass="form-control" />
+    <div >
+        <div class="row mt-1" >
+            <div class="col-12 d-flex justify-content-center align-items-center min-vh-100" style="background: url(img.jpg) center center / cover; background-color: rgba(255, 255, 255, 0.5);">
+                <div class="col-3 border my-auto text-center" style="border-radius: 3px; padding: 20px; background-color: #c6ecf7;">
+                    <img src="logo.jpg" alt="Logo de Usuario" class="img-fluid mb-3" />
+
+                    <label for="txtUser">Usuario</label>
+                    <input type="text" class="form-control" id="txtUser" aria-describedby="emailHelp" runat="server" />
+
+                    <label for="txtPassword">Contraseña</label>
+                    <input type="password" class="form-control" id="txtPassword" runat="server" />
+
+                   <asp:Button ID="btnIngresar" runat="server" Text="Ingresar" OnClick="btnIngresar_Click" CssClass="btn btn-primary mt-2 mb-3" />
+                </div>
+            </div>
+        </div>
     </div>
-
-
-    <div class="mb-3">
-        <label for="txtPassword" class="form-label">Contraseña</label>
-        <asp:TextBox ID="txtPassword" runat="server" TextMode="Password" CssClass="form-control" />
-    </div>
-
-    <div class="mb-3 form-check">
-        <asp:CheckBox ID="chkNotRobot" runat="server" CssClass="form-check-input" />
-        <label class="form-check-label" for="chkNotRobot">No soy robot</label>
-    </div>
-
-
-    <asp:Button ID="btnLogin" runat="server" Text="Entrar" CssClass="btn btn-primary" OnClick="btnLogin_Click" />
-
-
-    <asp:Label ID="lblMessage" runat="server" CssClass="form-text"></asp:Label>
- 
 </asp:Content>
