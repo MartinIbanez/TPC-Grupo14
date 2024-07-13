@@ -132,21 +132,21 @@ namespace TPC_Clinica_Grupo14
             int idProf = int.Parse(DropDownListProfesionales.SelectedValue);
 
             Profesional prof = new Profesional();
-            
+
             prof = listaProfesionales.Find(x => x.IdProfesional == idProf);
 
-            int idEspecialidad = int.Parse(DropDownListEspecialidades.SelectedValue);
+            //int idEspecialidad = int.Parse(DropDownListEspecialidades.SelectedValue);
 
-            List<Profesional> listaProfesionalesAMostrar = new List<Profesional>();
+            //List<Profesional> listaProfesionalesAMostrar = new List<Profesional>();
 
-            foreach (Profesional p in listaProfesionales)
-            {
-                if (p.Especialidades.Find(x => x.Id == idEspecialidad) != null)
-                {
-                    listaProfesionalesAMostrar.Add(p);  //CARGO LA LISTA DE PROFESIONALES QUE TIENEN LA ESPECIALIDAD SELECCIONADA
-                }
-            }
-            
+            //foreach (Profesional p in listaProfesionales)
+            //{
+            //    if (p.Especialidades.Find(x => x.Id == idEspecialidad) != null)
+            //    {
+            //        listaProfesionalesAMostrar.Add(p);  //CARGO LA LISTA DE PROFESIONALES QUE TIENEN LA ESPECIALIDAD SELECCIONADA
+            //    }
+            //}
+
             CardProfesional.Text = prof.Nombre;
             DropDownListHorariosDisponibles.Visible=false;  //Porque debo volver a seleccionar el dia
         }

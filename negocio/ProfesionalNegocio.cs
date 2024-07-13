@@ -89,7 +89,9 @@ namespace negocio
         }
 
 
-
+        //REVISAR RESTO DE FUNCIONES ABM PROFESIONALES
+        //REVISAR RESTO DE FUNCIONES ABM PROFESIONALES
+        //REVISAR RESTO DE FUNCIONES ABM PROFESIONALES
         public void AgregarProfesional(Profesional profesional)
         {
             AccesoDatos datos = new AccesoDatos();
