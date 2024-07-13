@@ -107,15 +107,7 @@ namespace TPC_Clinica_Grupo14
             DropDownListProfesionales.SelectedIndex = 0;        //Muestro el 1er profesional disponible
             CalendarioTurnos.Visible = true;                    //Con esto lo habilito y se dispara el evento DayRender
             
-            //POR ACA FONZOOOOOO
-            //HAY QUE MOSTRAR LAS HORAS Correspondiente a los dias Y PINTAR EN EL CALENDARIO 
-            //Solo muestro opcion de Horarios, cuando se haya seleccionado un dia valido en el calendario
-            //DropDownListHorariosDisponibles.Visible = false;
-            //DropDownListHorariosDisponibles.DataSource = listaProfesionalesAMostrar[0].ListHorariosDisponibles; //muestro el horario del 1er profesional?
-            //DropDownListHorariosDisponibles.DataValueField = "Id";
-            //DropDownListHorariosDisponibles.DataTextField = "HoraInicio";
-            //DropDownListHorariosDisponibles.DataBind();
-            //DropDownListHorariosDisponibles.SelectedIndex = 0;
+           
             
             CardEspecialidad.Text=DropDownListEspecialidades.SelectedItem.ToString();
             CardProfesional.Text=DropDownListProfesionales.SelectedItem.ToString();
@@ -135,17 +127,17 @@ namespace TPC_Clinica_Grupo14
             
             prof = listaProfesionales.Find(x => x.IdProfesional == idProf);
 
-            int idEspecialidad = int.Parse(DropDownListEspecialidades.SelectedValue);
+            //int idEspecialidad = int.Parse(DropDownListEspecialidades.SelectedValue);
 
-            List<Profesional> listaProfesionalesAMostrar = new List<Profesional>();
+            //List<Profesional> listaProfesionalesAMostrar = new List<Profesional>();
 
-            foreach (Profesional p in listaProfesionales)
-            {
-                if (p.Especialidades.Find(x => x.Id == idEspecialidad) != null)
-                {
-                    listaProfesionalesAMostrar.Add(p);  //CARGO LA LISTA DE PROFESIONALES QUE TIENEN LA ESPECIALIDAD SELECCIONADA
-                }
-            }
+            //foreach (Profesional p in listaProfesionales)  
+            //{
+            //    if (p.Especialidades.Find(x => x.Id == idEspecialidad) != null)
+            //    {
+            //        listaProfesionalesAMostrar.Add(p);  //CARGO LA LISTA DE PROFESIONALES QUE TIENEN LA ESPECIALIDAD SELECCIONADA
+            //    }
+            //}
             
             CardProfesional.Text = prof.Nombre;
             DropDownListHorariosDisponibles.Visible=false;  //Porque debo volver a seleccionar el dia
@@ -230,7 +222,7 @@ namespace TPC_Clinica_Grupo14
                     }
                 }
             }
-            DropDownListHorariosDisponibles.Visible = true;    //Oculto horarios , primero debe seleccionar el dia...
+           // DropDownListHorariosDisponibles.Visible = true;    //Muestro horarios , primero debe seleccionar el dia...
         }
 
         

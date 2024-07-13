@@ -4,32 +4,39 @@
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <link href="ColumnaLateral.css" rel="stylesheet" />
+  
+        <<div style="display: flex; justify-content: center; align-items: center; height: 100vh;">
+            <div style="display: flex; justify-content: space-around; width: 90%; max-width: 1600px;">
 
-    <h1>SESION CON PERMISOS DE MEDICO</h1>
 
-    <nav class="navbar navbar-expand-lg navbar-dark">
 
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
+                <div class="card" style="width: 12rem;">
+                    <img src="cita.png" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="Consultas">TURNOS </h5>
+                        <p class="card-text">Consultas de turnos y estados</p>
+                    </div>
+                    <ul class="list-group list-group-flush"></ul>
+                    <div class="card-body">
+                        <a href="Turnos.aspx" class="card-link">TURNOS</a>
+                    </div>
+                </div>
 
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="Turnos.aspx">Especialidad</a>
-                </li>
+                <div class="card" style="width: 12rem;">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRAswJKNKcHG8dxDXOSnQ6cAdOeGRiIcZzkUg&s" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">PACIENTES</h5>
+                        <p class="card-text">Fichas personales de pacientes</p>
+                    </div>
+                    <ul class="list-group list-group-flush"></ul>
+                    <div class="card-body">
+                        <a href="Pacientes.aspx" class="card-link">PACIENTES</a>
+                    </div>
+                </div>
 
-                <li class="nav-item">
-                    <a class="nav-link" href="Turnos.aspx">Ver Turnos</a>
-                </li>
 
-                <li class="nav-item">
-                    <a class="nav-link" href="">PERFIL</a>
-                </li>
-            </ul>
+
+            </div>
         </div>
-    </nav>
 
-
-</asp:Content>
+    </asp:Content>

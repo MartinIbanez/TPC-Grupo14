@@ -4,28 +4,53 @@
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <link href="ColumnaLateral.css" rel="stylesheet" />
 
-    <h1>SESION CON PERMISOS DE RECEPCIONISTA</h1>
 
-    <nav class="navbar navbar-expand-lg navbar-dark">
+      <<div style="display: flex; justify-content: center; align-items: center; height: 100vh;">
+        <div style="display: flex; justify-content: space-around; width: 90%; max-width: 1600px;">
+           
+            <div class="card" style="width: 13rem;">
+                <img src="Especialidades.png" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">ESPECIALIDADES</h5>
+                    <p class="card-text">Consultas sobre nuestras areas de atencion</p>
+                </div>
+                <ul class="list-group list-group-flush"></ul>
+                <div class="card-body">
+                    <a href="Especialidades.aspx" class="card-link">ESPECIALIDADES</a>
+                </div>
+            </div>
 
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
+            <div class="card" style="width: 12rem;">
+                <img src="cita.png" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="Consultas">TURNOS </h5>
+                    <p class="card-text">Consultas de turnos y estados</p>
+                </div>
+                <ul class="list-group list-group-flush"></ul>
+                <div class="card-body">
+                    <a href="Turnos.aspx" class="card-link">TURNOS</a>
+                </div>
+            </div>
 
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="">ESPECIALIDADES</a>
-                </li>
+            <div class="card" style="width: 12rem;">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRAswJKNKcHG8dxDXOSnQ6cAdOeGRiIcZzkUg&s" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">PACIENTES</h5>
+                    <p class="card-text">Fichas personales de pacientes</p>
+                </div>
+                <ul class="list-group list-group-flush"></ul>
+                <div class="card-body">
+                    <a href="Pacientes.aspx" class="card-link">PACIENTES</a>
+                </div>
+            </div>
 
-                <li class="nav-item">
-                    <a class="nav-link" href="">TURNOS</a>
-                </li>
+          
 
-                <li class="nav-item">
-                    <a class="nav-link" href="">MEDICOS</a>
-                </li>
+          
+
+        </div>
+    </div>
 
 </asp:Content>
+
