@@ -47,8 +47,7 @@ CREATE TABLE Usuarios(
     Usuario VARCHAR(50) NOT NULL,
     Pass VARCHAR(50) NOT NULL,
     TipoUser INT NOT NULL,
-    Email VARCHAR(50) NOT NULL,
-   	
+    Email VARCHAR(50) NOT NULL, 	
 )
 
 
