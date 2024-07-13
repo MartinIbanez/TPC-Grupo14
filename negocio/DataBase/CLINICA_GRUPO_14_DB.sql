@@ -43,7 +43,7 @@ CREATE TABLE Especialidades(
 )
 
 CREATE TABLE Usuarios(
-    ID SMALLINT NOT NULL PRIMARY KEY IDENTITY(1,1),
+    ID INT NOT NULL PRIMARY KEY IDENTITY(1,1),
     Usuario VARCHAR(50) NOT NULL,
     Pass VARCHAR(50) NOT NULL,
     TipoUser INT NOT NULL,
@@ -78,11 +78,11 @@ INSERT INTO Roles (Nombre) VALUES
 ('Profesional'),
 ('Paciente')
 
-INSERT INTO Usuarios(Id,Usuario,Pass,TipoUser,Email) VALUES
-('1','Admin','admin','1','administrador@clinic.com'),
-('2','Recepcionista','recep','2','rececpcionista@clinic.com'),
-('3','Medico','medico','3','profesional@clinic.com'),
-('4','Paciente','paciente','4','paciente@clinic.com');
+INSERT INTO Usuarios(Usuario,Pass,TipoUser,Email) VALUES
+('Admin','admin','1','administrador@clinic.com'),
+('Recepcionista','recep','2','rececpcionista@clinic.com'),
+('Medico','medico','3','profesional@clinic.com'),
+('Paciente','paciente','4','paciente@clinic.com');
 
 
 INSERT INTO Generos (Nombre) VALUES

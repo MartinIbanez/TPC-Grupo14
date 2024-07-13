@@ -70,7 +70,6 @@ namespace TPC_Clinica_Grupo14
                 else
                 {
                     Session.Add("error", "user o pass incorrectos");
-                   
                     Response.Redirect("Error.aspx", false);
                 }
 
