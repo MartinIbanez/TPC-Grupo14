@@ -29,15 +29,11 @@ namespace TPC_Clinica_Grupo14
         {
             try
             {
-                EspecialidadNegocio especialidadNegocio = new EspecialidadNegocio();
-                List<Especialidad> listaEspecialidades = especialidadNegocio.Listar();
-                ddlEspecialidad.DataSource = listaEspecialidades;
-                ddlEspecialidad.DataTextField = "Nombre"; // Asume que "Nombre" es el campo a mostrar
-                ddlEspecialidad.DataValueField = "Id"; // Asume que "Id" es el campo de valor
+                ddlEspecialidad.DataSource = especialidadNegocio.Listar();
+                ddlEspecialidad.DataTextField = "Nombre";
+                ddlEspecialidad.DataValueField = "Id";
                 ddlEspecialidad.DataBind();
-
-                // Agrega un ítem por defecto
-                ddlEspecialidad.Items.Insert(0, new ListItem("Seleccione una opción", "0"));
+                ddlEspecialidad.Items.Insert(0, new ListItem("Seleccione una especialidad", "0"));
             }
             catch (Exception ex)
             {
@@ -52,16 +48,22 @@ namespace TPC_Clinica_Grupo14
             dgvMedicos.DataSource = profesionalNegocio.Listar();
             dgvMedicos.DataBind();
 
+
+
+
         }
 
 
         protected void btnAgregar_Click(object sender, EventArgs e)
         {
-
+           
         }
 
         protected void btnModificar_Click(object sender, EventArgs e)
         {
+
+
+
 
         }
 
@@ -79,8 +81,15 @@ namespace TPC_Clinica_Grupo14
 
         protected void dgvMedicos_SelectedIndexChanged(object sender, EventArgs e)
         {
+            GridViewRow row = dgvMedicos.SelectedRow;
+            txtNombre.Text = row.Cells[1].Text;
+            txtApellido.Text = row.Cells[2].Text;
+            txtFechaNacimiento.Text = row.Cells[3].Text;
+            txtDNI.Text = row.Cells[4].Text;
+            txtCorreo.Text = row.Cells[5].Text;
+            txtTelefono.Text = row.Cells[6].Text;
 
-
+            
         }
 
 

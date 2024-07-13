@@ -11,8 +11,8 @@ namespace TPC_Clinica_Grupo14
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (Session["error"] != null)
-                lblMensaje.Text = Session["error"].ToString();
+            if (Session["error"] != null) ;
+                
         }
     }
 }

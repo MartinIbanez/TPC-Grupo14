@@ -54,8 +54,8 @@
                         <asp:Label ID="lblActivoMedico" runat="server" AssociatedControlID="txtActivo" CssClass="form-label fw-bold">Médico Activo?</asp:Label>
                         <asp:DropDownList ID="txtActivo" runat="server" CssClass="form-control">
                             <asp:ListItem Text="Seleccione una opción" Value="0"></asp:ListItem>
-                            <asp:ListItem Text="Sí" Value="1"></asp:ListItem>
-                            <asp:ListItem Text="No" Value="2"></asp:ListItem>
+                            <asp:ListItem Text="si" Value="1"></asp:ListItem>
+                            <asp:ListItem Text="no" Value="2"></asp:ListItem>
                         </asp:DropDownList>
                     </div>
                 </div>
@@ -78,7 +78,7 @@
                         <asp:BoundField DataField="IdProfesional" HeaderText="ID Profesional" />
                         <asp:BoundField DataField="Nombre" HeaderText="Nombre" />
                         <asp:BoundField DataField="Apellido" HeaderText="Apellido" />
-                        <asp:BoundField DataField="FechaNacimiento" HeaderText="Fecha de Nacimiento" />
+                        <asp:BoundField DataField="FechaNacimiento" HeaderText="Fecha de Nacimiento" DataFormatString="{0:dd/MM/yyyy}" HtmlEncode="false" />
                         <asp:BoundField DataField="NumDoc" HeaderText="DNI" />
                         <asp:BoundField DataField="Correo" HeaderText="Correo" />
                         <asp:BoundField DataField="Telefono" HeaderText="Teléfono" />

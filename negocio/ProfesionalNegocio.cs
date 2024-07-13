@@ -87,5 +87,26 @@ namespace negocio
                 datos.CerrarConexion();
             }
         }
+
+
+
+        public void AgregarProfesional(Profesional profesional)
+        {
+            AccesoDatos datos = new AccesoDatos();
+            try
+            {
+                datos.SetearConsulta("INSERT INTO Profesionales (IdPersona) VALUES (@IdPersona)");
+                datos.SetearParametro("@IdPersona", profesional.Id);
+                datos.EjecutarAccion();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.CerrarConexion();
+            }
+        }
     }
 }

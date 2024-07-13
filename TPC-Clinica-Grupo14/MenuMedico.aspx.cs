@@ -1,4 +1,5 @@
-﻿using System;
+﻿using dominio;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -11,6 +12,7 @@ namespace TPC_Clinica_Grupo14
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            
             if (Session["usuario"] == null)
             {
                 Session.Add("Error", "Debes loguearte para ingresar");
