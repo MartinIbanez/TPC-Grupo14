@@ -19,14 +19,26 @@ namespace negocio
                 datos.EjecutarLectura();
                 while (datos.Lector.Read())
                 {
-                    Horario aux = new Horario();
-                    aux.Id = int.Parse(datos.Lector["Id"].ToString());
-                    aux.IdProfesional = int.Parse(datos.Lector["IdProfesional"].ToString());
-                    aux.Dia = (System.DayOfWeek)int.Parse(datos.Lector["Dia"].ToString());
-                    aux.HoraInicio = int.Parse(datos.Lector["HoraInicio"].ToString());
-                    aux.HoraFin = int.Parse(datos.Lector["HoraFin"].ToString());
+                    //De cada Horario, es decir, de cada bloque horario, voy a cargar uno por cada hora.
+                    //Ejemplo: horainicio = 9:00 ; horafin = 12:00  ==> se cargaran 3 horarios 9,10 y 11
+                    //Este proceso lo hago en el for...
 
-                    lista.Add(aux);
+                    int Id = int.Parse(datos.Lector["Id"].ToString());
+                    int IdProfesional = int.Parse(datos.Lector["IdProfesional"].ToString());
+                    DayOfWeek Dia = (System.DayOfWeek)int.Parse(datos.Lector["Dia"].ToString());
+                    int HoraInicio = int.Parse(datos.Lector["HoraInicio"].ToString());
+                    int HoraFin = int.Parse(datos.Lector["HoraFin"].ToString());
+
+                    for (int i = HoraInicio; i < HoraFin; i++)
+                    {
+                        Horario aux = new Horario();
+                        aux.Id = Id;
+                        aux.IdProfesional = IdProfesional;
+                        aux.Dia = Dia;
+                        aux.HoraInicio = i;
+                        aux.HoraFin = i + 1;        //Aca defino que los turnos seran de 1 hora. Tocando este parametro achico o agrando la duracion de los turnos...
+                        lista.Add(aux);
+                    }
                 }
             }
             catch (Exception ex)

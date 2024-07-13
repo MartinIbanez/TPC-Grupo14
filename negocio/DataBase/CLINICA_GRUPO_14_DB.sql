@@ -248,6 +248,21 @@ select * from Horarios
 select * from Personas
 
 
+CREATE TABLE Usuarios(
+    ID INT NOT NULL PRIMARY KEY IDENTITY(1,1),
+    Usuario VARCHAR(50) NOT NULL,
+    Pass VARCHAR(50) NOT NULL,
+    TipoUser INT NOT NULL,
+    Email VARCHAR(50) NOT NULL,
+   	
+)
+
+
+INSERT INTO Usuarios(Usuario,Pass,TipoUser,Email) VALUES
+('Admin','admin','1','administrador@clinic.com'),
+('Recepcionista','recep','2','rececpcionista@clinic.com'),
+('Medico','medico','3','profesional@clinic.com'),
+('Paciente','paciente','4','paciente@clinic.com');
 
 -----HASTA ACA LA GENERACION
 

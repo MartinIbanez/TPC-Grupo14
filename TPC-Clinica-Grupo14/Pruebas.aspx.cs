@@ -37,15 +37,21 @@ namespace TPC_Clinica_Grupo14
                     List<Persona> listaPacientes = new List<Persona>();
                     listaPacientes = personaNegocio.ListarPacientes();
 
-                    GridPruebaRoles.DataSource = listaRoles;
-                    GridPruebaRoles.DataBind();
+                    TurnoNegocio turnoNegocio = new TurnoNegocio();
+                    List<Turno> listaTurnos = new List<Turno>();
+                    listaTurnos = turnoNegocio.Listar();
 
+                    //GridPruebaRoles.DataSource = listaRoles;
+                    //GridPruebaRoles.DataBind();
+
+                    GridPruebaTurnos.DataSource = listaTurnos;
+                    GridPruebaTurnos.DataBind();
 
                     DropDownListEspecialidades.DataSource = listaEspecialidades;
                     DropDownListEspecialidades.DataTextField = "Nombre";
                     DropDownListEspecialidades.DataValueField = "Id";
-                    Session.Add("listaEspecialidades", listaEspecialidades);     //agrego a la sesion asi no vuelvo a abrir la BD
-                    Session.Add("listaProfesionales", listaProfesionales);       //agrego a la sesion asi no vuelvo a abrir la BD
+                    //Session.Add("listaEspecialidades", listaEspecialidades);     //agrego a la sesion asi no vuelvo a abrir la BD
+                    //Session.Add("listaProfesionales", listaProfesionales);       //agrego a la sesion asi no vuelvo a abrir la BD
                     
 
                     DropDownListEspecialidades.DataBind();
@@ -55,7 +61,11 @@ namespace TPC_Clinica_Grupo14
                     DropDownListPacientes.DataTextField = "Nombre";
                     DropDownListPacientes.DataValueField = "Id";
                     DropDownListPacientes.DataBind();
-                    Session.Add("listaPacientes", listaPacientes);
+
+
+                    //VER ESTO!BORRAR?
+                    //Session.Add("listaPacientes", listaPacientes);
+
 
                 }
             }
@@ -70,160 +80,269 @@ namespace TPC_Clinica_Grupo14
         ///////////////////////////////////////
         protected void DropDownListEspecialidades_SelectedIndexChanged(object sender, EventArgs e)
         {
-            int idEspecialidad = int.Parse(DropDownListEspecialidades.SelectedItem.Value);
+            ProfesionalNegocio profNegocio = new ProfesionalNegocio();
+            List<Profesional> listaProfesionales = new List<Profesional>();
+            listaProfesionales = profNegocio.Listar();
+
+            int idEspecialidad = int.Parse(DropDownListEspecialidades.SelectedValue);
             
             List<Profesional> listaProfesionalesAMostrar = new List<Profesional>();
 
-            foreach (Profesional p in (List<Profesional>)Session["listaProfesionales"])
+            foreach (Profesional p in listaProfesionales)
             {
                 if (p.Especialidades.Find(x => x.Id == idEspecialidad) != null)
                 {
-                    listaProfesionalesAMostrar.Add(p);  //CARGO LA LISTA DE PROFESIONALES QUE TIENEN LA ESPECIALIDAD SELECCIONADA
+                    //CARGO LA LISTA DE PROFESIONALES QUE TIENEN LA ESPECIALIDAD SELECCIONADA
+                    listaProfesionalesAMostrar.Add(p);  
                 }
             }
             //Revisar la posibilidad de vacias este elemento de la sesion y volverlo a cargar...por las dudas...
-            Session.Add("listaProfesionalesAMostrar", listaProfesionalesAMostrar);
+            //Session.Add("listaProfesionalesAMostrar", listaProfesionalesAMostrar);
 
             DropDownListProfesionales.DataSource = listaProfesionalesAMostrar;
             DropDownListProfesionales.DataTextField = "Nombre";
             DropDownListProfesionales.DataValueField = "IdProfesional";
             DropDownListProfesionales.DataBind();
 
-            DropDownListProfesionales_SelectedIndexChanged(sender, e);          //Fuerzo el evento
+            DropDownListProfesionales.SelectedIndex = 0;        //Muestro el 1er profesional disponible
+            CalendarioTurnos.Visible = true;                    //Con esto lo habilito y se dispara el evento DayRender
+            
+            //POR ACA FONZOOOOOO
+            //HAY QUE MOSTRAR LAS HORAS Correspondiente a los dias Y PINTAR EN EL CALENDARIO 
+            //Solo muestro opcion de Horarios, cuando se haya seleccionado un dia valido en el calendario
+            //DropDownListHorariosDisponibles.Visible = false;
+            //DropDownListHorariosDisponibles.DataSource = listaProfesionalesAMostrar[0].ListHorariosDisponibles; //muestro el horario del 1er profesional?
+            //DropDownListHorariosDisponibles.DataValueField = "Id";
+            //DropDownListHorariosDisponibles.DataTextField = "HoraInicio";
+            //DropDownListHorariosDisponibles.DataBind();
+            //DropDownListHorariosDisponibles.SelectedIndex = 0;
             
             CardEspecialidad.Text=DropDownListEspecialidades.SelectedItem.ToString();
-
+            CardProfesional.Text=DropDownListProfesionales.SelectedItem.ToString();
+            DropDownListHorariosDisponibles.Visible = false;  //Porque debo volver a seleccionar el dia
         }
 
         protected void DropDownListProfesionales_SelectedIndexChanged(object sender, EventArgs e)
         {
+            ProfesionalNegocio profNegocio = new ProfesionalNegocio();
+            List<Profesional> listaProfesionales = new List<Profesional>();
+            listaProfesionales = profNegocio.Listar();
+
+            //Levanto el profesional selected...
             int idProf = int.Parse(DropDownListProfesionales.SelectedValue);
 
             Profesional prof = new Profesional();
-            prof = ((List<Profesional>)Session["listaProfesionalesAMostrar"]).Find(x=>x.IdProfesional==idProf);
+            
+            prof = listaProfesionales.Find(x => x.IdProfesional == idProf);
 
-            List<string> DiasDisponibles = new List<String>();      //aca defino la lista de DIAS
-            foreach (Horario h in prof.ListHorariosDisponibles)
+            int idEspecialidad = int.Parse(DropDownListEspecialidades.SelectedValue);
+
+            List<Profesional> listaProfesionalesAMostrar = new List<Profesional>();
+
+            foreach (Profesional p in listaProfesionales)
             {
-                DiasDisponibles.Add(h.Dia.ToString());              //CARGO LA LISTA DE DIAS DISPONIBLES EN BASE AL PROFESIONAL SELECCIONADO
+                if (p.Especialidades.Find(x => x.Id == idEspecialidad) != null)
+                {
+                    listaProfesionalesAMostrar.Add(p);  //CARGO LA LISTA DE PROFESIONALES QUE TIENEN LA ESPECIALIDAD SELECCIONADA
+                }
             }
-
-            DropDownListDia.DataSource = DiasDisponibles;
-            DropDownListDia.DataBind();
-
-            Session.Add("listaDiasDisponibles",DiasDisponibles);
-
-            CardProfesional.Text = prof.Apellido;
-
-            DropDownListDia_SelectedIndexChanged(sender, e);      
+            
+            CardProfesional.Text = prof.Nombre;
+            DropDownListHorariosDisponibles.Visible=false;  //Porque debo volver a seleccionar el dia
         }
 
         //
         //  VER ESTE EVENTO DIA NO PINTA LOS DIAS!
         //
-        protected void DropDownListDia_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            int idProf = int.Parse(DropDownListProfesionales.SelectedValue);
-            Profesional prof = new Profesional();
-            prof = ((List<Profesional>)Session["listaProfesionalesAMostrar"]).Find(x => x.IdProfesional == idProf);     //Busco profesional...
 
-            string DiaSeleccionado = DropDownListDia.SelectedValue;
-            Horario h = new Horario();
-            h = prof.ListHorariosDisponibles.Find(x => x.Dia.ToString() == DiaSeleccionado);
+        //ESTE EVENTO Y ESTE CONTROL NO VA MAS, USAMOS CALENDARIO...
+        //protected void DropDownListDia_SelectedIndexChanged(object sender, EventArgs e)
+        //{
+        //    int idProf = int.Parse(DropDownListProfesionales.SelectedValue);
+        //    Profesional prof = new Profesional();
+        //    prof = ((List<Profesional>)Session["listaProfesionalesAMostrar"]).Find(x => x.IdProfesional == idProf);     //Busco profesional...
 
-            List<string> horas = new List<string>();
-            horas = h.ObtenerHoras();
+        //    string DiaSeleccionado = DropDownListDia.SelectedValue;
+        //    Horario h = new Horario();
+        //    h = prof.ListHorariosDisponibles.Find(x => x.Dia.ToString() == DiaSeleccionado);
 
-            DropDownListHorariosDisponibles.DataSource = horas;
-            DropDownListHorariosDisponibles.DataBind();
+        //    DropDownListHorariosDisponibles.DataSource = h;
+        //    DropDownListHorariosDisponibles.DataValueField = "Id";
+        //    DropDownListHorariosDisponibles.DataTextField = "HoraInicio";
+        //    DropDownListHorariosDisponibles.DataBind();
 
-            Session.Add("listaHorasDisponibles", horas);
+        //    Session.Add("listaHorasDisponibles", h);
 
-            //DropDownListHorariosDisponibles_SelectedIndexChanged(sender, e);             //comentada por estar en visible=false
-        }
+        //    DropDownListHorariosDisponibles_SelectedIndexChanged(sender, e);             //comentada por estar en visible=false
+        //}
 
         //
         //  VER ESTE EVENTO HORA NO PINTA LOS DIAS!
+        //Este aparecera visible SOLO despues de seleccionar el dia
         //
-        protected void DropDownListHorariosDisponibles_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            string especialidad_selected=DropDownListEspecialidades.SelectedItem.ToString();
-            string profesional_selected=DropDownListProfesionales.SelectedItem.ToString();
-            string dia_selected = DropDownListDia.SelectedItem.ToString();
-            string hora_selected=DropDownListHorariosDisponibles.SelectedItem.ToString();
-            
-            LabelInfoTurno.Text =
-                "INFO:" +
-                " Especialidad: " + especialidad_selected +
-                " Profesional: " + profesional_selected +
-                " Dia: " + dia_selected +
-                " Hora: " + hora_selected;
-        }
 
-        protected void DropDownListPacientes_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            CardPaciente.Text=DropDownListPacientes.SelectedItem.ToString();    //actualizo la ficha turno
-        }
+
+        //POR ACA GONZOOO
+        //MOSTRAR TODAY EN CALENDARIO Y PINTAR EN CONSECUENCIA!!
+
 
         protected void CalendarioTurnos_DayRender(object sender, DayRenderEventArgs ev)
-        { 
-            List<string> DiasDisponibles = new List<string>();
-            //List<string> DiasOcupados = new List<string>();
+        {
+            //Selecciono el dia de hoy...
+            DateTime today = DateTime.Now;
+            CalendarioTurnos.SelectedDate = today;
 
-            DiasDisponibles = (List<string>)Session["listaDiasDisponibles"];        //Recupero los dias disponibles
-                                                                                    //para volver a pintarlos
-            if (DiasDisponibles == null)
+            Profesional profSelected = new Profesional();
+            ProfesionalNegocio profNeg = new ProfesionalNegocio();
+            List<Profesional> listaProfesionales = new List<Profesional>();
+            listaProfesionales = profNeg.Listar();
+
+            //DropDownListProfesionales.DataSource = listaProfesionales;  //la inicio para la 1er carga
+            //DropDownListProfesionales.DataTextField = "Nombre";
+            //DropDownListProfesionales.DataValueField = "IdProfesional";
+            //DropDownListProfesionales.DataBind();
+            //DropDownListProfesionales.SelectedValue = null;
+
+            //Levanto el profesional selected...
+            if(DropDownListProfesionales.SelectedValue != "")
             {
-                //no hago nada porque aun no cargue opciones
+                int idProf = int.Parse(DropDownListProfesionales.SelectedValue);
+                profSelected = listaProfesionales.Find(x=>x.IdProfesional==idProf);
+
+
+                //List<Horario> Horarios = new List<Horario>();
+                //List<DayOfWeek> DaysDisponibles = new List<DayOfWeek>();
+                DateTime diaRender = ev.Day.Date;
+
+                //Me quedo con los dias filtrados
+                List<DayOfWeek> listaDiasFiltrada = profSelected.ListHorariosDisponibles.Select(x => x.Dia).Distinct().ToList();
+            
+                //FALTA PINTAR DE ROJO LOS DIAS TOTALMENTE OCUPADOS
+                if((diaRender >= today))                    //Pregunto a partir de hoy en adelante, con hora real y todo, el pasado no interesa
+                {
+                    foreach(DayOfWeek d in listaDiasFiltrada)
+                    {
+                        if(diaRender.DayOfWeek == d)        //Si el dia a renderizar esta en los disponibles, pintar
+                        {
+                            ev.Cell.BackColor = System.Drawing.Color.LightGreen;
+                            ev.Cell.ToolTip = "Dia Disponibleeeeee";
+                        }
+                    }
+                }
             }
-            else if (DiasDisponibles.Contains(ev.Day.Date.DayOfWeek.ToString()))
-            {
-                ev.Cell.BackColor = System.Drawing.Color.LightGreen;
-                ev.Cell.ToolTip = "Dia Busyyyyyy";
-            }
+            DropDownListHorariosDisponibles.Visible = true;    //Oculto horarios , primero debe seleccionar el dia...
         }
 
         
         protected void CalendarioTurnos_SelectionChanged(object sender, EventArgs e)
         {
             DateTime fechaSeleccionada = CalendarioTurnos.SelectedDate;
-            List<string> dd = (List<string>)Session["listaDiasDisponibles"];
+            DayOfWeek DiaSeleccionado = CalendarioTurnos.SelectedDate.DayOfWeek;
+
+            Profesional profSelected = new Profesional();
+            ProfesionalNegocio profNeg = new ProfesionalNegocio();
+            List<Profesional> listaProfesionales = new List<Profesional>();
+            listaProfesionales = profNeg.Listar();
+
+            int idProf = int.Parse(DropDownListProfesionales.SelectedValue);
+            profSelected = listaProfesionales.Find(x => x.IdProfesional == idProf);
+
+            List<Horario> horariosAMostrar = new List<Horario>();
             
-
-            if(dd.Contains(fechaSeleccionada.Date.DayOfWeek.ToString())/* && fechaSeleccionada != null && dd != null*/)
+            foreach(Horario h in profSelected.ListHorariosDisponibles)
             {
-                LabelTurnoSeleccionado.Text = fechaSeleccionada.Date.ToString("dd/MM/yyyy");    //Pido la fecha en este formato
-                LabelInfoTurno.Text = "Usted a seleccionado : " + LabelTurnoSeleccionado.Text;
-            }
-            else
-            {
-                LabelTurnoSeleccionado.Text = "No aplica...";
-                LabelInfoTurno.Text = "DIA NO DISPONIBLEEEE!!!";
+                if(h.Dia == DiaSeleccionado)
+                {
+                    horariosAMostrar.Add(h);
+                }
             }
 
-            //Instancio un turno....
-            Turno turnoAsignado = new Turno();
-            turnoAsignado.Id = 0;
-            turnoAsignado.FechaTurno = fechaSeleccionada;
-            turnoAsignado.PacienteTurno = new Persona();
-            turnoAsignado.PacienteTurno.Apellido = DropDownListPacientes.SelectedItem.ToString();
-            turnoAsignado.ProfesionalTurno = new Profesional();
-            turnoAsignado.ProfesionalTurno.Apellido = DropDownListProfesionales.SelectedItem.ToString();
-            turnoAsignado.EspecialidadTurno = new Especialidad();
-            turnoAsignado.EspecialidadTurno.Nombre = DropDownListEspecialidades.SelectedItem.ToString();
-            turnoAsignado.Estado = new EstadoTurno();
-            turnoAsignado.Observaciones = "Sin observaciones....";
+            DropDownListHorariosDisponibles.DataSource = horariosAMostrar;
+            DropDownListHorariosDisponibles.DataValueField = "Id";
+            DropDownListHorariosDisponibles.DataTextField = "HoraInicio";
+            DropDownListHorariosDisponibles.DataBind();
+            DropDownListHorariosDisponibles.Visible = true;
 
-            //turnoAsignado.PacienteTurno.Apellido = "Pepito ejemplo";
-            //turnoAsignado.ProfesionalTurno.Apellido = "Bovazzi";
-            //to do...resto de info del turno...
-
-            CardIdTurno.Text = turnoAsignado.Id.ToString();
-            CardFechaTurno.Text = turnoAsignado.FechaTurno.ToString();
-            CardPaciente.Text = turnoAsignado.PacienteTurno.Apellido;
-            CardProfesional.Text = turnoAsignado.ProfesionalTurno.Apellido;
-            CardEspecialidad.Text = turnoAsignado.EspecialidadTurno.Nombre;
         }
+
+        protected void DropDownListHorariosDisponibles_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            //string especialidad_selected=DropDownListEspecialidades.SelectedItem.ToString();
+            //string profesional_selected=DropDownListProfesionales.SelectedItem.ToString();
+            //string dia_selected = CalendarioTurnos.SelectedDate.Day.ToString();
+            ////string dia_selected = DropDownListDia.SelectedItem.ToString();
+            //string hora_selected=(int.Parse((DropDownListHorariosDisponibles.SelectedItem).ToString())).ToString("D2") + ":00";
+            
+            //LabelInfoTurno.Text =
+            //    "INFO:" +
+            //    " Especialidad: " + especialidad_selected +
+            //    " Profesional: " + profesional_selected +
+            //    " Dia: " + dia_selected +
+            //    " Hora: " + hora_selected;
+        }
+        protected void btnCrearTurno_Click(object sender, EventArgs e)
+        {
+            LabelTurnoCreado.Visible = true;
+            TimerTurnoCreado.Enabled = true;    //Disparo el timer para mostrar confirmacion de turno!
+            TurnoNegocio turnoNegocio = new TurnoNegocio();
+            Turno nuevo = new Turno();
+
+            PersonaNegocio personaNegocio = new PersonaNegocio();
+            List<Persona> listaPacientes = new List<Persona>();
+            listaPacientes = personaNegocio.ListarPacientes();
+
+            Profesional profSelected = new Profesional();
+            ProfesionalNegocio profNeg = new ProfesionalNegocio();
+            List<Profesional> listaProfesionales = new List<Profesional>();
+            listaProfesionales = profNeg.Listar();
+
+            EspecialidadNegocio en = new EspecialidadNegocio();
+            List<Especialidad> listaEspecialidades = new List<Especialidad>();
+            listaEspecialidades = en.Listar();
+
+            //POR ACA GOOONNZOOOOO!!!
+            //POR ACA GOOONNZOOOOO!!!
+            //POR ACA GOOONNZOOOOO!!!
+            //Funciona levantar la hora?
+            nuevo.FechaTurno = CalendarioTurnos.SelectedDate;
+            nuevo.HoraTurno = int.Parse(DropDownListHorariosDisponibles.SelectedValue.ToString());
+
+            int idPaciente = int.Parse(DropDownListPacientes.SelectedValue);                                                        //id paciente seleccionado
+            nuevo.PacienteTurno = listaPacientes.Find(x=>x.Id == idPaciente);                           //busco por id paciente
+
+            int idProfesional = int.Parse(DropDownListProfesionales.SelectedValue);                                                 //id profesional seleccionado
+            nuevo.ProfesionalTurno = listaProfesionales.Find(x=>x.IdProfesional == idProfesional);
+
+            int idEspecialidad = int.Parse(DropDownListEspecialidades.SelectedValue);
+            nuevo.EspecialidadTurno = listaEspecialidades.Find(x => x.Id == idEspecialidad);
+
+            nuevo.EstadoTurno = 0;      //ABIERTO
+
+            nuevo.Observaciones = "";
+
+            turnoNegocio.Agregar(nuevo);
+        }
+        protected void DropDownListPacientes_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            CardPaciente.Text=DropDownListPacientes.SelectedItem.ToString();    //actualizo la ficha turno
+        }
+
+        protected void TimerTurnoCreado_Tick(object sender, EventArgs e)
+        {
+            LabelTurnoCreado.Visible = false;
+            TimerTurnoCreado.Enabled = false;
+        }
+
+        //protected void dgvProfesionales_Load(object sender, EventArgs e)
+        //{
+        //    ProfesionalNegocio profesionalNegocio = new ProfesionalNegocio();
+        //    List<Profesional> lista = new List<Profesional>();
+
+        //    lista = profesionalNegocio.Listar();
+
+        //    dgvProfesionales.DataSource = lista;
+        //    dgvProfesionales.DataBind();
+        //}
 
 
 
@@ -241,10 +360,7 @@ namespace TPC_Clinica_Grupo14
         //    int idEspecialidad = int.Parse(DropDownListEspecialidades.SelectedItem.Value);
 
 
-        //    //////POR ACA GONZOOOO
-        //    //////POR ACA GONZOOOO
-        //    //////POR ACA GONZOOOO!!!!!!
-        //    //TODO BINDEAR EL RESTO DE LOS DDL
+     
         //}
 
         //protected void DropDownListProfesionales_DataBound(object sender, EventArgs e)

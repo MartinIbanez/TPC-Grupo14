@@ -42,15 +42,6 @@ namespace TPC_Clinica_Grupo14
         protected global::System.Web.UI.WebControls.DropDownList DropDownListProfesionales;
 
         /// <summary>
-        /// DropDownListDia control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList DropDownListDia;
-
-        /// <summary>
         /// DropDownListHorariosDisponibles control.
         /// </summary>
         /// <remarks>
@@ -94,6 +85,33 @@ namespace TPC_Clinica_Grupo14
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList DropDownListPacientes;
+
+        /// <summary>
+        /// btnCrearTurno control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnCrearTurno;
+
+        /// <summary>
+        /// LabelTurnoCreado control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label LabelTurnoCreado;
+
+        /// <summary>
+        /// TimerTurnoCreado control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.Timer TimerTurnoCreado;
 
         /// <summary>
         /// CardIdTurno control.
@@ -141,12 +159,12 @@ namespace TPC_Clinica_Grupo14
         protected global::System.Web.UI.WebControls.Label CardEspecialidad;
 
         /// <summary>
-        /// GridPruebaRoles control.
+        /// GridPruebaTurnos control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView GridPruebaRoles;
+        protected global::System.Web.UI.WebControls.GridView GridPruebaTurnos;
     }
 }
