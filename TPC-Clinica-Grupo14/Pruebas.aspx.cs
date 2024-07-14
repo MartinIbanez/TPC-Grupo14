@@ -21,10 +21,6 @@ namespace TPC_Clinica_Grupo14
                 if (!IsPostBack)
                 {
 
-                    //RolNegocio rn = new RolNegocio();
-                    //List<Rol> listaRoles = new List<Rol>();
-                    //listaRoles = rn.Listar();
-
                     EspecialidadNegocio en = new EspecialidadNegocio();
                     List<Especialidad> listaEspecialidades = new List<Especialidad>();
                     listaEspecialidades = en.Listar();
@@ -117,15 +113,6 @@ namespace TPC_Clinica_Grupo14
             DropDownListProfesionales.SelectedIndex = 0;        //Muestro el 1er profesional disponible
             //CalendarioTurnos.Visible = true;                    //Con esto lo habilito y se dispara el evento DayRender
 
-            //POR ACA FONZOOOOOO
-            //HAY QUE MOSTRAR LAS HORAS Correspondiente a los dias Y PINTAR EN EL CALENDARIO 
-            //Solo muestro opcion de Horarios, cuando se haya seleccionado un dia valido en el calendario
-            //DropDownListHorariosDisponibles.Visible = false;
-            //DropDownListHorariosDisponibles.DataSource = listaProfesionalesAMostrar[0].ListHorariosDisponibles; //muestro el horario del 1er profesional?
-            //DropDownListHorariosDisponibles.DataValueField = "Id";
-            //DropDownListHorariosDisponibles.DataTextField = "HoraInicio";
-            //DropDownListHorariosDisponibles.DataBind();
-            //DropDownListHorariosDisponibles.SelectedIndex = 0;
 
             CardEspecialidad.Text = "Especialidad: " + DropDownListEspecialidades.SelectedItem.ToString();
             CardProfesional.Text = "Profesional: "  + DropDownListProfesionales.SelectedItem.ToString();
@@ -133,7 +120,6 @@ namespace TPC_Clinica_Grupo14
             CardPaciente.Text ="Paciente: " + DropDownListPacientes.SelectedItem.ToString();
 
             dgvHorariosDisponibles.Visible = false;
-            //DropDownListHorariosDisponibles.Enabled = false;  //Porque debo volver a seleccionar el dia
         }
 
         protected void DropDownListProfesionales_SelectedIndexChanged(object sender, EventArgs e)
@@ -157,13 +143,6 @@ namespace TPC_Clinica_Grupo14
 
             dgvHorariosDisponibles.Visible = false;
             
-            //DropDownListHorariosDisponibles.Enabled = false;  //Porque debo volver a seleccionar el dia
-
-            //DropDownListPacientes.DataSource = listaPacientes;
-            //DropDownListPacientes.DataValueField = "Id";
-            //DropDownListPacientes.DataTextField = "Nombre";
-            //DropDownListPacientes.DataBind();
-            //DropDownListPacientes.Enabled = true;
         }
         protected void DropDownListPacientes_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -193,20 +172,9 @@ namespace TPC_Clinica_Grupo14
             if ((diaRender >= today))
             {
 
-                //Profesional profSelected = new Profesional();
-                //ProfesionalNegocio profNeg = new ProfesionalNegocio();
-                //List<Profesional> listaProfesionales = new List<Profesional>();
-                //listaProfesionales = profNeg.Listar();
-
-
                 //Levanto el profesional selected...
                 if (DropDownListProfesionales.SelectedValue != "")
                 {
-                    //int idProf = int.Parse(DropDownListProfesionales.SelectedValue);
-                    //profSelected = listaProfesionales.Find(x => x.IdProfesional == idProf);
-
-                    ////Me quedo con los dias filtrados
-                    //List<DayOfWeek> listaDiasFiltrada = profSelected.ListHorariosDisponibles.Select(x => x.Dia).Distinct().ToList();
 
                     //FALTA PINTAR DE ROJO LOS DIAS TOTALMENTE OCUPADOS
                     foreach (DayOfWeek d in listaDiasFiltrada)
@@ -225,12 +193,8 @@ namespace TPC_Clinica_Grupo14
         protected void CalendarioTurnos_SelectionChanged(object sender, EventArgs e)
         {
             DateTime fechaSeleccionada = CalendarioTurnos.SelectedDate;
-            //DropDownListHorariosDisponibles.Enabled = false;
-            //Levanto los dias de profesional seleccionado
 
             DateTime today = DateTime.Now;
-            //DateTime diaRender = ev.Day.Date;
-            //CalendarioTurnos.SelectedDate = today;
 
             //Levanto el profesional selected...
             Profesional profSelected = new Profesional();
@@ -248,14 +212,6 @@ namespace TPC_Clinica_Grupo14
             if (fechaSeleccionada >= DateTime.Now && listaDiasFiltrada.Contains(fechaSeleccionada.DayOfWeek))
             {
                 DayOfWeek DiaSeleccionado = CalendarioTurnos.SelectedDate.DayOfWeek;
-
-                //Profesional profSelected = new Profesional();
-                //ProfesionalNegocio profNeg = new ProfesionalNegocio();
-                //List<Profesional> listaProfesionales = new List<Profesional>();
-                //listaProfesionales = profNeg.Listar();
-
-                //int idProf = int.Parse(DropDownListProfesionales.SelectedValue);
-                //profSelected = listaProfesionales.Find(x => x.IdProfesional == idProf);
 
                 List<Horario> horariosAMostrar = new List<Horario>();
                 
@@ -284,6 +240,13 @@ namespace TPC_Clinica_Grupo14
             }
         }
 
+        protected void dgvHorariosDisponibles_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string horaSeleccionada = int.Parse(dgvHorariosDisponibles.SelectedRow.Cells[1].Text).ToString("D2") + ":00";
+
+            CardFechaTurno.Text = CalendarioTurnos.SelectedDate.ToString("dd/MM/yyyy") + "  ,  " + horaSeleccionada;
+        }
+
 
         protected void btnCrearTurno_Click(object sender, EventArgs e)
         {
@@ -305,14 +268,7 @@ namespace TPC_Clinica_Grupo14
             List<Especialidad> listaEspecialidades = new List<Especialidad>();
             listaEspecialidades = en.Listar();
 
-            //POR ACA GOOONNZOOOOO!!!
-            //POR ACA GOOONNZOOOOO!!!
-            //POR ACA GOOONNZOOOOO!!!
-            //Funciona levantar la hora?
-
             nuevo.FechaTurno = CalendarioTurnos.SelectedDate.Date;
-            //ACA DEBO LEVANTAR EL HORARIO ELEGIDO EN EL GRIDVIEW
-            //nuevo.HoraTurno = int.Parse(DropDownListHorariosDisponibles.SelectedValue.ToString());
 
             //id paciente seleccionado
             int idPaciente = int.Parse(DropDownListPacientes.SelectedValue);                    
@@ -326,7 +282,8 @@ namespace TPC_Clinica_Grupo14
             int idEspecialidad = int.Parse(DropDownListEspecialidades.SelectedValue);
             nuevo.EspecialidadTurno = listaEspecialidades.Find(x => x.Id == idEspecialidad);
 
-            int horaTurno = int.Parse(dgvHorariosDisponibles.SelectedRow.Cells[1].ToString());
+            int horaTurno = int.Parse(dgvHorariosDisponibles.SelectedRow.Cells[1].Text);
+            nuevo.HoraTurno = horaTurno;
 
             nuevo.EstadoTurno = 0;      //ABIERTO
 
@@ -342,38 +299,5 @@ namespace TPC_Clinica_Grupo14
             LabelTurnoCreado.Visible = false;
             TimerTurnoCreado.Enabled = false;
         }
-
-        protected void dgvHorariosDisponibles_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            string horaSeleccionada = int.Parse(dgvHorariosDisponibles.SelectedRow.Cells[1].Text).ToString("D2") + ":00"; 
-
-            CardFechaTurno.Text = CalendarioTurnos.SelectedDate.ToString("dd/MM/yyyy") + "  ,  " + horaSeleccionada;
-        }
-
-
-        ////////////////////////////////////
-        //ACA ESTAN LOS EVENTOS DE DATABOUND
-        ////////////////////////////////////
-        //protected void DropDownListEspecialidades_DataBound(object sender, EventArgs e)
-        //{
-        //    List<Especialidad> le = new List<Especialidad>();
-        //    le = (List<Especialidad>)Session["listaEspecialidades"];        //Recupero la lista especialidades completa
-
-        //    DropDownListEspecialidades.SelectedValue = le[0].Id.ToString(); //Muestro la 1era especialidad
-        //    int idEspecialidad = int.Parse(DropDownListEspecialidades.SelectedItem.Value);
-
-
-
-        //}
-
-        //protected void DropDownListProfesionales_DataBound(object sender, EventArgs e)
-        //{
-
-        //}
-
-        //protected void DropDownListHorariosDisponibles_DataBound(object sender, EventArgs e)
-        //{
-
-        //}
     }
 }
