@@ -42,13 +42,22 @@ namespace TPC_Clinica_Grupo14
         protected global::System.Web.UI.WebControls.DropDownList DropDownListProfesionales;
 
         /// <summary>
-        /// DropDownListHorariosDisponibles control.
+        /// DropDownListPacientes control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList DropDownListHorariosDisponibles;
+        protected global::System.Web.UI.WebControls.DropDownList DropDownListPacientes;
+
+        /// <summary>
+        /// dgvHorariosDisponibles control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView dgvHorariosDisponibles;
 
         /// <summary>
         /// CalendarioTurnos control.
@@ -58,33 +67,6 @@ namespace TPC_Clinica_Grupo14
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Calendar CalendarioTurnos;
-
-        /// <summary>
-        /// LabelTurnoSeleccionado control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label LabelTurnoSeleccionado;
-
-        /// <summary>
-        /// LabelInfoTurno control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label LabelInfoTurno;
-
-        /// <summary>
-        /// DropDownListPacientes control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList DropDownListPacientes;
 
         /// <summary>
         /// btnCrearTurno control.

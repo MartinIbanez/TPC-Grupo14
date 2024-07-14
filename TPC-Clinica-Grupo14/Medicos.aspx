@@ -72,7 +72,7 @@
 
             <!-- Aquí iría el contenido principal de la página -->
             <div class="table-responsive">
-                <!-- Aquí va la GridView de médicos que se levanta de una base de datos -->
+                <!-- Gridview medicos de la BD -->
                 <asp:GridView runat="server" ID="dgvMedicos" OnSelectedIndexChanged="dgvMedicos_SelectedIndexChanged" AutoGenerateColumns="False" DataKeyNames="ID" CssClass="table table-striped table-bordered table-dark grid-view">
                     <Columns>
                         <asp:BoundField DataField="IdProfesional" HeaderText="ID Profesional" />

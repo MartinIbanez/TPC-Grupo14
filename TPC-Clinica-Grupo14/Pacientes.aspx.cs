@@ -123,13 +123,13 @@ namespace TPC_Clinica_Grupo14
                     Nombre = txtNombre.Text,
                     Apellido = txtApellido.Text,
                     FechaNacimiento = Convert.ToDateTime(txtFechaNacimiento.Text),
-                    IdGenero = Convert.ToInt32(txtGenero.SelectedValue),
+                    Genero = Convert.ToInt32(txtGenero.SelectedValue),
                     NumDoc = txtDNI.Text,
                     Correo = txtCorreo.Text,
                     Telefono = txtTelefono.Text,
                     // si no se ingreso la condicion de activo ponerlo por defecto como activo
                     Activo = txtActivo.Text.ToLower() == "sí",
-                    IdRol = 4 // Asignar el rol de paciente
+                    Rol = 4 // Asignar el rol de paciente
                 };
 
                 personaNegocio.AgregarPaciente(persona);
@@ -174,12 +174,12 @@ namespace TPC_Clinica_Grupo14
                     Nombre = txtNombre.Text,
                     Apellido = txtApellido.Text,
                     FechaNacimiento = DateTime.Parse(txtFechaNacimiento.Text),
-                    IdGenero = Convert.ToInt32(txtGenero.SelectedValue),
+                    Genero = Convert.ToInt32(txtGenero.SelectedValue),
                     NumDoc = numDoc,
                     Correo = txtCorreo.Text,
                     Telefono = txtTelefono.Text,
                     Activo = txtActivo.SelectedValue == "true",
-                    IdRol = 4 // Asignar el rol de paciente
+                    Rol = 4 // Asignar el rol de paciente
                 };
 
                 // Llamar al método para modificar el paciente en la base de datos
@@ -237,8 +237,5 @@ namespace TPC_Clinica_Grupo14
             txtTelefono.Text = string.Empty;
             txtActivo.SelectedIndex = 0; // Resetear a la primera opción
         }
-
-
-
     }
 }

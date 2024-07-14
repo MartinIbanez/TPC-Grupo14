@@ -154,7 +154,8 @@ namespace TPC_Clinica_Grupo14
             }
             catch (Exception ex)
             {
-                Console.WriteLine("No se pudo eliminar especialidad");
+                throw ex;
+                //Console.WriteLine("No se pudo eliminar especialidad");
             }
         }
 

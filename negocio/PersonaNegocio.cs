@@ -15,7 +15,7 @@ namespace negocio
             List<Persona> lista = new List<Persona>();
             try
             {
-                datos.SetearConsulta("SELECT P.ID, P.Nombre, P.Apellido, P.FechaNac, P.IDGenero, G.Nombre as Gen, P.NumDoc, P.Correo, P.Telefono, P.IDRol, R.Nombre as Rol, P.Activo FROM Personas P INNER JOIN Generos G ON P.IDGenero = G.ID INNER JOIN Roles R ON P.IDRol = R.ID");
+                datos.SetearConsulta("SELECT P.ID, P.Nombre, P.Apellido, P.FechaNac, P.Genero, P.NumDoc, P.Correo, P.Telefono, P.Rol, P.Activo FROM Personas P");
                 datos.EjecutarLectura();
 
                 while (datos.Lector.Read())
@@ -25,13 +25,13 @@ namespace negocio
                     aux.Nombre = datos.Lector["Nombre"].ToString();
                     aux.Apellido = (string)datos.Lector["Apellido"].ToString();
                     aux.FechaNacimiento = (DateTime)datos.Lector["FechaNac"];
-                    aux.IdGenero = int.Parse(datos.Lector["IDGenero"].ToString());
-                    aux.Gen = datos.Lector["Gen"].ToString();
+                    aux.Genero = int.Parse(datos.Lector["Genero"].ToString());
+                    //aux.Gen = datos.Lector["Gen"].ToString();
                     aux.NumDoc = datos.Lector["NumDoc"].ToString();
                     aux.Correo = datos.Lector["Correo"].ToString();
                     aux.Telefono = datos.Lector["Telefono"].ToString();
-                    aux.IdRol = int.Parse(datos.Lector["IDRol"].ToString());
-                    aux.Role = datos.Lector["Rol"].ToString();
+                    aux.Rol = int.Parse(datos.Lector["Rol"].ToString());
+                    //aux.Role = datos.Lector["Rol"].ToString();
                     aux.Activo = (bool)datos.Lector["Activo"];
                     
 
@@ -55,7 +55,7 @@ namespace negocio
             List<Persona> lista = new List<Persona>();
             try
             {
-                datos.SetearConsulta("SELECT P.ID, P.Nombre, P.Apellido, P.FechaNac, P.IDGenero, P.NumDoc, P.Correo, P.Telefono, P.IDRol, P.Activo FROM Personas P where IDrol = 4");
+                datos.SetearConsulta("SELECT P.ID, P.Nombre, P.Apellido, P.FechaNac, P.Genero, P.NumDoc, P.Correo, P.Telefono, P.Rol, P.Activo FROM Personas P WHERE P.Rol=4");
                 datos.EjecutarLectura();
 
                 while (datos.Lector.Read())
@@ -65,11 +65,11 @@ namespace negocio
                     aux.Nombre = datos.Lector["Nombre"].ToString();
                     aux.Apellido = datos.Lector["Apellido"].ToString();
                     aux.FechaNacimiento = (DateTime)datos.Lector["FechaNac"];
-                    aux.IdGenero = int.Parse(datos.Lector["IDGenero"].ToString());
+                    aux.Genero = int.Parse(datos.Lector["Genero"].ToString());
                     aux.NumDoc = datos.Lector["NumDoc"].ToString();
                     aux.Correo = datos.Lector["Correo"].ToString();
                     aux.Telefono = datos.Lector["Telefono"].ToString();
-                    aux.IdRol = int.Parse(datos.Lector["IDRol"].ToString());
+                    aux.Rol = int.Parse(datos.Lector["Rol"].ToString());
                     aux.Activo = (bool)datos.Lector["Activo"];
 
                     lista.Add(aux);
@@ -95,7 +95,7 @@ namespace negocio
 
             try
             {
-                datos.SetearConsulta("SELECT P.ID, P.Nombre, P.Apellido, P.FechaNac, P.IDGenero, P.NumDoc, P.Correo, P.Telefono, P.IDRol, P.Activo FROM Personas P WHERE P.ID = @ID");
+                datos.SetearConsulta("SELECT P.ID, P.Nombre, P.Apellido, P.FechaNac, P.Genero, P.NumDoc, P.Correo, P.Telefono, P.Rol, P.Activo FROM Personas P WHERE P.ID = @ID");
                 datos.SetearParametro("@ID", id);
                 datos.EjecutarLectura();
 
@@ -106,11 +106,11 @@ namespace negocio
                     aux.Nombre = datos.Lector["Nombre"].ToString();
                     aux.Apellido = datos.Lector["Apellido"].ToString();
                     aux.FechaNacimiento = (DateTime)datos.Lector["FechaNac"];
-                    aux.IdGenero = int.Parse(datos.Lector["IDGenero"].ToString());
+                    aux.Genero = int.Parse(datos.Lector["Genero"].ToString());
                     aux.NumDoc = datos.Lector["NumDoc"].ToString();
                     aux.Correo = datos.Lector["Correo"].ToString();
                     aux.Telefono = datos.Lector["Telefono"].ToString();
-                    aux.IdRol = int.Parse(datos.Lector["IDRol"].ToString());
+                    aux.Rol = int.Parse(datos.Lector["Rol"].ToString());
                     aux.Activo = (bool)datos.Lector["Activo"];
 
                     return aux;
@@ -134,15 +134,15 @@ namespace negocio
             AccesoDatos datos = new AccesoDatos();
             try
             {
-                datos.SetearConsulta("INSERT INTO Personas (Nombre, Apellido, FechaNac, IDGenero, NumDoc, Correo, Telefono, IDRol, Activo) VALUES (@Nombre, @Apellido, @FechaNac, @IDGenero, @NumDoc, @Correo, @Telefono, @IDRol, @Activo)");
+                datos.SetearConsulta("INSERT INTO Personas (Nombre, Apellido, FechaNac, Genero, NumDoc, Correo, Telefono, Rol, Activo) VALUES (@Nombre, @Apellido, @FechaNac, @Genero, @NumDoc, @Correo, @Telefono, @Rol, @Activo)");
                 datos.SetearParametro("@Nombre", nuevo.Nombre);
                 datos.SetearParametro("@Apellido", nuevo.Apellido);
                 datos.SetearParametro("@FechaNac", nuevo.FechaNacimiento);
-                datos.SetearParametro("@IDGenero", nuevo.IdGenero);
+                datos.SetearParametro("@Genero", nuevo.Genero);
                 datos.SetearParametro("@NumDoc", nuevo.NumDoc);
                 datos.SetearParametro("@Correo", nuevo.Correo);
                 datos.SetearParametro("@Telefono", nuevo.Telefono);
-                datos.SetearParametro("@IDRol", nuevo.IdRol);
+                datos.SetearParametro("@Rol", nuevo.Rol);
                 datos.SetearParametro("@Activo", nuevo.Activo);
                 datos.EjecutarAccion();
             }
@@ -163,16 +163,17 @@ namespace negocio
             AccesoDatos datos = new AccesoDatos();
             try
             {
-                datos.SetearConsulta("UPDATE Personas SET Nombre = @Nombre, Apellido = @Apellido, FechaNac = @FechaNac, IDGenero = @IDGenero, NumDoc = @NumDoc, Correo = @Correo, Telefono = @Telefono, IDRol = @IDRol, Activo = @Activo WHERE ID = @ID");
+                datos.SetearConsulta("UPDATE Personas SET Nombre = @Nombre, Apellido = @Apellido, FechaNac = @FechaNac, Genero = @Genero, NumDoc = @NumDoc, Correo = @Correo, Telefono = @Telefono, Rol = @Rol, Activo = @Activo WHERE ID = @ID");
                 datos.SetearParametro("@Nombre", nuevo.Nombre);
                 datos.SetearParametro("@Apellido", nuevo.Apellido);
                 datos.SetearParametro("@FechaNac", nuevo.FechaNacimiento);
-                datos.SetearParametro("@IDGenero", nuevo.IdGenero);
+                datos.SetearParametro("@Genero", nuevo.Genero);
                 datos.SetearParametro("@NumDoc", nuevo.NumDoc);
                 datos.SetearParametro("@Correo", nuevo.Correo);
                 datos.SetearParametro("@Telefono", nuevo.Telefono);
-                datos.SetearParametro("@IDRol", nuevo.IdRol);
+                datos.SetearParametro("@Rol", nuevo.Rol);
                 datos.SetearParametro("@Activo", nuevo.Activo);
+                //el id se actualiza??
                 datos.SetearParametro("@ID", nuevo.Id);
                 datos.EjecutarAccion();
             }
@@ -216,16 +217,16 @@ namespace negocio
             AccesoDatos datos = new AccesoDatos();
             try
             {
-                datos.SetearConsulta("INSERT INTO Personas (Nombre, Apellido, FechaNac, IDGenero, NumDoc, Correo, Telefono, IDRol, Activo, Password) " +
-                                     "VALUES (@Nombre, @Apellido, @FechaNac, @IDGenero, @NumDoc, @Correo, @Telefono, @IDRol, @Activo, @Password)");
+                datos.SetearConsulta("INSERT INTO Personas (Nombre, Apellido, FechaNac, Genero, NumDoc, Correo, Telefono, Rol, Activo, Password) " +
+                                     "VALUES (@Nombre, @Apellido, @FechaNac, @Genero, @NumDoc, @Correo, @Telefono, @Rol, @Activo, @Password)");
                 datos.SetearParametro("@Nombre", nuevo.Nombre);
                 datos.SetearParametro("@Apellido", nuevo.Apellido);
                 datos.SetearParametro("@FechaNac", nuevo.FechaNacimiento);
-                datos.SetearParametro("@IDGenero", nuevo.IdGenero);
+                datos.SetearParametro("@Genero", nuevo.Genero);
                 datos.SetearParametro("@NumDoc", nuevo.NumDoc);
                 datos.SetearParametro("@Correo", nuevo.Correo);
                 datos.SetearParametro("@Telefono", nuevo.Telefono);
-                datos.SetearParametro("@IDRol", nuevo.IdRol);
+                datos.SetearParametro("@Rol", nuevo.Rol);
                 datos.SetearParametro("@Activo", nuevo.Activo);
                 datos.SetearParametro("@Password", nuevo.Password);
 
@@ -247,15 +248,15 @@ namespace negocio
             AccesoDatos datos = new AccesoDatos();
             try
             {
-                datos.SetearConsulta("UPDATE Personas SET Nombre = @Nombre, Apellido = @Apellido, FechaNac = @FechaNac, IDGenero = @IDGenero, NumDoc = @NumDoc, Correo = @Correo, Telefono = @Telefono, IDRol = @IDRol, Activo = @Activo, Password = @Password WHERE ID = @ID");
+                datos.SetearConsulta("UPDATE Personas SET Nombre = @Nombre, Apellido = @Apellido, FechaNac = @FechaNac, Genero = @Genero, NumDoc = @NumDoc, Correo = @Correo, Telefono = @Telefono, Rol = @Rol, Activo = @Activo, Password = @Password WHERE ID = @ID");
                 datos.SetearParametro("@Nombre", modificar.Nombre);
                 datos.SetearParametro("@Apellido", modificar.Apellido);
                 datos.SetearParametro("@FechaNac", modificar.FechaNacimiento);
-                datos.SetearParametro("@IDGenero", modificar.IdGenero);
+                datos.SetearParametro("@Genero", modificar.Genero);
                 datos.SetearParametro("@NumDoc", modificar.NumDoc);
                 datos.SetearParametro("@Correo", modificar.Correo);
                 datos.SetearParametro("@Telefono", modificar.Telefono);
-                datos.SetearParametro("@IDRol", modificar.IdRol);
+                datos.SetearParametro("@Rol", modificar.Rol);
                 datos.SetearParametro("@Activo", modificar.Activo);
                 datos.SetearParametro("@Password", modificar.Password);
                 datos.SetearParametro("@ID", modificar.Id);
@@ -297,7 +298,7 @@ namespace negocio
             Persona aux = new Persona();
             try
             {
-                datos.SetearConsulta("SELECT P.ID, P.Nombre, P.Apellido, P.FechaNac, P.IDGenero, G.Nombre as Gen, P.NumDoc, P.Correo, P.Telefono, P.IDRol, R.Nombre as Rol, P.Activo, P.Password FROM Personas P INNER JOIN Generos G ON P.IDGenero = G.ID INNER JOIN Roles R ON P.IDRol = R.ID WHERE P.ID = @ID");
+                datos.SetearConsulta("SELECT P.ID, P.Nombre, P.Apellido, P.FechaNac, P.Genero, P.NumDoc, P.Correo, P.Telefono, P.Rol, P.Activo, P.Password FROM Personas P WHERE P.ID = @ID");
                 datos.SetearParametro("@ID", id);
                 datos.EjecutarLectura();
 
@@ -307,13 +308,13 @@ namespace negocio
                     aux.Nombre = (string)datos.Lector["Nombre"];
                     aux.Apellido = (string)datos.Lector["Apellido"];
                     aux.FechaNacimiento = (DateTime)datos.Lector["FechaNac"];
-                    aux.IdGenero = (int)datos.Lector["IDGenero"];
-                    aux.Gen = (string)datos.Lector["Gen"];
+                    aux.Genero = (int)datos.Lector["Genero"];
+                    //aux.Gen = (string)datos.Lector["Gen"];
                     aux.NumDoc = (string)datos.Lector["NumDoc"];
                     aux.Correo = (string)datos.Lector["Correo"];
                     aux.Telefono = (string)datos.Lector["Telefono"];
-                    aux.IdRol = (int)datos.Lector["IDRol"];
-                    aux.Role = (string)datos.Lector["Rol"];
+                    aux.Rol = (int)datos.Lector["Rol"];
+                    //aux.Role = (string)datos.Lector["Rol"];
                     aux.Activo = (bool)datos.Lector["Activo"];
                     aux.Password = (string)datos.Lector["Password"];
                 }
@@ -335,7 +336,7 @@ namespace negocio
             Persona aux = new Persona();
             try
             {
-                datos.SetearConsulta("SELECT P.ID, P.Nombre, P.Apellido, P.FechaNac, P.IDGenero, G.Nombre as Gen, P.NumDoc, P.Correo, P.Telefono, P.IDRol, R.Nombre as Rol, P.Activo, P.Password FROM Personas P INNER JOIN Generos G ON P.IDGenero = G.ID INNER JOIN Roles R ON P.IDRol = R.ID WHERE P.Correo = @Correo");
+                datos.SetearConsulta("SELECT P.ID, P.Nombre, P.Apellido, P.FechaNac, P.Genero, P.NumDoc, P.Correo, P.Telefono, P.Rol, P.Activo, P.Password FROM Personas P  WHERE P.Correo = @Correo");
                 datos.SetearParametro("@Correo", email);
                 datos.EjecutarLectura();
 
@@ -345,13 +346,13 @@ namespace negocio
                     aux.Nombre = (string)datos.Lector["Nombre"];
                     aux.Apellido = (string)datos.Lector["Apellido"];
                     aux.FechaNacimiento = (DateTime)datos.Lector["FechaNac"];
-                    aux.IdGenero = (int)datos.Lector["IDGenero"];
-                    aux.Gen = (string)datos.Lector["Gen"];
+                    aux.Genero = (int)datos.Lector["Genero"];
+                    //aux.Gen = (string)datos.Lector["Gen"];
                     aux.NumDoc = (string)datos.Lector["NumDoc"];
                     aux.Correo = (string)datos.Lector["Correo"];
                     aux.Telefono = (string)datos.Lector["Telefono"];
-                    aux.IdRol = (int)datos.Lector["IDRol"];
-                    aux.Role = (string)datos.Lector["Rol"];
+                    aux.Rol = (int)datos.Lector["Rol"];
+                    //aux.Role = (string)datos.Lector["Rol"];
                     aux.Activo = (bool)datos.Lector["Activo"];
                     aux.Password = (string)datos.Lector["Password"];
                 }
@@ -373,7 +374,7 @@ namespace negocio
             Persona aux = null;
             try
             {
-                datos.SetearConsulta("SELECT P.ID, P.Nombre, P.Apellido, P.FechaNac, P.IDGenero, G.Nombre as Gen, P.NumDoc, P.Correo, P.Telefono, P.IDRol, R.Nombre as Rol, P.Activo, P.Password FROM Personas P INNER JOIN Generos G ON P.IDGenero = G.ID INNER JOIN Roles R ON P.IDRol = R.ID WHERE P.Correo = @Correo AND P.Password = @Password");
+                datos.SetearConsulta("SELECT P.ID, P.Nombre, P.Apellido, P.FechaNac, P.Genero, P.NumDoc, P.Correo, P.Telefono, P.Rol, P.Activo, P.Password FROM Personas P WHERE P.Correo = @Correo AND P.Password = @Password");
                 datos.SetearParametro("@Correo", email);
                 datos.SetearParametro("@Password", password);
                 datos.EjecutarLectura();
@@ -385,13 +386,13 @@ namespace negocio
                     aux.Nombre = (string)datos.Lector["Nombre"];
                     aux.Apellido = (string)datos.Lector["Apellido"];
                     aux.FechaNacimiento = (DateTime)datos.Lector["FechaNac"];
-                    aux.IdGenero = (int)datos.Lector["IDGenero"];
-                    aux.Gen = (string)datos.Lector["Gen"];
+                    aux.Genero = (int)datos.Lector["IDGenero"];
+                    //aux.Gen = (string)datos.Lector["Gen"];
                     aux.NumDoc = (string)datos.Lector["NumDoc"];
                     aux.Correo = (string)datos.Lector["Correo"];
                     aux.Telefono = (string)datos.Lector["Telefono"];
-                    aux.IdRol = (int)datos.Lector["IDRol"];
-                    aux.Role = (string)datos.Lector["Rol"];
+                    aux.Rol = (int)datos.Lector["IDRol"];
+                    //aux.Role = (string)datos.Lector["Rol"];
                     aux.Activo = (bool)datos.Lector["Activo"];
                     aux.Password = (string)datos.Lector["Password"];
                 }
@@ -406,8 +407,5 @@ namespace negocio
                 datos.CerrarConexion();
             }
         }
-
-
-
     }
 }
