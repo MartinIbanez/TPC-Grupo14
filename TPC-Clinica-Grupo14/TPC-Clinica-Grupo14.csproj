@@ -82,7 +82,7 @@
     <Content Include="Turnos.aspx" />
     <Content Include="Web.config" />
     <Content Include="Login.aspx" />
-    <Content Include="MenuPaciente.aspx" />
+    <Content Include="Contacto.aspx" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Default.aspx.cs">
@@ -166,12 +166,12 @@
     <Compile Include="Pruebas.aspx.designer.cs">
       <DependentUpon>Pruebas.aspx</DependentUpon>
     </Compile>
-    <Compile Include="MenuPaciente.aspx.cs">
-      <DependentUpon>MenuPaciente.aspx</DependentUpon>
+    <Compile Include="Contacto.aspx.cs">
+      <DependentUpon>Contacto.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="MenuPaciente.aspx.designer.cs">
-      <DependentUpon>MenuPaciente.aspx</DependentUpon>
+    <Compile Include="Contacto.aspx.designer.cs">
+      <DependentUpon>Contacto.aspx</DependentUpon>
     </Compile>
     <Compile Include="Turnos.aspx.cs">
       <DependentUpon>Turnos.aspx</DependentUpon>

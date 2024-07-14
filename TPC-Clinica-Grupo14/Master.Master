@@ -42,7 +42,7 @@
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link" href="MenuPaciente.aspx">PACIENTES</a>
+                        <a class="nav-link" href="Contacto.aspx">CONTACTO</a>
                     </li>
 
                     <li class="nav-item">
@@ -75,8 +75,6 @@
 
         </div>
     </form>
-
-  
 
 </body>
 </html>
