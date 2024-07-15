@@ -204,27 +204,70 @@ namespace TPC_Clinica_Grupo14
             int idProf = int.Parse(DropDownListProfesionales.SelectedValue);
             profSelected = listaProfesionales.Find(x => x.IdProfesional == idProf);
 
-            //Me quedo con los dias filtrados
-            List<DayOfWeek> listaDiasFiltrada = profSelected.ListHorariosDisponibles.Select(x => x.Dia).Distinct().ToList();
+            //Levanto los turnos asignados para verificar disponibilidad...
+            TurnoNegocio tn = new TurnoNegocio();
+            List<Turno> listaTurnosAsignados = new List<Turno>();
+            listaTurnosAsignados = tn.ListarTurnosAsignados(profSelected,fechaSeleccionada);
+            List<int> listaHorariosAsignados = (List<int>)listaTurnosAsignados.Select(x => x.HoraTurno).ToList();
 
+            //Me quedo con los horarios correspondientes al dia seleccionado
+            //List<DayOfWeek> listaDiasFiltradaProfesional = profSelected.ListHorariosDisponibles.Select(x => x.Dia).Distinct().ToList();
+            List<Horario> listaHorariosFiltradaProfesional = profSelected.ListHorariosDisponibles.FindAll(x => x.Dia == fechaSeleccionada.DayOfWeek);
 
-            //Pregunto si selecciono algo valido...
-            if (fechaSeleccionada >= DateTime.Now && listaDiasFiltrada.Contains(fechaSeleccionada.DayOfWeek))
+            List<Horario> horariosAMostrar = new List<Horario>();
+
+            foreach(Horario h in listaHorariosFiltradaProfesional)
             {
-                DayOfWeek DiaSeleccionado = CalendarioTurnos.SelectedDate.DayOfWeek;
-
-                List<Horario> horariosAMostrar = new List<Horario>();
-                
-                //btnVerHorariosDisponibles.Enabled = true;
-
-                foreach (Horario h in profSelected.ListHorariosDisponibles)
+                if(!listaHorariosAsignados.Contains(h.HoraInicio))
                 {
-                    if (h.Dia == DiaSeleccionado)
-                    {
-                        horariosAMostrar.Add(h);
-                    }
+                    horariosAMostrar.Add(h);
                 }
+            }
 
+            //listaHorariosFiltradaProfesional.
+            //foreach(Turno t in listaTurnosAsignados)
+            //{
+            //    if(t.HoraTurno == )
+            //}
+
+
+
+
+
+            ////Pregunto si selecciono algo valido...
+            //if (fechaSeleccionada >= DateTime.Now && listaDiasFiltradaProfesional.Contains(fechaSeleccionada.DayOfWeek))
+            //{
+            //    DayOfWeek DiaSeleccionado = CalendarioTurnos.SelectedDate.DayOfWeek;
+
+            //    List<Horario> horariosAMostrar = new List<Horario>();
+                
+            //    //Recorro los horarios disponibles del dia seleccionados y saco los ocupados....
+            //    //foreach(Turno turno in listaTurnosAsignados)
+            //    //{
+            //    //    DayOfWeek dia = 
+            //    //    if(turno.FechaTurno.Date.Day == )
+            //    //}
+                
+
+            //    //VER QUE QUEDA DE ESTE FOR
+            //    //foreach (Horario h in profSelected.ListHorariosDisponibles)
+            //    //{
+            //    //    if (h.Dia == DiaSeleccionado)
+            //    //    {
+            //    //        horariosAMostrar.Add(h);
+            //    //    }
+            //    //}
+
+            //    foreach(Horario h in profSelected.ListHorariosDisponibles)
+            //    {
+            //        if(DiaSeleccionado == h.Dia)                    //1ero filtro por dia de atencion
+            //        {
+                        
+            //        }
+            //    }
+
+
+                //////////////////////////
                 CardFechaTurno.Text = "Fecha Turno: " + fechaSeleccionada.Date.ToString("dd/MM/yyyy");
                 CardEspecialidad.Text = "Especialidad: " + DropDownListEspecialidades.SelectedItem.ToString();
                 CardProfesional.Text = "Profesional: " + DropDownListProfesionales.SelectedItem.ToString();
@@ -233,11 +276,11 @@ namespace TPC_Clinica_Grupo14
                 dgvHorariosDisponibles.DataSource = horariosAMostrar;
                 dgvHorariosDisponibles.DataBind();
                 dgvHorariosDisponibles.Visible = true;
-            }
-            else
-            {
+            //}
+            //else
+            //{
                 CardFechaTurno.Text = "Fecha Turno: Dia no disponible";
-            }
+            //}
         }
 
         protected void dgvHorariosDisponibles_SelectedIndexChanged(object sender, EventArgs e)
