@@ -7,5 +7,5 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 
 
-    <h1> por aca se vana a manejar los turnos ....</h1>
+
 </asp:Content>

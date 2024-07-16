@@ -9,10 +9,10 @@
         
         <asp:UpdatePanel runat="server">
             <ContentTemplate>
+                <h1 class="text-center mb-4">Arrancan las pruebas...</h1>
                 
-              
                 <div class="row">
-                    <div class="col-md-3">
+                    <div class="col-md-3 mb-4">
                         <asp:DropDownList runat="server" ID="DropDownListEspecialidades" AutoPostBack="true" 
                                           OnSelectedIndexChanged="DropDownListEspecialidades_SelectedIndexChanged" 
                                           CssClass="form-select mb-3"></asp:DropDownList>
@@ -28,7 +28,7 @@
                         <asp:GridView runat="server" ID="dgvHorariosDisponibles" Visible="false" 
                                       OnSelectedIndexChanged="dgvHorariosDisponibles_SelectedIndexChanged" 
                                       AutoGenerateColumns="False" DataKeyNames="ID" 
-                                      CssClass="table table-striped table-bordered mt-3">
+                                      CssClass="table table-striped table-bordered table-dark mt-3">
                             <Columns>
                                 <asp:BoundField DataField="Dia" HeaderText="Día de atención" />
                                 <asp:BoundField DataField="HoraInicio" HeaderText="Hora de inicio turno" />
@@ -40,11 +40,11 @@
                         </asp:GridView>
                     </div>
                     
-                    <div class="col-md-3">
-                        
+                    <div class="col-md-3 mb-4">
+                        <!-- Columna vacía para balancear el diseño -->
                     </div>
                     
-                    <div class="col-md-3">
+                    <div class="col-md-3 mb-4">
                         <h2>Días Disponibles:</h2>
                         <asp:Calendar runat="server" ID="CalendarioTurnos" AutoPostBack="true" 
                                       OnDayRender="CalendarioTurnos_DayRender" 
@@ -52,7 +52,7 @@
                                       CssClass="mt-3"></asp:Calendar>
                     </div>
                     
-                    <div class="col-md-3">
+                    <div class="col-md-3 mb-4">
                         <asp:Button ID="btnCrearTurno" CssClass="btn btn-success mt-4" Text="CREAR TURNO" runat="server" OnClick="btnCrearTurno_Click" />
                         
                         <asp:Label ID="LabelTurnoCreado" Visible="false" CssClass="alert alert-success mt-4" Text="¡TURNO CREADO!" runat="server" />
