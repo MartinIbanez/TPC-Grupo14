@@ -9,7 +9,7 @@
         
         <asp:UpdatePanel runat="server">
             <ContentTemplate>
-                <h1 class="text-center mb-4">Arrancan las pruebas...</h1>
+             
                 
                 <div class="row">
                     <div class="col-md-3 mb-4">
