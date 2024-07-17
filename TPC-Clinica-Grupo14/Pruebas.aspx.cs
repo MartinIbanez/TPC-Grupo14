@@ -110,8 +110,8 @@ namespace TPC_Clinica_Grupo14
             DropDownListProfesionales.DataValueField = "IdProfesional";
             DropDownListProfesionales.DataBind();
 
-            DropDownListProfesionales.SelectedIndex = 0;        //Muestro el 1er profesional disponible
-            //CalendarioTurnos.Visible = true;                    //Con esto lo habilito y se dispara el evento DayRender
+            DropDownListProfesionales.SelectedIndex = 0;            //Muestro el 1er profesional disponible
+            //CalendarioTurnos.Visible = true;                      //Con esto lo habilito y se dispara el evento DayRender
 
 
             CardEspecialidad.Text = "Especialidad: " + DropDownListEspecialidades.SelectedItem.ToString();
@@ -182,7 +182,7 @@ namespace TPC_Clinica_Grupo14
                         if (diaRender.DayOfWeek == d)        //Si el dia a renderizar esta en los disponibles, pintar
                         {
                             ev.Cell.BackColor = System.Drawing.Color.LightGreen;
-                            ev.Cell.ToolTip = "Dia Disponibleeeeee";
+                            //ev.Cell.ToolTip = "Dia Disponibleeeeee";
                         }
                     }
                 }
@@ -224,6 +224,7 @@ namespace TPC_Clinica_Grupo14
                 }
             }
             
+            //pregunto si el dia seleccionado es hoy o futuro , y si es un dia valido y dia con disponibilidad
             if(fechaSeleccionada >= DateTime.Now && listaDiasFiltradaProfesional.Contains(fechaSeleccionada.DayOfWeek) && horariosAMostrar!=null)
             {
                 CardFechaTurno.Text = "Fecha Turno: " + fechaSeleccionada.Date.ToString("dd/MM/yyyy");
@@ -243,52 +244,6 @@ namespace TPC_Clinica_Grupo14
 
 
 
-
-
-            ////Pregunto si selecciono algo valido...
-            //if (fechaSeleccionada >= DateTime.Now && listaDiasFiltradaProfesional.Contains(fechaSeleccionada.DayOfWeek))
-            //{
-            //    DayOfWeek DiaSeleccionado = CalendarioTurnos.SelectedDate.DayOfWeek;
-
-            //    List<Horario> horariosAMostrar = new List<Horario>();
-                
-            //    //Recorro los horarios disponibles del dia seleccionados y saco los ocupados....
-            //    //foreach(Turno turno in listaTurnosAsignados)
-            //    //{
-            //    //    DayOfWeek dia = 
-            //    //    if(turno.FechaTurno.Date.Day == )
-            //    //}
-                
-
-            //    //VER QUE QUEDA DE ESTE FOR
-            //    //foreach (Horario h in profSelected.ListHorariosDisponibles)
-            //    //{
-            //    //    if (h.Dia == DiaSeleccionado)
-            //    //    {
-            //    //        horariosAMostrar.Add(h);
-            //    //    }
-            //    //}
-
-            //    foreach(Horario h in profSelected.ListHorariosDisponibles)
-            //    {
-            //        if(DiaSeleccionado == h.Dia)                    //1ero filtro por dia de atencion
-            //        {
-                        
-            //        }
-            //    }
-
-
-                //////////////////////////
-                //CardFechaTurno.Text = "Fecha Turno: " + fechaSeleccionada.Date.ToString("dd/MM/yyyy");
-                //CardEspecialidad.Text = "Especialidad: " + DropDownListEspecialidades.SelectedItem.ToString();
-                //CardProfesional.Text = "Profesional: " + DropDownListProfesionales.SelectedItem.ToString();
-                //CardPaciente.Text = "Paciente: " + DropDownListPacientes.SelectedItem.ToString();    //actualizo la ficha turno
-
-                //dgvHorariosDisponibles.DataSource = horariosAMostrar;
-                //dgvHorariosDisponibles.DataBind();
-                //dgvHorariosDisponibles.Visible = true;
-
-                //CardFechaTurno.Text = "Fecha Turno: Dia no disponible";
         }
 
         protected void dgvHorariosDisponibles_SelectedIndexChanged(object sender, EventArgs e)
@@ -319,7 +274,10 @@ namespace TPC_Clinica_Grupo14
             List<Especialidad> listaEspecialidades = new List<Especialidad>();
             listaEspecialidades = en.Listar();
 
-            nuevo.FechaTurno = CalendarioTurnos.SelectedDate.Date;
+
+
+            //nuevo.FechaTurno = CalendarioTurnos.SelectedDate.Date;
+
 
             //id paciente seleccionado
             int idPaciente = int.Parse(DropDownListPacientes.SelectedValue);                    
@@ -335,6 +293,14 @@ namespace TPC_Clinica_Grupo14
 
             int horaTurno = int.Parse(dgvHorariosDisponibles.SelectedRow.Cells[1].Text);
             nuevo.HoraTurno = horaTurno;
+            //TimeSpan horita = new TimeSpan(horaTurno,0,0);
+
+            DateTime fechita = new DateTime(
+            CalendarioTurnos.SelectedDate.Year, CalendarioTurnos.SelectedDate.Month, CalendarioTurnos.SelectedDate.Day,
+            horaTurno, 0, 0);
+
+            nuevo.FechaTurno = fechita;
+
 
             nuevo.EstadoTurno = 0;      //ABIERTO
 

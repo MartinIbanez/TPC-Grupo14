@@ -8,7 +8,7 @@
         <%--Necesario para el update panel--%>
         <asp:UpdatePanel runat="server">
             <ContentTemplate>
-                <h1>Arrancan las pruebas....</h1>
+                <%--<h1>Arrancan las pruebas....</h1>--%>
                 <%--aca arrancan las 4 columnas--%>
                 <div class="container">
                     <div class="row ">
@@ -88,7 +88,7 @@
                 <%--aca terminan las 4 columnas--%>
                 <br />
                 <br />
-                <asp:GridView runat="server" ID="GridPruebaTurnos"></asp:GridView>
+                <asp:GridView runat="server" ID="GridPruebaTurnos" Visible="false"></asp:GridView>
                 <br />
                 <br />
                 <br />
@@ -98,9 +98,5 @@
             </ContentTemplate>
         </asp:UpdatePanel>
     </div>
-
-
-
-
 
 </asp:Content>
