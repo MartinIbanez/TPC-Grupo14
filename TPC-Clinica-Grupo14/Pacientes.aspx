@@ -80,7 +80,7 @@
                         <Columns>
                             <asp:BoundField DataField="Nombre" HeaderText="Nombre" />
                             <asp:BoundField DataField="Apellido" HeaderText="Apellido" />
-                            <asp:BoundField DataField="FechaNacimiento" HeaderText="Fecha de Nacimiento" />
+                            <asp:BoundField DataField="FechaNacimiento" DataFormatString="{0:dd/MM/yyyy}" HeaderText="Fecha de Nacimiento" />
                             <%--<asp:BoundField DataField="IdGenero" HeaderText="Género" />--%>
                             <asp:BoundField DataField="NumDoc" HeaderText="DNI" />
                             <asp:BoundField DataField="Correo" HeaderText="Correo" />
