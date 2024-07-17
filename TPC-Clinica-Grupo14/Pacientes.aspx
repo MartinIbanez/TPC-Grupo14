@@ -81,7 +81,7 @@
                             <asp:BoundField DataField="Nombre" HeaderText="Nombre" />
                             <asp:BoundField DataField="Apellido" HeaderText="Apellido" />
                             <asp:BoundField DataField="FechaNacimiento" HeaderText="Fecha de Nacimiento" />
-                            <asp:BoundField DataField="IdGenero" HeaderText="Género" />
+                            <%--<asp:BoundField DataField="IdGenero" HeaderText="Género" />--%>
                             <asp:BoundField DataField="NumDoc" HeaderText="DNI" />
                             <asp:BoundField DataField="Correo" HeaderText="Correo" />
                             <asp:BoundField DataField="Telefono" HeaderText="Teléfono" />
