@@ -6,10 +6,9 @@
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-
-      <<div style="display: flex; justify-content: center; align-items: center; height: 100vh;">
+    <<div style="display: flex; justify-content: center; align-items: center; height: 100vh;">
         <div style="display: flex; justify-content: space-around; width: 90%; max-width: 1600px;">
-           
+
             <div class="card" style="width: 13rem;">
                 <img src="Especialidades.png" class="card-img-top" alt="...">
                 <div class="card-body">
@@ -31,6 +30,18 @@
                 <ul class="list-group list-group-flush"></ul>
                 <div class="card-body">
                     <a href="Pruebas.aspx" class="card-link">TURNOS</a>
+                </div>
+            </div>
+
+            <div class="card" style="width: 12rem;">
+                <img src="cita.png" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="Consultas">TURNOS ASIGNADOS</h5>
+                    <p class="card-text">Consultas de turnos asignados</p>
+                </div>
+                <ul class="list-group list-group-flush"></ul>
+                <div class="card-body">
+                    <a href="TurnosAsignados.aspx" class="card-link">TURNOS ASIGNADOS</a>
                 </div>
             </div>
 
