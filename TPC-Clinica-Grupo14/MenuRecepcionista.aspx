@@ -29,7 +29,7 @@
                 </div>
                 <ul class="list-group list-group-flush"></ul>
                 <div class="card-body">
-                    <a href="Turnos.aspx" class="card-link">TURNOS</a>
+                    <a href="Pruebas.aspx" class="card-link">TURNOS</a>
                 </div>
             </div>
 

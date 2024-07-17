@@ -39,9 +39,7 @@
                         <a class="nav-link" href="MenuMedico.aspx">MEDICOS</a>
                     </li>
 
-                    <li class="nav-item">
-                        <a class="nav-link" href="Contacto.aspx">CONTACTO</a>
-                    </li>
+                   
 
                     <li class="nav-item">
                         <a class="nav-link" href="MenuRecepcionista.aspx">RECEPCIONISTA</a>

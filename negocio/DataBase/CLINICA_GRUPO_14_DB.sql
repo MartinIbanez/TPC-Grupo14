@@ -43,15 +43,6 @@ CREATE TABLE Especialidades(
     Nombre VARCHAR(50) NOT NULL
 )
 
-CREATE TABLE Usuarios(
-    ID INT NOT NULL PRIMARY KEY IDENTITY(1,1),
-    Usuario VARCHAR(50) NOT NULL,
-    Pass VARCHAR(50) NOT NULL,
-    TipoUser INT NOT NULL,
-    Email VARCHAR(50) NOT NULL, 	
-)
-
-
 CREATE TABLE Profesionales(
     ID SMALLINT NOT NULL PRIMARY KEY IDENTITY(1,1),
     IdPersona SMALLINT NOT NULL FOREIGN KEY REFERENCES Personas(ID)
@@ -228,3 +219,96 @@ INSERT INTO Usuarios(Usuario,Pass,TipoUser,Email) VALUES
 ('Recepcionista','recep','2','rececpcionista@clinic.com'),
 ('Medico','medico','3','profesional@clinic.com'),
 ('Paciente','paciente','4','paciente@clinic.com');
+
+
+
+-----HASTA ACA LA GENERACION
+
+--Consulta para ver especialidades de profesionales
+-- select
+-- P.nombre as Nombre_Profesional,
+-- P.Apellido as Apellido_Profesional,
+-- E.Nombre as Especialidad
+-- from Personas p
+-- inner JOIN Profesionales Pr ON P.ID=Pr.IdPersona
+-- Inner Join Profesionales_x_Especialidad PXE ON PXE.IdProfesional=PR.ID
+-- Inner join Especialidades E ON PXE.IDEspecialidad=E.ID
+
+
+--Consulta para ver especialidades
+-- select E.Id as Id_Especialidad, E.Nombre as Especialidad  from especialidades E
+
+--Consulta para profesionales con nombre, apellido e IDProfesional
+-- select P.ID as IdProfesional,PER.Nombre as Nombre, PER.Apellido as Apellido from Profesionales P
+-- INNER JOIN Personas PER ON P.IdPersona=PER.ID
+
+
+--Consulta para personas (Tod@s)
+SELECT
+P.ID, P.Nombre, P.Apellido, P.FechaNac,
+P.Genero, P.NumDoc,
+P.Correo, P.Telefono,P.Activo
+FROM Personas P 
+
+
+
+
+
+--Consulta de especialidades
+select E.ID,E.Nombre  from Especialidades E 
+
+--Consulta de ProfesionalesXEspecialidad
+select PXE.IDProfesional as IdProfesional,PXE.IDEspecialidad as IdEspecialidad from Profesionales_x_Especialidad PXE
+
+--consulta de Profesionales con Nombre y Apellido
+select PR.ID as ID,P.Nombre as Nombre,P.Apellido as Apellido from Profesionales PR INNER JOIN Personas P ON P.ID=PR.IdPersona
+
+select * from Horarios
+
+SELECT * from EstadoTurnos
+
+select PXE.IDProfesional as IdProfesional,PXE.IDEspecialidad as IdEspecialidad from Profesionales_x_Especialidad PXE
+-- where PXE.IDProfesional = 1
+select * from Horarios
+
+--Consulta de todos los horarios disponibles
+select H.Id as Id,H.IdProfesional as IdProfesional,H.DayOfWeek as DayOfWeek,H.HoraInicio as HoraInicio,H.HoraFin as HoraFin FROM Horarios H
+
+select * from Especialidades
+
+
+select * from Personas
+
+select * from Profesionales
+
+
+SELECT PR.ID AS ID, P.Nombre, P.Apellido, P.FechaNac, P.NumDoc, P.Correo, P.Telefono, P.Activo, E.Nombre AS Especialidad
+FROM Profesionales PR
+INNER JOIN Personas P ON P.ID = PR.IdPersona
+LEFT JOIN Profesionales_x_Especialidad PXE ON PR.ID = PXE.IDProfesional
+LEFT JOIN Especialidades E ON PXE.IDEspecialidad = E.Id
+
+
+SELECT PR.ID AS ID, P.Nombre, P.Apellido, P.FechaNac, P.NumDoc, P.Correo, P.Telefono, P.Activo
+FROM Profesionales PR
+INNER JOIN Personas P ON P.ID = PR.IdPersona
+-- INNER JOIN Profesionales_x_Especialidad PXE ON PR.ID = PXE.IDProfesional
+-- INNER JOIN Especialidades E ON PXE.IDEspecialidad = E.Id
+
+    select * from Horarios
+
+
+select * from Profesionales
+select * from Profesionales_x_Especialidad
+
+select * from Horarios
+
+select H.Id as Id,H.IdProfesional as IdProfesional,H.DayOfWeek as Dia,H.HoraInicio as HoraInicio,H.HoraFin as HoraFin FROM Horarios H
+
+select PXE.IDProfesional as IdProfesional,PXE.IDEspecialidad as IdEspecialidad from Profesionales_x_Especialidad PXE
+
+
+select * from Horarios
+
+
+SELECT P.ID, P.Nombre, P.Apellido, P.FechaNac, P.Genero, P.NumDoc, P.Correo, P.Telefono, P.Rol, P.Activo FROM Personas P
