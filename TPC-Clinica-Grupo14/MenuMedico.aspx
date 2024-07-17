@@ -13,12 +13,12 @@
                 <div class="card" style="width: 12rem;">
                     <img src="cita.png" class="card-img-top" alt="...">
                     <div class="card-body">
-                        <h5 class="Consultas">TURNOS </h5>
+                        <h5 class="Consultas">TURNOS ASIGNADOS </h5>
                         <p class="card-text">Consultas de turnos y estados</p>
                     </div>
                     <ul class="list-group list-group-flush"></ul>
                     <div class="card-body">
-                        <a href="Pruebas.aspx" class="card-link">TURNOS</a>
+                        <a href="TurnosAsignados.aspx" class="card-link">TURNOS ASIGNADOS</a>
                     </div>
                 </div>
 
